@@ -15,7 +15,7 @@
         </div>
         <div class="card-body">
 
-            <a class="btn btn-primary btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Input" href=""><i class="fa fa-edit"></i></a>
+            <a class="btn btn-primary btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Input" href="<?= base_url('kepala_bagian/tambah_penilaian'); ?>"><i class="fa fa-edit"></i></a>
             <a class="btn btn-secondary btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Hitung" href=""><i class="fas fa-tools"></i></a>
             <a class="btn btn-warning btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Laporan" href=""><i class="fas fa-print"></i></a>
 
@@ -29,7 +29,7 @@
                         <th scope="col">Kepribadian</th>
                         <th scope="col">Kerja Sama</th>
                         <th scope="col">Hasil Pekerjaan</th>
-                        <th scope="col">Absen</th>
+                        <th scope="col">Absensi</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -43,7 +43,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td> <a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href=""><i class="fa fa-edit"></i></a>
+                        <td> <a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="<?= base_url('kepala_bagian/ubah_penilaian'); ?>"><i class="fa fa-edit"></i></a>
 
                             <a class="btn btn-danger btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Delete" href=""><i class="fa fa-trash"></i></a>
                         </td>
