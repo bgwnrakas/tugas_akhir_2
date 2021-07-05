@@ -32,6 +32,28 @@ class Hrd extends CI_Controller
         $this->load->view('templates/hrd_footer', $data);
     }
 
+    public function tambah_kriteria()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Tambah Kriteria';
+        $this->load->view('templates/hrd_header', $data);
+        $this->load->view('templates/hrd_sidebar', $data);
+        $this->load->view('templates/hrd_topbar', $data);
+        $this->load->view('hrd/tambah_kriteria', $data);
+        $this->load->view('templates/hrd_footer', $data);
+    }
+
+    public function ubah_kriteria()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Ubah Kriteria';
+        $this->load->view('templates/hrd_header', $data);
+        $this->load->view('templates/hrd_sidebar', $data);
+        $this->load->view('templates/hrd_topbar', $data);
+        $this->load->view('hrd/ubah_kriteria', $data);
+        $this->load->view('templates/hrd_footer', $data);
+    }
+
     public function kelola_karyawan()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
@@ -40,6 +62,28 @@ class Hrd extends CI_Controller
         $this->load->view('templates/hrd_sidebar', $data);
         $this->load->view('templates/hrd_topbar', $data);
         $this->load->view('hrd/kelola_karyawan', $data);
+        $this->load->view('templates/hrd_footer', $data);
+    }
+
+    public function tambah_karyawan()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Tambah Karyawan';
+        $this->load->view('templates/hrd_header', $data);
+        $this->load->view('templates/hrd_sidebar', $data);
+        $this->load->view('templates/hrd_topbar', $data);
+        $this->load->view('hrd/tambah_karyawan', $data);
+        $this->load->view('templates/hrd_footer', $data);
+    }
+
+    public function ubah_karyawan()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Ubah Karyawan';
+        $this->load->view('templates/hrd_header', $data);
+        $this->load->view('templates/hrd_sidebar', $data);
+        $this->load->view('templates/hrd_topbar', $data);
+        $this->load->view('hrd/ubah_karyawan', $data);
         $this->load->view('templates/hrd_footer', $data);
     }
 
@@ -149,7 +193,7 @@ class Hrd extends CI_Controller
 
     public function delete_pengguna($id)
     {
-        $this->Admin_model->deleteDataPengguna($id);
+        $this->Hrd_model->deleteDataPengguna($id);
         redirect('hrd/kelola_pengguna');
     }
 }

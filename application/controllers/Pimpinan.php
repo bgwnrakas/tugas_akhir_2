@@ -31,6 +31,28 @@ class Pimpinan extends CI_Controller
         $this->load->view('templates/pimpinan_footer', $data);
     }
 
+    public function tambah_bonus()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Tambah Bonus';
+        $this->load->view('templates/pimpinan_header', $data);
+        $this->load->view('templates/pimpinan_sidebar', $data);
+        $this->load->view('templates/pimpinan_topbar', $data);
+        $this->load->view('pimpinan/tambah_bonus', $data);
+        $this->load->view('templates/pimpinan_footer', $data);
+    }
+
+    public function ubah_bonus()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Ubah Bonus';
+        $this->load->view('templates/pimpinan_header', $data);
+        $this->load->view('templates/pimpinan_sidebar', $data);
+        $this->load->view('templates/pimpinan_topbar', $data);
+        $this->load->view('pimpinan/ubah_bonus', $data);
+        $this->load->view('templates/pimpinan_footer', $data);
+    }
+
     public function profile()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();

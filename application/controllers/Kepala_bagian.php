@@ -31,6 +31,28 @@ class Kepala_bagian extends CI_Controller
         $this->load->view('templates/kabag_footer', $data);
     }
 
+    public function tambah_penilaian()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Tambah Penilaian';
+        $this->load->view('templates/kabag_header', $data);
+        $this->load->view('templates/kabag_sidebar', $data);
+        $this->load->view('templates/kabag_topbar', $data);
+        $this->load->view('kepala_bagian/tambah_penilaian', $data);
+        $this->load->view('templates/kabag_footer', $data);
+    }
+
+    public function ubah_penilaian()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Ubah Penilaian';
+        $this->load->view('templates/kabag_header', $data);
+        $this->load->view('templates/kabag_sidebar', $data);
+        $this->load->view('templates/kabag_topbar', $data);
+        $this->load->view('kepala_bagian/ubah_penilaian', $data);
+        $this->load->view('templates/kabag_footer', $data);
+    }
+
     public function profile()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
