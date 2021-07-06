@@ -6,9 +6,12 @@ class Kepala_bagian extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-
+        $this->load->model('Kriteria_model');
         $this->load->model('Kabag_model');
+        $this->load->model('Karyawan_model');
+        $this->load->model('Penilaian_model');
     }
+
     public function index()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
@@ -20,10 +23,37 @@ class Kepala_bagian extends CI_Controller
         $this->load->view('templates/kabag_footer', $data);
     }
 
+    public function getJabatan()
+    {
+        foreach ($_POST as $key => $value) { $$key = $value; }
+        $jabatan = $this->Karyawan_model->getDataJabatan($nik);
+        echo json_encode($jabatan);
+    }
+
+    public function submit_penilaian()
+    {
+        foreach ($_POST as $key => $value) { $$key = $value; }
+        $nilaiJabatan = array('NIK'=>$nik,'id_kriteria'=>$jabatan);
+        $simpanj = $this->Penilaian_model->insert($nilaiJabatan);
+        for ($i=0; $i <count($kriteria) ; $i++) { 
+            $data = array('NIK'=>$nik,'id_kriteria'=>$kriteria[$i]);
+            $simpan = $this->Penilaian_model->insert($data);
+        }
+        if ($simpan) {
+            $this->Karyawan_model->updateStatus($nik);
+            $this->session->set_flashdata('berhasil','Data Tersimpan!');
+            redirect('Kepala_bagian/kelola_penilaian');
+        }else{
+             $this->session->set_flashdata('error','Data Gagal tersimpan!');
+             redirect('Kepala_bagian/tambah_penilaian');
+        }
+    }
+
     public function kelola_penilaian()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['title'] = 'Kelola Penilaian';
+        $data['title'] = 'Tambah Penilaian';
+        $data['karyawan'] = $this->Karyawan_model->getDataKaryawanDiNilai();
         $this->load->view('templates/kabag_header', $data);
         $this->load->view('templates/kabag_sidebar', $data);
         $this->load->view('templates/kabag_topbar', $data);
@@ -31,8 +61,12 @@ class Kepala_bagian extends CI_Controller
         $this->load->view('templates/kabag_footer', $data);
     }
 
+    
+
     public function tambah_penilaian()
     {
+        $data['karyawan'] = $this->Karyawan_model->getDataKaryawanBelum();
+        $data['jenis_kriteria'] = $this->Kriteria_model->getJenisKriteria(); 
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Tambah Penilaian';
         $this->load->view('templates/kabag_header', $data);
