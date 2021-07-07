@@ -26,8 +26,9 @@
         </div>
         <div class="card-body">
             <a class="btn btn-primary btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Input" href="<?= base_url('kepala_bagian/tambah_penilaian'); ?>"><i class="fa fa-edit"></i></a>
-            <a class="btn btn-secondary btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Hitung" href=""><i class="fas fa-tools"></i></a>
+            <a class="btn btn-secondary btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Hitung Penilaian" href="<?= base_url('kepala_bagian/hitung'); ?>"><i class="fas fa-tools"></i></a>
             <a class="btn btn-warning btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Laporan" href=""><i class="fas fa-print"></i></a>
+            <a class="btn btn-info btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Laporan" href=""><i class="fas fa-sort-numeric-up-alt"></i></a>
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead class="thead-dark">
                     <tr>
