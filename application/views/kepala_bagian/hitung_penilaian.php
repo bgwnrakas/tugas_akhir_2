@@ -78,6 +78,7 @@
 					<?php
                          $x = count(reset($ternormalisasi));
                          $y = count($ternormalisasi);
+						
                          for ($i=0; $i < $y; $i++) { 
                              echo"<tr>";
                              for ($j=0; $j < $x; $j++) { 
@@ -116,9 +117,10 @@
 					<?php
                          $x = count(reset($optimalisasi));
                          $y = count($optimalisasi);
+						//  echo $x .'-'. $y;
                          for ($i=0; $i < $y; $i++) { 
                              echo"<tr>";
-                             for ($j=0; $j < $y; $j++) { 
+                             for ($j=0; $j < $x; $j++) { 
                                 if ($j==0) {
                                     echo'<td>'.$optimalisasi[$i][$j].'</td>';
                                 }else{
