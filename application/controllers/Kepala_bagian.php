@@ -206,18 +206,18 @@ class Kepala_bagian extends CI_Controller
         for ($i=0; $i <$y ; $i++) {
             $minimum[$i] = 0; 
             $maksimum[$i] = 0; 
-             for ($j=1; $j <$x ; $j++) { 
+            for ($j=1; $j <$x ; $j++) { 
                 if ($j == $x-1) {
                     $minimum[$i] += $optimalisasi[$i][$j];
+                   
                 }else{
                     $maksimum[$i] += $optimalisasi[$i][$j];
                 }   
-             }
-             $Yi[$i] = $maksimum[$i] - $minimum[$i];
+            }
+            $Yi[$i] = $maksimum[$i] - $minimum[$i];
          }
 
-         
-         // Membuat Matrix Akhir Untuk Menampung Semua hasil
+        //  Membuat Matrix Akhir Untuk Menampung Semua hasil
          $matrixYi = array();
          for ($i=0; $i <$y ; $i++) { 
             $matrixYi[$i][0] = $fuzzy[$i][0];
@@ -227,7 +227,7 @@ class Kepala_bagian extends CI_Controller
          }
 
       
-        // Mengirim Data Array Ke View
+        // // Mengirim Data Array Ke View
         $data['pembagi']        = $pembagi;
         $data['fuzzy']          = $fuzzy;
         $data['ternormalisasi'] = $ternormalisasi;
