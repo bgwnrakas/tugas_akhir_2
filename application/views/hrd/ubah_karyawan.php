@@ -5,67 +5,86 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="<?= base_url(); ?>hrd/kelola_karyawan">Kelola Karyawan</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Form Ubah Karyawan</li>
+            <li class="breadcrumb-item active" aria-current="page">Ubah Karyawan</li>
         </ol>
     </nav>
     <h1 class="h3 mb-4 text-gray-800"></h1>
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-info"> Form Ubah Karyawan</h6>
+            <h6 class="m-0 font-weight-bold text-danger">Form Ubah Karyawan</h6>
         </div>
         <div class="card-body">
-            <form action="<?= base_url('hrd/kelola_karyawan'); ?>" method="post">
+            <form action="" method="post">
                 <div class="form-group row">
                     <label for="nik" class="col-sm-2 col-form-label">NIK</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nik" name="nik">
+                        <input type="text" class="form-control" id="nik" name="nik" value="<?= $tb_karyawan['nik']; ?>">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+                    <label for="no_ktp" class="col-sm-2 col-form-label">No KTP</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nama" name="nama">
+                        <input type="text" class="form-control" id="no_ktp" name="no_ktp" value="<?= $tb_karyawan['no_ktp']; ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="nama_karyawan" class="col-sm-2 col-form-label">Nama</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="nama_karyawan" name="nama_karyawan" value="<?= $tb_karyawan['nama_karyawan']; ?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="jenis_kelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="jenis_kelamin" name="jenis_kelamin">
+                        <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" value="">
+                            <option><?= $tb_karyawan['jenis_kelamin']; ?></option>
+                            <option>Laki - Laki</option>
+                            <option>Perempuan</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="tempat_lahir" class="col-sm-2 col-form-label">Tempat Lahir</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir">
+                        <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" value="<?= $tb_karyawan['tempat_lahir']; ?>">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="tanggal_lahir" class="col-sm-2 col-form-label">Tanggal Lahir</label>
+                    <label for="tgl_lahir" class="col-sm-2 col-form-label">Tanggal Lahir</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="tanggal_lahir" name="tanggal_lahir">
+                        <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" value="<?= $tb_karyawan['tgl_lahir']; ?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="alamat" name="alamat">
+                        <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $tb_donor_darah['kelurahan']; ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="jabatan" class="col-sm-2 col-form-label">Jabatan</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="jabatan" name="jabatan">
+                            <option><?= $tb_karyawan['jabatan']; ?></option>
+                            <option>Spinning</option>
+                            <option>Weaving</option>
+                            <option>Dyeing</option>
+                            <option>Celup</option>
+                            <option>Finishing</option>
+                            <option>Utility</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="posisi" class="col-sm-2 col-form-label">Posisi</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="posisi" name="posisi">
+                        <input type="text" class="form-control" id="posisi" name="posisi" value="<?= $tb_karyawan['posisi']; ?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6">
-                        <input type="email" class="form-control" id="email" name="email" value="<?= $user['email']; ?>" hidden>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <input type="id_user" class="form-control" id="id_user" name="id_user" value="<?= $user['id']; ?>" hidden>
+                        <input type="email" class="form-control" id="email" name="email" value="<?= $tb_donor_darah['email']; ?>" hidden>
                     </div>
                 </div>
                 <div class="form-group row">

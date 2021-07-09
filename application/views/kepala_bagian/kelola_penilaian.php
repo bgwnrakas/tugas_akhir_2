@@ -1,12 +1,14 @@
 <!-- Begin Page Content -->
 <style>
-  .swal-footer { text-align: center; }
+    .swal-footer {
+        text-align: center;
+    }
 </style>
 
-<?php if($this->session->flashdata('berhasil')): ?>
-<script>
-    swal("Success!", "Data Penilaian Berhasil Tersimpan!", "success");  
-</script>
+<?php if ($this->session->flashdata('berhasil')) : ?>
+    <script>
+        swal("Success!", "Data Penilaian Berhasil Tersimpan!", "success");
+    </script>
 <?php endif; ?>
 
 <div class="container-fluid">
@@ -15,7 +17,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active" aria-current="page">Kelola Penilaian
-            <?php echo $this->session->flashdata('berhasil');?>
+                <?php echo $this->session->flashdata('berhasil'); ?>
             </li>
         </ol>
     </nav>
@@ -28,7 +30,6 @@
             <a class="btn btn-primary btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Input" href="<?= base_url('kepala_bagian/tambah_penilaian'); ?>"><i class="fa fa-edit"></i></a>
             <a class="btn btn-secondary btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Hitung Penilaian" href="<?= base_url('kepala_bagian/hitung'); ?>"><i class="fas fa-tools"></i></a>
             <a class="btn btn-warning btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Laporan" href=""><i class="fas fa-print"></i></a>
-            <a class="btn btn-info btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Laporan" href=""><i class="fas fa-sort-numeric-up-alt"></i></a>
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead class="thead-dark">
                     <tr>
@@ -44,20 +45,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php $i=1;?>
-                <?php foreach ($karyawan as $d) : ?>
-                    <tr>
-                        <th scope="row"><?= $i; ?></th>
-                        <td><?= $d['nama_karyawan'];?></td>
-                        <?php $bobot = $this->Kriteria_model->getBobot($d['NIK']);?>
-                        <?php foreach ($bobot as $r) : ?>
-                            <td><?= $r['nama_kriteria'];?></td>
-                        <?php endforeach;?>
-                        <td> <a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="<?= base_url('kepala_bagian/ubah_penilaian'); ?>"><i class="fa fa-edit"></i></a>
-                            <a class="btn btn-danger btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Delete" href=""><i class="fa fa-trash"></i></a>
-                        </td>
-                    </tr>
-                <?php $i++; endforeach;?>
+                    <?php $i = 1; ?>
+                    <?php foreach ($karyawan as $d) : ?>
+                        <tr>
+                            <th scope="row"><?= $i; ?></th>
+                            <td><?= $d['nama_karyawan']; ?></td>
+                            <?php $bobot = $this->Kriteria_model->getBobot($d['nik']); ?>
+                            <?php foreach ($bobot as $r) : ?>
+                                <td><?= $r['nama_kriteria']; ?></td>
+                            <?php endforeach; ?>
+                            <td> <a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="<?= base_url('kepala_bagian/ubah_penilaian'); ?>"><i class="fa fa-edit"></i></a>
+                                <a class="btn btn-danger btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Delete" href=""><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    <?php $i++;
+                    endforeach; ?>
                 </tbody>
             </table>
         </div>

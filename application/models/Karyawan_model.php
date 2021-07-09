@@ -16,14 +16,14 @@ class Karyawan_model extends CI_Model
     {
         $this->db->select('jabatan');
         $this->db->from('tb_karyawan');
-        $this->db->where('nik',$nik);
-        $query = $this->db->get(); 
+        $this->db->where('nik', $nik);
+        $query = $this->db->get();
         return $query->result();
     }
 
     public function updateStatus($nik)
     {
-        $this->db->where('NIK', $nik);
+        $this->db->where('nik', $nik);
         $this->db->update('tb_karyawan', array('status' => 'Dinilai'));
     }
 }

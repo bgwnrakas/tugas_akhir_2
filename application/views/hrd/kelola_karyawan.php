@@ -16,37 +16,47 @@
         <div class="card-body">
 
             <a class="btn btn-primary btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Input" href="<?= base_url('hrd/tambah_karyawan'); ?>"><i class="fa fa-edit"></i></a>
+            <div class="table-responsive">
+                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">NIK</th>
+                            <th scope="col">No KTP</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Jabatan</th>
+                            <th scope="col">Posisi</th>
+                            <th scope="col">Jenis Kelamin</th>
+                            <th scope="col">Tempat Lahir</th>
+                            <th scope="col">Tanggal Lahir</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $i = 1; ?>
+                        <?php foreach ($tb_karyawan as $p) : ?>
+                            <tr>
+                                <th scope="row"><?= $i; ?></th>
+                                <td><?= $p['nik']; ?></td>
+                                <td><?= $p['no_ktp']; ?></td>
+                                <td><?= $p['nama_karyawan']; ?></td>
+                                <td><?= $p['jabatan']; ?></td>
+                                <td><?= $p['posisi']; ?></td>
+                                <td><?= $p['jenis_kelamin']; ?></td>
+                                <td><?= $p['tempat_lahir']; ?></td>
+                                <td><?= $p['tgl_lahir']; ?></td>
+                                <td><?= $p['status']; ?></td>
+                                <td> <a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="<?= base_url('hrd/ubah_karyawan'); ?>"><i class="fa fa-edit"></i></a>
 
-            <table id="example" class="table table-striped table-bordered" style="width:100%">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">NIK</th>
-                        <th scope="col">Nama</th>
-                        <th scope="col">Posisi</th>
-                        <th scope="col">Jenis Kelamin</th>
-                        <th scope="col">Tempat Lahir</th>
-                        <th scope="col">Tanggal Lahir</th>
-                        <th scope="col">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row"></th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td> <a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="<?= base_url('hrd/ubah_karyawan'); ?>"><i class="fa fa-edit"></i></a>
-
-                            <a class="btn btn-danger btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Delete" href=""><i class="fa fa-trash"></i></a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
+                                    <a class="btn btn-danger btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Delete" href=""><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            <?php $i++; ?>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

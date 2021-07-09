@@ -57,6 +57,7 @@ class Hrd extends CI_Controller
     public function kelola_karyawan()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['tb_karyawan'] = $this->db->get('tb_karyawan')->result_array();
         $data['title'] = 'Kelola Karyawan';
         $this->load->view('templates/hrd_header', $data);
         $this->load->view('templates/hrd_sidebar', $data);
@@ -69,22 +70,109 @@ class Hrd extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Tambah Karyawan';
-        $this->load->view('templates/hrd_header', $data);
-        $this->load->view('templates/hrd_sidebar', $data);
-        $this->load->view('templates/hrd_topbar', $data);
-        $this->load->view('hrd/tambah_karyawan', $data);
-        $this->load->view('templates/hrd_footer', $data);
+        $this->form_validation->set_rules('nik', 'nik', 'required');
+        $this->form_validation->set_rules('nama_karyawan', 'nama_karyawan', 'required');
+        $this->form_validation->set_rules('jenis_kelamin', 'jenis_kelamin', 'required');
+        $this->form_validation->set_rules('tempat_lahir', 'tempat_lahir', 'required');
+        $this->form_validation->set_rules('tgl_lahir', 'tgl_lahir', 'required');
+        $this->form_validation->set_rules('alamat', 'alamat', 'required');
+        $this->form_validation->set_rules('jabatan', 'jabatan', 'required');
+        $this->form_validation->set_rules('no_ktp', 'no_ktp', 'required');
+        $this->form_validation->set_rules('posisi', 'posisi', 'required');
+        $this->form_validation->set_rules('status', 'status', 'required');
+        $this->form_validation->set_rules('email', 'email', 'required');
+        $this->form_validation->set_rules('id_user', 'id_user', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/hrd_header', $data);
+            $this->load->view('templates/hrd_sidebar', $data);
+            $this->load->view('templates/hrd_topbar', $data);
+            $this->load->view('hrd/tambah_karyawan', $data);
+            $this->load->view('templates/hrd_footer', $data);
+        } else {
+            $nik = $this->input->post('nik');
+            $nama_karyawan = $this->input->post('nama_karyawan');
+            $jenis_kelamin = $this->input->post('jenis_kelamin');
+            $tempat_lahir = $this->input->post('tempat_lahir');
+            $tgl_lahir = $this->input->post('tgl_lahir');
+            $alamat = $this->input->post('alamat');
+            $jabatan = $this->input->post('jabatan');
+            $no_ktp = $this->input->post('no_ktp');
+            $posisi = $this->input->post('posisi');
+            $status = $this->input->post('status');
+            $email = $this->input->post('email');
+            $id_user = $this->input->post('id_user');
+
+            $data = array(
+                'nik' => $nik,
+                'nama_karyawan' => $nama_karyawan,
+                'jenis_kelamin' => $jenis_kelamin,
+                'tempat_lahir' => $tempat_lahir,
+                'tgl_lahir' => $tgl_lahir,
+                'alamat' => $alamat,
+                'jabatan' => $jabatan,
+                'no_ktp' => $no_ktp,
+                'posisi' => $posisi,
+                'status' => $status,
+                'email' => $email,
+                'id_user' => $id_user,
+            );
+            $this->db->insert('tb_karyawan', $data);
+            redirect('hrd/kelola_karyawan');
+        }
     }
 
     public function ubah_karyawan()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data = $this->Hrd_model->getDataKaryawanByNik();
         $data['title'] = 'Ubah Karyawan';
-        $this->load->view('templates/hrd_header', $data);
-        $this->load->view('templates/hrd_sidebar', $data);
-        $this->load->view('templates/hrd_topbar', $data);
-        $this->load->view('hrd/ubah_karyawan', $data);
-        $this->load->view('templates/hrd_footer', $data);
+        $this->form_validation->set_rules('nik', 'nik', 'required');
+        $this->form_validation->set_rules('no_ktp', 'no_ktp', 'required');
+        $this->form_validation->set_rules('nama_karyawan', 'nama_karyawan', 'required');
+        $this->form_validation->set_rules('jenis_kelamin', 'jenis_kelamin', 'required');
+        $this->form_validation->set_rules('tempat_lahir', 'tempat_lahir', 'required');
+        $this->form_validation->set_rules('tgl_lahir', 'tgl_lahir', 'required');
+        $this->form_validation->set_rules('alamat', 'alamat', 'required');
+        $this->form_validation->set_rules('jabatan', 'jabatan', 'required');
+        $this->form_validation->set_rules('posisi', 'posisi', 'required');
+        $this->form_validation->set_rules('email', 'email', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/hrd_header', $data);
+            $this->load->view('templates/hrd_sidebar', $data);
+            $this->load->view('templates/hrd_topbar', $data);
+            $this->load->view('hrd/ubah_karyawan', $data);
+            $this->load->view('templates/hrd_footer');
+        } else {
+            $nik = $this->input->post('nik');
+            $no_ktp = $this->input->post('no_ktp');
+            $nama_karyawan = $this->input->post('nama_karyawan');
+            $jenis_kelamin = $this->input->post('jenis_kelamin');
+            $tempat_lahir = $this->input->post('tempat_lahir');
+            $tgl_lahir = $this->input->post('tgl_lahir');
+            $alamat = $this->input->post('alamat');
+            $jabatan = $this->input->post('jabatan');
+            $posisi = $this->input->post('posisi');
+            $email = $this->input->post('email');
+
+            $data = array(
+                'nik' => $nik,
+                'no_ktp' => $no_ktp,
+                'nama_karyawan' => $nama_karyawan,
+                'jenis_kelamin' => $jenis_kelamin,
+                'tempat_lahir' => $tempat_lahir,
+                'tgl_lahir' => $tgl_lahir,
+                'alamat' => $alamat,
+                'jabatan' => $jabatan,
+                'posisi' => $posisi,
+                'email' => $email
+
+            );
+
+            $this->Hrd_model->editDataKaryawan($data);
+            redirect('hrd/kelola_karyawan');
+        }
     }
 
     public function profile()

@@ -39,4 +39,29 @@ class Hrd_model extends CI_Model
         $this->db->where('id', $this->input->post('id'));
         $this->db->update('user', $data);
     }
+
+
+    public function getDataKaryawanByNik($nik)
+    {
+        return $this->db->get_where('tb_karyawan', ['nik' => $nik])->result_array();
+    }
+
+    public function editDataKaryawan($id)
+    {
+        $data = [
+            "nik" => $this->input->post('nik'),
+            "no_ktp" => $this->input->post('no_ktp'),
+            "nama_karyawan" => $this->input->post('nama_karyawan'),
+            "jenis_kelamin" => $this->input->post('jenis_kelamin'),
+            "tempat_lahir" => $this->input->post('tempat_lahir'),
+            "tgl_lahir" => $this->input->post('tgl_lahir'),
+            "alamat" => $this->input->post('alamat'),
+            "jabatan" => $this->input->post('jabatan'),
+            "posisi" => $this->input->post('posisi'),
+            "email" => $this->input->post('email'),
+        ];
+
+        $this->db->where('id', $this->input->post('nik'));
+        $this->db->update('tb_karyawan', $data);
+    }
 }

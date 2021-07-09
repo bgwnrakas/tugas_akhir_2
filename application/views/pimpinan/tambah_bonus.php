@@ -15,17 +15,17 @@
             <h6 class="m-0 font-weight-bold text-info"> Form Tambah Bonus</h6>
         </div>
         <div class="card-body">
-            <form action="<?= base_url('pimpinan/kelola_bonus'); ?>" method="post">
+            <form action="<?= base_url('pimpinan/tambah_bonus'); ?>" method="post">
                 <div class="form-group row">
-                    <label for="bonus" class="col-sm-2 col-form-label">Bonus</label>
+                    <label for="jumlah_bonus" class="col-sm-2 col-form-label">Bonus</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="bonus" name="bonus">
+                        <input type="text" class="form-control" id="jumlah_bonus" name="jumlah_bonus">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="batas_nilai" class="col-sm-2 col-form-label">Batas Nilai Yi</label>
+                    <label for="batas_nilai_yi" class="col-sm-2 col-form-label">Batas Nilai Yi</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="batas_nilai" name="bats_nilai">
+                        <input type="text" class="form-control" id="batas_nilai_yi" name="batas_nilai_yi">
                     </div>
                 </div>
                 <div class="form-group row">
