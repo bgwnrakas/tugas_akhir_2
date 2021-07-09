@@ -97,11 +97,6 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="status" name="status" value="Belum Dinilai" hidden>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
                         <input type="email" class="form-control" id="email" name="email" value="<?= $user['email']; ?>" hidden>
                     </div>
                 </div>

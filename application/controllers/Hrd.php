@@ -54,6 +54,39 @@ class Hrd extends CI_Controller
         $this->load->view('templates/hrd_footer', $data);
     }
 
+    public function kelola_sub_kriteria()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Kelola Sub Kriteria';
+        $this->load->view('templates/hrd_header', $data);
+        $this->load->view('templates/hrd_sidebar', $data);
+        $this->load->view('templates/hrd_topbar', $data);
+        $this->load->view('hrd/kelola_sub_kriteria', $data);
+        $this->load->view('templates/hrd_footer', $data);
+    }
+
+    public function tambah_sub_kriteria()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Tambah Sub Kriteria';
+        $this->load->view('templates/hrd_header', $data);
+        $this->load->view('templates/hrd_sidebar', $data);
+        $this->load->view('templates/hrd_topbar', $data);
+        $this->load->view('hrd/tambah_sub_kriteria', $data);
+        $this->load->view('templates/hrd_footer', $data);
+    }
+
+    public function ubah_sub_kriteria()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Ubah Kriteria';
+        $this->load->view('templates/hrd_header', $data);
+        $this->load->view('templates/hrd_sidebar', $data);
+        $this->load->view('templates/hrd_topbar', $data);
+        $this->load->view('hrd/ubah_sub_kriteria', $data);
+        $this->load->view('templates/hrd_footer', $data);
+    }
+
     public function kelola_karyawan()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
