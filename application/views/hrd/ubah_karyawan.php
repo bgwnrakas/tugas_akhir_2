@@ -17,6 +17,11 @@
         <div class="card-body">
             <form action="" method="post">
                 <div class="form-group row">
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="id_karyawan" name="id_karyawan" value="<?= $tb_karyawan['id_karyawan']; ?>" hidden>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="nik" class="col-sm-2 col-form-label">NIK</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="nik" name="nik" value="<?= $tb_karyawan['nik']; ?>">
@@ -57,16 +62,10 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+                    <label for="departemen" class="col-sm-2 col-form-label">Departemen</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $tb_donor_darah['kelurahan']; ?>">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="jabatan" class="col-sm-2 col-form-label">Jabatan</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" id="jabatan" name="jabatan">
-                            <option><?= $tb_karyawan['jabatan']; ?></option>
+                        <select class="form-control" id="departemen" name="departemen">
+                            <option><?= $tb_karyawan['departemen']; ?></option>
                             <option>Spinning</option>
                             <option>Weaving</option>
                             <option>Dyeing</option>
@@ -80,11 +79,6 @@
                     <label for="posisi" class="col-sm-2 col-form-label">Posisi</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="posisi" name="posisi" value="<?= $tb_karyawan['posisi']; ?>">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <input type="email" class="form-control" id="email" name="email" value="<?= $tb_donor_darah['email']; ?>" hidden>
                     </div>
                 </div>
                 <div class="form-group row">

@@ -15,6 +15,25 @@ class Hrd_model extends CI_Model
         $this->db->delete('user', ['id' => $id]);
     }
 
+    public function deleteDataKaryawan($id_karyawan)
+    {
+        // $this->db->where('id', $id);
+        $this->db->delete('tb_karyawan', ['id_karyawan' => $id_karyawan]);
+    }
+
+    public function deleteDataKriteria($id_kriteria)
+    {
+        // $this->db->where('id', $id);
+        $this->db->delete('tb_kriteria', ['id_kriteria' => $id_kriteria]);
+    }
+
+    public function deleteDataSubKriteria($id_sub_kriteria)
+    {
+        // $this->db->where('id', $id);
+        $this->db->delete('tb_sub_kriteria', ['id_sub_kriteria' => $id_sub_kriteria]);
+    }
+
+
     public function getDataUserById($id)
     {
         return $this->db->get_where('user', ['id' => $id])->row_array();
@@ -41,14 +60,47 @@ class Hrd_model extends CI_Model
     }
 
 
-    public function getDataKaryawanByNik($nik)
+    public function getDataKaryawanById($id_karyawan)
     {
-        return $this->db->get_where('tb_karyawan', ['nik' => $nik])->result_array();
+        return $this->db->get_where('tb_karyawan', ['id_karyawan' => $id_karyawan])->result_array();
     }
 
-    public function editDataKaryawan($id)
+    public function getDataKriteriaById($id_kriteria)
+    {
+        return $this->db->get_where('tb_kriteria', ['id_kriteria' => $id_kriteria])->row_array();
+    }
+
+    public function editDataKriteria($id_kriteria)
     {
         $data = [
+            "id_kriteria" => $this->input->post('id_kriteria'),
+            "nama_kriteria" => $this->input->post('nama_kriteria'),
+            "bobot_kriteria" => $this->input->post('bobot_kriteria'),
+            "jenis_kriteria" => $this->input->post('jenis_kriteria'),
+        ];
+
+        $this->db->where('id_kriteria', $this->input->post('id_kriteria'));
+        $this->db->update('tb_kriteria', $data);
+    }
+
+    public function editDataSubKriteria($id_sub_kriteria)
+    {
+        $data = [
+            "id_sub_kriteria" => $this->input->post('id_sub_kriteria'),
+            "id_kriteria" => $this->input->post('id_kriteria'),
+            "nama_kriteria" => $this->input->post('nama_kriteria'),
+            "nama_sub_kriteria" => $this->input->post('nama_sub_kriteria'),
+            "nilai_sub_kriteria" => $this->input->post('nilai_sub_kriteria'),
+        ];
+
+        $this->db->where('id_sub_kriteria', $this->input->post('id_sub_kriteria'));
+        $this->db->update('tb_sub_kriteria', $data);
+    }
+
+    public function editDataKaryawan($id_karyawan)
+    {
+        $data = [
+            "id_karyawan" => $this->input->post('id_karyawan'),
             "nik" => $this->input->post('nik'),
             "no_ktp" => $this->input->post('no_ktp'),
             "nama_karyawan" => $this->input->post('nama_karyawan'),
@@ -58,10 +110,9 @@ class Hrd_model extends CI_Model
             "alamat" => $this->input->post('alamat'),
             "jabatan" => $this->input->post('jabatan'),
             "posisi" => $this->input->post('posisi'),
-            "email" => $this->input->post('email'),
         ];
 
-        $this->db->where('id', $this->input->post('nik'));
+        $this->db->where('id_karyawan', $this->input->post('id_karyawan'));
         $this->db->update('tb_karyawan', $data);
     }
 }

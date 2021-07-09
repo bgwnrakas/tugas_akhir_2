@@ -5,53 +5,55 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="<?= base_url(); ?>hrd/kelola_sub_kriteria">Kelola Sub Kriteria</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Form Ubah Sub Kriteria</li>
+            <li class="breadcrumb-item active" aria-current="page">Ubah Sub Kriteria</li>
         </ol>
     </nav>
     <h1 class="h3 mb-4 text-gray-800"></h1>
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-info"> Form Ubah Sub Kriteria</h6>
+            <h6 class="m-0 font-weight-bold text-info">Form Ubah Sub Kriteria</h6>
         </div>
         <div class="card-body">
-            <form action="<?= base_url('hrd/kelola_sub_kriteria'); ?>" method="post">
+            <form action="" method="post">
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="id_sub_kriteria" name="id_sub_kriteria" value="<?= $tb_sub_kriteria['id_sub_kriteria']; ?>" hidden>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="id_kriteria" class="col-sm-2 col-form-label">ID Kriteria</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="id_kriteria" name="id_kriteria" value="<?= $tb_sub_kriteria['id_kriteria']; ?>" rows="3">
+                    </div>
+                </div>
                 <div class="form-group row">
                     <label for="nama_kriteria" class="col-sm-2 col-form-label">Nama Kriteria</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nama_kriteria" name="nama_kriteria">
+                        <input type="text" class="form-control" id="nama_kriteria" name="nama_kriteria" value="<?= $tb_sub_kriteria['nama_kriteria']; ?>" rows="3">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="sub_kriteria" class="col-sm-2 col-form-label">Sub Kriteria</label>
+                    <label for="nama_sub_kriteria" class="col-sm-2 col-form-label">Nama Sub Kriteria</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="sub_kriteria" name="sub_kriteria">
+                        <input type="text" class="form-control" id="nama_sub_kriteria" name="nama_sub_kriteria" value="<?= $tb_sub_kriteria['nama_sub_kriteria']; ?>" rows="3">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="bobot_kriteria" class="col-sm-2 col-form-label">Nilai Fuzzy</label>
+                    <label for="nilai_sub_kriteria" class="col-sm-2 col-form-label">Nilai Sub Kriteria</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="bobot_kriteria" name="bobot_kriteria">
+                        <input type="text" class="form-control" id="nilai_sub_kriteria" name="nilai_sub_kriteria" value="<?= $tb_sub_kriteria['nilai_sub_kriteria']; ?>" rows="3">
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <input type="email" class="form-control" id="email" name="email" value="<?= $user['email']; ?>" hidden>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <input type="id_user" class="form-control" id="id_user" name="id_user" value="<?= $user['id']; ?>" hidden>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-10">
-                        <button type="submit" class="btn btn-primary">Done</button>
-                    </div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary">Done</button>
                 </div>
             </form>
         </div>
     </div>
+
+
+
 
 
 

@@ -29,17 +29,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row"></th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td> <a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="<?= base_url('hrd/ubah_kriteria'); ?>"><i class="fa fa-edit"></i></a>
+                    <?php $i = 1; ?>
+                    <?php foreach ($tb_kriteria as $p) : ?>
+                        <tr>
+                            <th scope="row"><?= $i; ?></th>
+                            <td><?= $p['id_kriteria']; ?></td>
+                            <td><?= $p['nama_kriteria']; ?></td>
+                            <td><?= $p['bobot_kriteria']; ?></td>
+                            <td><?= $p['jenis_kriteria']; ?></td>
+                            <td> <a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="<?= base_url(); ?>hrd/ubah_kriteria/<?= $p['id_kriteria']; ?>"><i class="fa fa-edit"></i></a>
 
-                            <a class="btn btn-danger btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Delete" href=""><i class="fa fa-trash"></i></a>
-                        </td>
-                    </tr>
+                                <a class="btn btn-danger btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Delete" href="<?= base_url(); ?>hrd/delete_kriteria/<?= $p['id_kriteria']; ?>"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        <?php $i++; ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
 

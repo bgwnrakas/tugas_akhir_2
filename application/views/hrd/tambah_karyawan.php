@@ -73,9 +73,9 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="jabatan" class="col-sm-2 col-form-label">Jabatan</label>
+                    <label for="departemen" class="col-sm-2 col-form-label">Departemen</label>
                     <div class="col-sm-10">
-                        <select class="form-control" id="jabatan" name="jabatan">
+                        <select class="form-control" id="departemen" name="departemen">
                             <option></option>
                             <option>Spinning</option>
                             <option>Weaving</option>
@@ -89,20 +89,7 @@
                 <div class="form-group row">
                     <label for="posisi" class="col-sm-2 col-form-label">Posisi</label>
                     <div class="col-sm-10">
-                        <select class="form-control" id="posisi" name="posisi">
-                            <option></option>
-                            <option>Operator</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <input type="email" class="form-control" id="email" name="email" value="<?= $user['email']; ?>" hidden>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <input type="id_user" class="form-control" id="id_user" name="id_user" value="<?= $user['id']; ?>" hidden>
+                        <input type="text" class="form-control" id="posisi" name="posisi" value="Operator" readonly>
                     </div>
                 </div>
                 <div class="form-group row">

@@ -24,6 +24,7 @@ class Hrd extends CI_Controller
     public function kelola_kriteria()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['tb_kriteria'] = $this->db->get('tb_kriteria')->result_array();
         $data['title'] = 'Kelola Kriteria';
         $this->load->view('templates/hrd_header', $data);
         $this->load->view('templates/hrd_sidebar', $data);
@@ -36,27 +37,79 @@ class Hrd extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Tambah Kriteria';
-        $this->load->view('templates/hrd_header', $data);
-        $this->load->view('templates/hrd_sidebar', $data);
-        $this->load->view('templates/hrd_topbar', $data);
-        $this->load->view('hrd/tambah_kriteria', $data);
-        $this->load->view('templates/hrd_footer', $data);
+        $this->form_validation->set_rules('nama_kriteria', 'nama_kriteria', 'required');
+        $this->form_validation->set_rules('bobot_kriteria', 'bobot_kriteria', 'required');
+        $this->form_validation->set_rules('jenis_kriteria', 'jenis_kriteria', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/hrd_header', $data);
+            $this->load->view('templates/hrd_sidebar', $data);
+            $this->load->view('templates/hrd_topbar', $data);
+            $this->load->view('hrd/tambah_kriteria', $data);
+            $this->load->view('templates/hrd_footer', $data);
+        } else {
+            $nama_kriteria = $this->input->post('nama_kriteria');
+            $bobot_kriteria = $this->input->post('bobot_kriteria');
+            $jenis_kriteria = $this->input->post('jenis_kriteria');
+
+            $data = array(
+                'nama_kriteria' => $nama_kriteria,
+                'bobot_kriteria' => $bobot_kriteria,
+                'jenis_kriteria' => $jenis_kriteria,
+            );
+            $this->db->insert('tb_kriteria', $data);
+            redirect('hrd/kelola_kriteria');
+        }
     }
 
-    public function ubah_kriteria()
+    public function ubah_kriteria($id_kriteria)
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['title'] = 'Ubah Kriteria';
-        $this->load->view('templates/hrd_header', $data);
-        $this->load->view('templates/hrd_sidebar', $data);
-        $this->load->view('templates/hrd_topbar', $data);
-        $this->load->view('hrd/ubah_kriteria', $data);
-        $this->load->view('templates/hrd_footer', $data);
+        $data['tb_kriteria'] = $this->Hrd_model->getDataKriteriaById($id_kriteria);
+        $data['title'] = 'Ubah kriteria';
+        $this->form_validation->set_rules('nama_kriteria', 'nama_kriteria', 'required');
+        $this->form_validation->set_rules('bobot_kriteria', 'bobot_kriteria', 'required');
+        $this->form_validation->set_rules('jenis_kriteria', 'jenis_kriteria', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/hrd_header', $data);
+            $this->load->view('templates/hrd_sidebar', $data);
+            $this->load->view('templates/hrd_topbar', $data);
+            $this->load->view('hrd/ubah_kriteria', $data);
+            $this->load->view('templates/hrd_footer');
+        } else {
+            $id_kriteria = $this->input->post('id_kriteria');
+            $nama_kriteria = $this->input->post('nama_kriteria');
+            $bobot_kriteria = $this->input->post('bobot_kriteria');
+            $jenis_kriteria = $this->input->post('jenis_kriteria');
+
+
+            $data = array(
+                'id_kriteria' => $id_kriteria,
+                'nama_kriteria' => $nama_kriteria,
+                'bobot_kriteria' => $bobot_kriteria,
+                'jenis_kriteria' => $jenis_kriteria
+
+            );
+
+            $this->Hrd_model->editDataKriteria($data);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success" 
+                    role="alert">Data Pendaftaran Berhasil di Ubag !');
+            redirect('hrd/kelola_kriteria');
+        }
+    }
+
+    public function delete_kriteria($id_kriteria)
+    {
+        $this->Hrd_model->deleteDataKriteria($id_kriteria);
+        redirect('hrd/kelola_kriteria');
     }
 
     public function kelola_sub_kriteria()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['tb_sub_kriteria'] = $this->db->get('tb_sub_kriteria')->result_array();
         $data['title'] = 'Kelola Sub Kriteria';
         $this->load->view('templates/hrd_header', $data);
         $this->load->view('templates/hrd_sidebar', $data);
@@ -68,23 +121,81 @@ class Hrd extends CI_Controller
     public function tambah_sub_kriteria()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['tb_kriteria'] = $this->db->get('tb_kriteria')->result_array();
         $data['title'] = 'Tambah Sub Kriteria';
-        $this->load->view('templates/hrd_header', $data);
-        $this->load->view('templates/hrd_sidebar', $data);
-        $this->load->view('templates/hrd_topbar', $data);
-        $this->load->view('hrd/tambah_sub_kriteria', $data);
-        $this->load->view('templates/hrd_footer', $data);
+        $this->form_validation->set_rules('id_kriteria', 'id_kriteria', 'required');
+        $this->form_validation->set_rules('nama_kriteria', 'nama_kriteria', 'required');
+        $this->form_validation->set_rules('nama_sub_kriteria', 'nama_sub_kriteria', 'required');
+        $this->form_validation->set_rules('nilai_sub_kriteria', 'nilai_sub_kriteria', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/hrd_header', $data);
+            $this->load->view('templates/hrd_sidebar', $data);
+            $this->load->view('templates/hrd_topbar', $data);
+            $this->load->view('hrd/tambah_sub_kriteria', $data);
+            $this->load->view('templates/hrd_footer', $data);
+        } else {
+            $id_kriteria = $this->input->post('id_kriteria');
+            $nama_kriteria = $this->input->post('nama_kriteria');
+            $nama_sub_kriteria = $this->input->post('nama_sub_kriteria');
+            $nilai_sub_kriteria = $this->input->post('nilai_sub_kriteria');
+
+            $data = array(
+                'id_kriteria' => $id_kriteria,
+                'nama_kriteria' => $nama_kriteria,
+                'nama_sub_kriteria' => $nama_sub_kriteria,
+                'nilai_sub_kriteria' => $nilai_sub_kriteria,
+            );
+            $this->db->insert('tb_sub_kriteria', $data);
+            redirect('hrd/kelola_sub_kriteria');
+        }
     }
 
-    public function ubah_sub_kriteria()
+    public function ubah_sub_kriteria($id_sub_kriteria)
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['title'] = 'Ubah Kriteria';
-        $this->load->view('templates/hrd_header', $data);
-        $this->load->view('templates/hrd_sidebar', $data);
-        $this->load->view('templates/hrd_topbar', $data);
-        $this->load->view('hrd/ubah_sub_kriteria', $data);
-        $this->load->view('templates/hrd_footer', $data);
+        $data['tb_sub_kriteria'] = $this->Hrd_model->getDataKriteriaById($id_sub_kriteria);
+        $data['title'] = 'Ubah Sub kriteria';
+        $this->form_validation->set_rules('id_kriteria', 'id_kriteria', 'required');
+        $this->form_validation->set_rules('nama_kriteria', 'nama_kriteria', 'required');
+        $this->form_validation->set_rules('nama_sub_kriteria', 'nama_sub_kriteria', 'required');
+        $this->form_validation->set_rules('nilai_sub_kriteria', 'nilai_sub_kriteria', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/hrd_header', $data);
+            $this->load->view('templates/hrd_sidebar', $data);
+            $this->load->view('templates/hrd_topbar', $data);
+            $this->load->view('hrd/ubah_sub_kriteria', $data);
+            $this->load->view('templates/hrd_footer');
+        } else {
+            $id_sub_kriteria = $this->input->post('id_sub_kriteria');
+            $id_kriteria = $this->input->post('id_kriteria');
+            $nama_kriteria = $this->input->post('nama_kriteria');
+            $nama_sub_kriteria = $this->input->post('nama_sub_kriteria');
+            $nilai_sub_kriteria = $this->input->post('nilai_sub_kriteria');
+
+
+            $data = array(
+                'id_sub_kriteria' => $id_sub_kriteria,
+                'id_kriteria' => $id_kriteria,
+                'nama_kriteria' => $nama_kriteria,
+                'nama_sub_kriteria' => $nama_sub_kriteria,
+                'nilai_sub_kriteria' => $nilai_sub_kriteria
+
+            );
+
+            $this->Hrd_model->editDataSubKriteria($data);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success" 
+                    role="alert">Data Pendaftaran Berhasil di Ubag !');
+            redirect('hrd/kelola_sub_kriteria');
+        }
+    }
+
+    public function delete_sub_kriteria($id_sub_kriteria)
+    {
+        $this->Hrd_model->deleteDataSubKriteria($id_sub_kriteria);
+        redirect('hrd/kelola_sub_kriteria');
     }
 
     public function kelola_karyawan()
@@ -109,12 +220,9 @@ class Hrd extends CI_Controller
         $this->form_validation->set_rules('tempat_lahir', 'tempat_lahir', 'required');
         $this->form_validation->set_rules('tgl_lahir', 'tgl_lahir', 'required');
         $this->form_validation->set_rules('alamat', 'alamat', 'required');
-        $this->form_validation->set_rules('jabatan', 'jabatan', 'required');
+        $this->form_validation->set_rules('departemen', 'departemen', 'required');
         $this->form_validation->set_rules('no_ktp', 'no_ktp', 'required');
         $this->form_validation->set_rules('posisi', 'posisi', 'required');
-        $this->form_validation->set_rules('status', 'status', 'required');
-        $this->form_validation->set_rules('email', 'email', 'required');
-        $this->form_validation->set_rules('id_user', 'id_user', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/hrd_header', $data);
@@ -129,12 +237,9 @@ class Hrd extends CI_Controller
             $tempat_lahir = $this->input->post('tempat_lahir');
             $tgl_lahir = $this->input->post('tgl_lahir');
             $alamat = $this->input->post('alamat');
-            $jabatan = $this->input->post('jabatan');
+            $departemen = $this->input->post('departemen');
             $no_ktp = $this->input->post('no_ktp');
             $posisi = $this->input->post('posisi');
-            $status = $this->input->post('status');
-            $email = $this->input->post('email');
-            $id_user = $this->input->post('id_user');
 
             $data = array(
                 'nik' => $nik,
@@ -143,22 +248,19 @@ class Hrd extends CI_Controller
                 'tempat_lahir' => $tempat_lahir,
                 'tgl_lahir' => $tgl_lahir,
                 'alamat' => $alamat,
-                'jabatan' => $jabatan,
+                'departemen' => $departemen,
                 'no_ktp' => $no_ktp,
                 'posisi' => $posisi,
-                'status' => $status,
-                'email' => $email,
-                'id_user' => $id_user,
             );
             $this->db->insert('tb_karyawan', $data);
             redirect('hrd/kelola_karyawan');
         }
     }
 
-    public function ubah_karyawan()
+    public function ubah_karyawan($id_karyawan)
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data = $this->Hrd_model->getDataKaryawanByNik();
+        $data['tb_karyawan'] = $this->Hrd_model->getDataKaryawanById($id_karyawan);
         $data['title'] = 'Ubah Karyawan';
         $this->form_validation->set_rules('nik', 'nik', 'required');
         $this->form_validation->set_rules('no_ktp', 'no_ktp', 'required');
@@ -167,9 +269,8 @@ class Hrd extends CI_Controller
         $this->form_validation->set_rules('tempat_lahir', 'tempat_lahir', 'required');
         $this->form_validation->set_rules('tgl_lahir', 'tgl_lahir', 'required');
         $this->form_validation->set_rules('alamat', 'alamat', 'required');
-        $this->form_validation->set_rules('jabatan', 'jabatan', 'required');
+        $this->form_validation->set_rules('departemen', 'departemen', 'required');
         $this->form_validation->set_rules('posisi', 'posisi', 'required');
-        $this->form_validation->set_rules('email', 'email', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/hrd_header', $data);
@@ -178,34 +279,42 @@ class Hrd extends CI_Controller
             $this->load->view('hrd/ubah_karyawan', $data);
             $this->load->view('templates/hrd_footer');
         } else {
+            $id_karyawan = $this->input->post('id_karyawan');
             $nik = $this->input->post('nik');
-            $no_ktp = $this->input->post('no_ktp');
             $nama_karyawan = $this->input->post('nama_karyawan');
             $jenis_kelamin = $this->input->post('jenis_kelamin');
             $tempat_lahir = $this->input->post('tempat_lahir');
             $tgl_lahir = $this->input->post('tgl_lahir');
             $alamat = $this->input->post('alamat');
-            $jabatan = $this->input->post('jabatan');
+            $departemen = $this->input->post('departemen');
             $posisi = $this->input->post('posisi');
-            $email = $this->input->post('email');
+
 
             $data = array(
+                'id_karyawan' => $id_karyawan,
                 'nik' => $nik,
-                'no_ktp' => $no_ktp,
                 'nama_karyawan' => $nama_karyawan,
                 'jenis_kelamin' => $jenis_kelamin,
                 'tempat_lahir' => $tempat_lahir,
                 'tgl_lahir' => $tgl_lahir,
                 'alamat' => $alamat,
-                'jabatan' => $jabatan,
-                'posisi' => $posisi,
-                'email' => $email
+                'departemen' => $departemen,
+                'posisi' => $posisi
 
             );
 
             $this->Hrd_model->editDataKaryawan($data);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success" 
+                    role="alert">Data Pendaftaran Berhasil di Ubag !');
             redirect('hrd/kelola_karyawan');
         }
+    }
+
+    public function delete_karyawan($id_karyawan)
+    {
+        $this->Hrd_model->deleteDataKaryawan($id_karyawan);
+        redirect('hrd/kelola_karyawan');
     }
 
     public function profile()

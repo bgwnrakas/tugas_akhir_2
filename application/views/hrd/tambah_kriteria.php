@@ -15,7 +15,7 @@
             <h6 class="m-0 font-weight-bold text-info"> Form Tambah Kriteria</h6>
         </div>
         <div class="card-body">
-            <form action="<?= base_url('hrd/kelola_kriteria'); ?>" method="post">
+            <form action="<?= base_url('hrd/tambah_kriteria'); ?>" method="post">
                 <div class="form-group row">
                     <label for="nama_kriteria" class="col-sm-2 col-form-label">Nama Kriteria</label>
                     <div class="col-sm-10">
@@ -23,25 +23,19 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="bobot" class="col-sm-2 col-form-label">Bobot</label>
+                    <label for="bobot_kriteria" class="col-sm-2 col-form-label">Bobot</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="bobot" name="bobot">
+                        <input type="text" class="form-control" id="bobot_kriteria" name="bobot_kriteria">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="jenis_kriteria" class="col-sm-2 col-form-label">Jenis Kriteria</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="jenis_kriteria" name="jenis_kriteria">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <input type="email" class="form-control" id="email" name="email" value="<?= $user['email']; ?>" hidden>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <input type="id_user" class="form-control" id="id_user" name="id_user" value="<?= $user['id']; ?>" hidden>
+                        <select class="form-control" id="jenis_kriteria" name="jenis_kriteria">
+                            <option></option>
+                            <option>Benefit</option>
+                            <option>Cost</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">
