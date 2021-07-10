@@ -28,7 +28,7 @@ class Pimpinan extends CI_Controller
         $data['tb_bonus'] = $this->db->get('tb_bonus')->result_array();
         $data['title'] = 'Kelola Bonus';
 
-        // Get Data Karyawan
+        // Get Data Karyawan tes
         $karyawan = $this->Karyawan_model->getDataKaryawanDiNilai();
 
         // --- Bilangan Fuzzy ---
