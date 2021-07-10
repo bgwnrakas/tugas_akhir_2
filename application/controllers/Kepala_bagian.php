@@ -117,6 +117,7 @@ class Kepala_bagian extends CI_Controller
 
     public function profile()
     {
+        $data['departemen'] = $this->Kabag_model->getDepartemenKabag($this->session->userdata('role_id'));
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'My Profile';
         $this->load->view('templates/kabag_header', $data);

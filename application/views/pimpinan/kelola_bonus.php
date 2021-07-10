@@ -33,8 +33,8 @@
                             <th scope="row"><?= $i; ?></th>
                             <td><?= $p['jumlah_bonus']; ?></td>
                             <td><?= $p['batas_nilai_yi']; ?></td>
-                            <td> <a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="<?= base_url('pimpinan/ubah_bonus'); ?>"><i class="fa fa-edit"></i></a>
-                                <a class="btn btn-danger btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Delete" href="<?= base_url('pimpinan/delete_bonus'); ?>"><i class="fa fa-trash"></i></a>
+                            <td> <a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="<?= base_url('pimpinan/ubah_bonus/'.$p['id']); ?>"><i class="fa fa-edit"></i></a>
+                                <a class="btn btn-danger btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Delete" href="<?= base_url('pimpinan/delete_bonus/'.$p['id']); ?>"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                         <?php $i++; ?>
