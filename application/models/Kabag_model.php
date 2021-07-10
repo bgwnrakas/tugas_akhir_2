@@ -7,4 +7,10 @@ class Kabag_model extends CI_Model
         $this->db->where('id', $id);
         $this->db->update('user', $data);
     }
+
+    public function getDepartemenKabag($id)
+    {
+        $data = $this->db->get_where('user_role', ['id' => $id])->row_array();
+        return  explode(' ', $data['role'], 2)[1];
+    }
 }

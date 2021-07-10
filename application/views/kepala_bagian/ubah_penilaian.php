@@ -15,70 +15,60 @@
             <h6 class="m-0 font-weight-bold text-info"> Form Ubah Penilaian</h6>
         </div>
         <div class="card-body">
-            <form action="<?= base_url('kepala_bagian/kelola_penilaian'); ?>" method="post">
+            <form action="<?= base_url('kepala_bagian/update_penilaian'); ?>" method="post">
                 <div class="form-group row">
                     <label for="nama_karyawan" class="col-sm-2 col-form-label">Nama Karyawan</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nama_karyawan" name="nama_karyawan">
+                        <input type="text" class="form-control" id="nama_karyawan" value="<?= $karyawan['nama_karyawan'];?>" name="nama_karyawan" readonly>
+                        <input type="hidden"  name="id_karyawan" value="<?= $karyawan['id_karyawan'];?>">
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="posisi" class="col-sm-2 col-form-label">Posisi</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="posisi" name="posisi">
+               <?php 
+                foreach ($kriteria as $d) 
+                {
+                    echo'
+                        <div class="form-group row">
+                            <label for="posisi" class="col-sm-2 col-form-label">'.$d['nama_kriteria'].'</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="id_sub_kriteria[]" required>';
+                                            $query = $this->Kriteria_model->getSubKriteria($d['id_kriteria']);
+                                            foreach ($query as $q):
+                                                $cek = $this->Penilaian_model->isNotNull($karyawan['id_karyawan'],$q['id_sub_kriteria']);
+                                                if (!empty($cek)) { 
+                                                     if ($cek['id_sub_kriteria'] == $q['id_sub_kriteria']) {
+                                                        echo'<option value="'.$q['id_sub_kriteria'].'" selected>'.$q['nama_sub_kriteria'].'</option>';
+                                                    }
+                                                }else{
+                                                    echo'<option value="'.$q['id_sub_kriteria'].'">'.$q['nama_sub_kriteria'].'</option>';
+                                                }
+                                            endforeach; 
+                                echo'                       
+                                    </select>
+                                </div>
+                            </div>'; } ?>
+                            <?php 
+                                foreach ($kriteria as $d) 
+                                {
+                                    $query = $this->Kriteria_model->getSubKriteria($d['id_kriteria']); 
+                                    foreach ($query as $q)
+                                    {
+                                        $cek = $this->Penilaian_model->isNotNull($karyawan['id_karyawan'],$q['id_sub_kriteria']);
+                                        if (!empty($cek)) {
+                                              if ($cek['id_sub_kriteria'] == $q['id_sub_kriteria']) {
+                                                echo'<input type="hidden" name="id_penilaian[]" value="'.$cek['id_penilaian'].'">';
+                                             }
+                                        } 
+                                    }
+                                } 
+                            ?>
+
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary">Done</button>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="tanggung_jawab" class="col-sm-2 col-form-label">Tanggung Jawab</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="tanggunga_jawab" name="tanggung_jawab">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="kepribadian" class="col-sm-2 col-form-label">Kepribadian</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="kepribadian" name="kepribadian">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="kerja_sama" class="col-sm-2 col-form-label">Kerja Sama</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="kerja_sama" name="kerja_sama">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="absensi" class="col-sm-2 col-form-label">Absensi</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="absensi" name="absensi">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <input type="email" class="form-control" id="email" name="email" value="<?= $user['email']; ?>" hidden>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <input type="id_user" class="form-control" id="id_user" name="id_user" value="<?= $user['id']; ?>" hidden>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-10">
-                        <button type="submit" class="btn btn-primary">Done</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-
-
-
-
-
-
-
 </div>
-<!-- /.container-fluid -->
-
-</div>
-<!-- End of Main Content -->

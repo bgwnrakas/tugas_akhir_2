@@ -69,31 +69,31 @@
 		$(document).ready(function () {
 			$('.select-example').select2();
 
-			$('.select-example').change(function () {
-				var nik = $(this).find('option:selected').val();
-				$.ajax({
-				    type: "POST",
-				    url: "<?php echo base_url('Kepala_bagian/getJabatan'); ?>", 
-				    data: {
-                        nik: nik
-                     },
-				    dataType: 'json',//return type expected as json
-				    success: function(data){
-                        $('#jabatan').val(data[0].jabatan);
-                        if (data[0].jabatan == 'Operator') {
-                            $('#jabatan_kriteria').val(4);
-                        }
-                        else if (data[0].jabatan == 'Mekanik') {
-                            $('#jabatan_kriteria').val(3);
-                        }
-                        else if (data[0].jabatan == 'Kepala Regu') {
-                            $('#jabatan_kriteria').val(2);
-                        }else{
-                             $('#jabatan_kriteria').val(1);
-                        }
-				    },
-				});
-			});
+			// $('.select-example').change(function () {
+			// 	var nik = $(this).find('option:selected').val();
+			// 	$.ajax({
+			// 	    type: "POST",
+			// 	    url: "<?php echo base_url('Kepala_bagian/getJabatan'); ?>", 
+			// 	    data: {
+            //             nik: nik
+            //          },
+			// 	    dataType: 'json',//return type expected as json
+			// 	    success: function(data){
+            //             $('#jabatan').val(data[0].jabatan);
+            //             if (data[0].jabatan == 'Operator') {
+            //                 $('#jabatan_kriteria').val(4);
+            //             }
+            //             else if (data[0].jabatan == 'Mekanik') {
+            //                 $('#jabatan_kriteria').val(3);
+            //             }
+            //             else if (data[0].jabatan == 'Kepala Regu') {
+            //                 $('#jabatan_kriteria').val(2);
+            //             }else{
+            //                  $('#jabatan_kriteria').val(1);
+            //             }
+			// 	    },
+			// 	});
+			// });
 		});
 	</script>
 </head>

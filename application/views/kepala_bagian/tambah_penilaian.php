@@ -29,38 +29,30 @@
                 <div class="form-group row">
                     <label for="nama_karyawan" class="col-sm-2 col-form-label">Nama Karyawan</label>
                     <div class="col-sm-10">
-                        <select class="form-control select-example" id="karyawan" name="nik" required>
+                        <select class="form-control select-example" id="karyawan" name="id_karyawan" required>
                              <option value="" selected disabled>-Pilih Karywan-</option>
                             <?php foreach ($karyawan as $r) :
-                                echo'<option value="'.$r['NIK'].'">'.$r['NIK'].' - '.$r['nama_karyawan'].'</option>';
+                                echo'<option value="'.$r['id_karyawan'].'">'.$r['no_ktp'].' - '.$r['nama_karyawan'].'</option>';
                             endforeach; ?>
                         </select>
                     </div>
                 </div>
-                <?php foreach ($jenis_kriteria as $d) :?>
-                <?php if($d['jenis_kriteria'] == "Jabatan") { ?>
-                     <div class="form-group row">
-                        <label for="posisi" class="col-sm-2 col-form-label"><?= $d['jenis_kriteria'] ;?></label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="jabatan" disabled>
-                            <input type="hidden" class="form-control" id="jabatan_kriteria" name="jabatan">
-                        </div>
-                     </div>   
-                <?php } else{ ?>
+                <?php foreach ($kriteria as $d) :?>
                     <div class="form-group row">
-                        <label for="posisi" class="col-sm-2 col-form-label"><?= $d['jenis_kriteria'] ;?></label>
+                        <label for="posisi" class="col-sm-2 col-form-label"><?= $d['nama_kriteria'] ;?></label>
                         <div class="col-sm-10">
-                            <select class="form-control select-example" name="kriteria[]" required>
+                            <select class="form-control" name="id_sub_kriteria[]" required>
                                 <option value="" selected disabled>-Pilih Penilaian-</option>
                                 <?php 
-                                $query = $this->Kriteria_model->getNamaKriteria($d['jenis_kriteria']);
+                                $query = $this->Kriteria_model->getSubKriteria($d['id_kriteria']);
                                 foreach ($query as $q) :
-                                    echo'<option value="'.$q['id_kriteria'].'">'.$q['nama_kriteria'].'</option>';
-                                endforeach; ?>
+                                    echo'<option value="'.$q['id_sub_kriteria'].'">'.$q['nama_sub_kriteria'].'</option>';
+                                endforeach; 
+                                ?>
                             </select>
                         </div>
                     </div>
-                <?php } endforeach;?>
+                <?php  endforeach;?>
                 <div class="form-group row">
                     <div class="col-sm-10">
                         <button type="submit" class="btn btn-primary">Done</button>

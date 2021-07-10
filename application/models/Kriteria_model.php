@@ -2,34 +2,66 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class Kriteria_model extends CI_Model
 {
-    public function getJenisKriteria()
+    public function getKriteria()
     {
-      $this->db->select('jenis_kriteria');
-      $this->db->from('tb_kriteria');
-      $this->db->group_by('jenis_kriteria');
-      $this->db->order_by('id_kriteria','ASC');
-      $query = $this->db->get(); 
-      return $query->result_array();
-    }
-
-    public function getNamaKriteria($jenis)
-    {
-      $this->db->select('*');
-      $this->db->from('tb_kriteria');
-      $this->db->where('jenis_kriteria',$jenis);
-      $query = $this->db->get(); 
-      return $query->result_array();
-    }
-
-    public function getBobot($nik)
-    {
-
       $this->db->select('*')
-         ->from('tb_kriteria')
-         ->join('tb_penilaian', 'tb_kriteria.id_kriteria = tb_penilaian.id_kriteria')
-         ->join('tb_karyawan','tb_penilaian.NIK = tb_karyawan.NIK')
-         ->where('tb_karyawan.NIK',$nik);
+               ->from('tb_kriteria')
+               ->order_by('jenis_kriteria','ASC')
+               ->order_by('id_kriteria','ASC');
+      $query = $this->db->get(); 
+      return $query->result_array();
+    }
+
+    public function getKriteriaBobot()
+    {
+      $data  = $this->getKriteria(); 
+      $bobot = array();
+      foreach ($data as $index => $r) {
+        $bobot[$index] = $r['bobot_kriteria'];
+      }
+      return $bobot;
+    }
+
+    public function getKriteriaJenis()
+    {
+      $data  = $this->getKriteria(); 
+      $jenis = array();
+      foreach ($data as $index => $r) {
+        $jenis[$index] = $r['jenis_kriteria'];
+      }
+      return $jenis;
+    }
+
+    public function getSubKriteria($id_kriteria)
+    {
+      $this->db->select('*')
+               ->from('tb_sub_kriteria')
+               ->where('id_kriteria',$id_kriteria);
+      $query = $this->db->get(); 
+      return $query->result_array();
+    }
+
+    public function getSubKriteriaByID($id_karyawan)
+    {
+      $this->db->select('*')
+               ->from('tb_sub_kriteria')
+               ->join('tb_penilaian', 'tb_sub_kriteria.id_sub_kriteria = tb_penilaian.id_sub_kriteria')
+               ->join('tb_karyawan','tb_penilaian.id_karyawan = tb_karyawan.id_karyawan')
+               ->where('tb_karyawan.id_karyawan',$id_karyawan);
       $result = $this->db->get();
       return $result->result_array();
     }
+
+    public function getSubKriteriaByID2($id_sub_kriteria,$id_karyawan)
+    {
+      $this->db->select('*')
+               ->from('tb_penilaian')
+               ->join('tb_sub_kriteria', 'tb_sub_kriteria.id_sub_kriteria = tb_penilaian.id_sub_kriteria')
+               ->join('tb_karyawan','tb_karyawan.id_karyawan = tb_penilaian.id_karyawan')
+               ->where('tb_penilaian.id_sub_kriteria',$id_sub_kriteria)
+               ->where('tb_penilaian.id_karyawan',$id_karyawan);
+      $result = $this->db->get();
+      return $result->row_array();
+    }
+
 }

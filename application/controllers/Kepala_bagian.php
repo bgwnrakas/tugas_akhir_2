@@ -10,11 +10,13 @@ class Kepala_bagian extends CI_Controller
         $this->load->model('Kabag_model');
         $this->load->model('Karyawan_model');
         $this->load->model('Penilaian_model');
+        $this->load->model('Peringkat_model');
     }
 
     public function index()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['departemen'] = $this->Kabag_model->getDepartemenKabag($this->session->userdata('role_id'));
         $data['title'] = 'Dashboard';
         $this->load->view('templates/kabag_header', $data);
         $this->load->view('templates/kabag_sidebar', $data);
@@ -34,17 +36,18 @@ class Kepala_bagian extends CI_Controller
 
     public function submit_penilaian()
     {
-        foreach ($_POST as $key => $value) {
-            $$key = $value;
-        }
-        $nilaiJabatan = array('NIK' => $nik, 'id_kriteria' => $jabatan);
-        $simpanj = $this->Penilaian_model->insert($nilaiJabatan);
-        for ($i = 0; $i < count($kriteria); $i++) {
-            $data = array('NIK' => $nik, 'id_kriteria' => $kriteria[$i]);
+        foreach ($_POST as $key => $value) {$$key = $value;}        
+        
+        for ($i = 0; $i < count($id_sub_kriteria); $i++) {
+            $data = array(
+                    'id_karyawan' => $id_karyawan, 
+                    'id_sub_kriteria' => $id_sub_kriteria[$i], 
+                    'tahun' => date("Y")
+                   );
             $simpan = $this->Penilaian_model->insert($data);
         }
+            $update = $this->Karyawan_model->updateStatus($id_karyawan);
         if ($simpan) {
-            $this->Karyawan_model->updateStatus($nik);
             $this->session->set_flashdata('berhasil', 'Data Tersimpan!');
             redirect('Kepala_bagian/kelola_penilaian');
         } else {
@@ -55,9 +58,14 @@ class Kepala_bagian extends CI_Controller
 
     public function kelola_penilaian()
     {
+        $data['departemen'] = $this->Kabag_model->getDepartemenKabag($this->session->userdata('role_id'));
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Tambah Penilaian';
-        $data['karyawan'] = $this->Karyawan_model->getDataKaryawanDiNilai();
+
+        $data['karyawan'] = $this->Karyawan_model->getDataKaryawanDiNilai($data['departemen']);
+        $data['totalKaryawan'] = $this->Karyawan_model->CountAllKaryawanByDepartmen($data['departemen']);
+       
+        $data['kriteria'] = $this->Kriteria_model->getKriteria();
         $this->load->view('templates/kabag_header', $data);
         $this->load->view('templates/kabag_sidebar', $data);
         $this->load->view('templates/kabag_topbar', $data);
@@ -65,14 +73,15 @@ class Kepala_bagian extends CI_Controller
         $this->load->view('templates/kabag_footer', $data);
     }
 
-
-
     public function tambah_penilaian()
     {
-        $data['karyawan'] = $this->Karyawan_model->getDataKaryawanBelum();
-        $data['jenis_kriteria'] = $this->Kriteria_model->getJenisKriteria();
+        $data['departemen'] = $this->Kabag_model->getDepartemenKabag($this->session->userdata('role_id'));
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Tambah Penilaian';
+
+        $data['karyawan'] = $this->Karyawan_model->getDataKaryawanBelum($data['departemen']);
+        $data['kriteria'] = $this->Kriteria_model->getKriteria();
+
         $this->load->view('templates/kabag_header', $data);
         $this->load->view('templates/kabag_sidebar', $data);
         $this->load->view('templates/kabag_topbar', $data);
@@ -80,15 +89,30 @@ class Kepala_bagian extends CI_Controller
         $this->load->view('templates/kabag_footer', $data);
     }
 
-    public function ubah_penilaian()
+    public function ubah_penilaian($id_karyawan)
     {
+        $data['departemen'] = $this->Kabag_model->getDepartemenKabag($this->session->userdata('role_id'));
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Ubah Penilaian';
+
+        $data['karyawan'] = $this->Karyawan_model->getDataKaryawanByID($id_karyawan);
+        $data['kriteria'] = $this->Kriteria_model->getKriteria();
         $this->load->view('templates/kabag_header', $data);
         $this->load->view('templates/kabag_sidebar', $data);
         $this->load->view('templates/kabag_topbar', $data);
         $this->load->view('kepala_bagian/ubah_penilaian', $data);
         $this->load->view('templates/kabag_footer', $data);
+    }
+
+    public function update_penilaian()
+    {
+        foreach ($_POST as $key => $value) {$$key = $value;}   
+        for ($i = 0; $i < count($id_penilaian); $i++) {
+            $update = $this->Penilaian_model->update($id_penilaian[$i], $id_sub_kriteria[$i]);
+        }
+
+        $this->session->set_flashdata('berhasil', 'Data Terupdate!');
+        redirect('Kepala_bagian/kelola_penilaian');
     }
 
     public function profile()
@@ -140,7 +164,6 @@ class Kepala_bagian extends CI_Controller
                 'name' => $name,
                 'email' => $email,
                 'image' => $image,
-
             );
             $this->Kabag_model->editDataProfile($id, $data);
             redirect('kepala_bagian/profile');
@@ -151,21 +174,24 @@ class Kepala_bagian extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Hasil Perhitungan Penilaian';
-
+        $data['departemen'] = $this->Kabag_model->getDepartemenKabag($this->session->userdata('role_id'));
+        $data['kriteria'] = $this->Kriteria_model->getKriteria();
         // Get Data Karyawan
-        $karyawan = $this->Karyawan_model->getDataKaryawanDiNilai();
+        $karyawan = $this->Karyawan_model->getDataKaryawanDiNilai($data['departemen']);
+        $bobot    = $this->Kriteria_model->getKriteriaBobot();
+        $jenis    = $this->Kriteria_model->getKriteriaJenis();
 
         // --- Bilangan Fuzzy ---
         $fuzzy = array();
         foreach ($karyawan as $datakaryawan => $r) {
-            $fuzzy[$datakaryawan][0] = $r['nama_karyawan'];
-            $bobot = $this->Kriteria_model->getBobot($r['nik']);
-            foreach ($bobot as $databobot => $b) {
-                $fuzzy[$datakaryawan][$databobot + 1] = $b['bobot_kriteria'];
+            $subkriteria = $this->Kriteria_model->getSubKriteriaByID($r['id_karyawan']);
+            $fuzzy[$datakaryawan][0] = $r['id_karyawan'];
+            foreach ($subkriteria as $sub => $s) {
+                $fuzzy[$datakaryawan][$sub + 1] = $s['nilai_sub_kriteria'];
             }
         }
 
-        // --- Mencari Pembagi ---
+        // // --- Mencari Pembagi ---
         $x = count(reset($fuzzy)); // Mendapatkan Dimensi X dari Matrix
         $y = count($fuzzy); // Mendapatkan Dimensi Y dari Matrix
 
@@ -176,7 +202,6 @@ class Kepala_bagian extends CI_Controller
                 $pangkat += pow($fuzzy[$j][$i], 2);
             }
             $pembagi[$i] = sqrt($pangkat);
-            // echo $pembagi[$i] .' | ';
         }
 
         // Menghitung Matrix Ternormalisasi
@@ -187,9 +212,6 @@ class Kepala_bagian extends CI_Controller
                 $ternormalisasi[$i][$j] = $fuzzy[$i][$j] / $pembagi[$j];
             }
         }
-
-        // Inisialisasi Bobot
-        $bobot = array(2, 1.5, 1.5, 1.5, 2, 1.5);
 
         // Menghitung Matrix Optimalisasi
         $optimalisasi = array();
@@ -211,10 +233,10 @@ class Kepala_bagian extends CI_Controller
             $minimum[$i] = 0;
             $maksimum[$i] = 0;
             for ($j = 1; $j < $x; $j++) {
-                if ($j == $x - 1) {
-                    $minimum[$i] += $optimalisasi[$i][$j];
-                } else {
+                if ($jenis[$j-1] == "Benefit") {
                     $maksimum[$i] += $optimalisasi[$i][$j];
+                } else {
+                    $minimum[$i] += $optimalisasi[$i][$j];
                 }
             }
             $Yi[$i] = $maksimum[$i] - $minimum[$i];
@@ -229,8 +251,7 @@ class Kepala_bagian extends CI_Controller
             $matrixYi[$i][3] = $Yi[$i];
         }
 
-
-        // // Mengirim Data Array Ke View
+        // // // Mengirim Data Array Ke View
         $data['pembagi']        = $pembagi;
         $data['fuzzy']          = $fuzzy;
         $data['ternormalisasi'] = $ternormalisasi;
@@ -243,6 +264,26 @@ class Kepala_bagian extends CI_Controller
         $this->load->view('templates/kabag_topbar', $data);
         $this->load->view('kepala_bagian/hitung_penilaian', $data);
         $this->load->view('templates/kabag_footer', $data);
+    }
+
+    public function simpan_peringkat()
+    {
+        foreach ($_POST as $key => $value) {$$key = $value;}   
+        for ($i = 0; $i < count($id_karyawan); $i++) {
+            $data = array(
+                    'id_karyawan' => $id_karyawan[$i], 
+                    'ranking' => $peringkat[$i],
+                    'nilai_yi' => $yi[$i],  
+                    'tahun' => date("Y")
+                   );
+            $simpan = $this->Peringkat_model->insert($data);
+        }
+
+        if ($simpan) {
+            redirect('Kepala_bagian/kelola_penilaian');
+        } else {
+            redirect('Kepala_bagian/hitung');
+        }
     }
 
     public function example()
