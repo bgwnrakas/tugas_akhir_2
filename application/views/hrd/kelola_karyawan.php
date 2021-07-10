@@ -45,7 +45,7 @@
                                 <td><?= $p['jenis_kelamin']; ?></td>
                                 <td><?= $p['tempat_lahir']; ?></td>
                                 <td><?= $p['tgl_lahir']; ?></td>
-                                <td> <a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="<?= base_url(); ?>hrd/ubah_kriteria/<?= $p['id_karyawan']; ?>"><i class="fa fa-edit"></i></a>
+                                <td> <a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="<?= base_url(); ?>hrd/ubah_karyawan/<?= $p['id_karyawan']; ?>"><i class="fa fa-edit"></i></a>
 
                                     <a class="btn btn-danger btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Delete" href="<?= base_url(); ?>hrd/delete_karyawan/<?= $p['id_karyawan']; ?>"><i class="fa fa-trash"></i></a>
                                 </td>

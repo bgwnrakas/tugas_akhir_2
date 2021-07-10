@@ -3,9 +3,8 @@
 	<!-- Page Heading -->
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item active" aria-current="page">Hasil Perhitungan
-				
-			</li>
+			<li class="breadcrumb-item"><a href="<?= base_url(); ?>kepala_bagian/kelola_penilaian">Kelola Penilaian</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Hasil Perhitungan</li>
 		</ol>
 	</nav>
 	<div class="card shadow mb-5">
@@ -18,36 +17,38 @@
 					<tr>
 						<th scope="col">Nama Karyawan</th>
 						<?php
-							foreach ($kriteria as $k) { echo'<th scope="col" class="text-center">'.$k['nama_kriteria'].'</th>';}
+						foreach ($kriteria as $k) {
+							echo '<th scope="col" class="text-center">' . $k['nama_kriteria'] . '</th>';
+						}
 						?>
 					</tr>
 				</thead>
 				<tbody>
 					<?php
-                         $x = count(reset($fuzzy));
-                         $y = count($fuzzy);
-                         for ($i=0; $i < $y; $i++) { 
-                             echo"<tr>";
-                             for ($j=0; $j < $x; $j++) { 
-                                if ($j==0) {
-									$kar = $this->Karyawan_model->getDataKaryawanByID($matrixYi[$i][$j]);
-                                    echo'<td>'.$kar['nama_karyawan'].'</td>';
-                                }else{
-                                     echo'<td class="text-center">'.$fuzzy[$i][$j].'</td>';
-                                }
-                             }
-                             echo"</tr>";
-                         }
-                    ?>
+					$x = count(reset($fuzzy));
+					$y = count($fuzzy);
+					for ($i = 0; $i < $y; $i++) {
+						echo "<tr>";
+						for ($j = 0; $j < $x; $j++) {
+							if ($j == 0) {
+								$kar = $this->Karyawan_model->getDataKaryawanByID($matrixYi[$i][$j]);
+								echo '<td>' . $kar['nama_karyawan'] . '</td>';
+							} else {
+								echo '<td class="text-center">' . $fuzzy[$i][$j] . '</td>';
+							}
+						}
+						echo "</tr>";
+					}
+					?>
 				</tbody>
 				<tfood>
 					<tr>
 						<th scope="col">Pembagi</th>
 						<?php
-                            for ($i=0; $i <count($pembagi) ; $i++) { 
-                                echo'<th scope="col" class="text-center">'.round($pembagi[$i+1], 5).'</th>';
-                            }
-                        ?>
+						for ($i = 0; $i < count($pembagi); $i++) {
+							echo '<th scope="col" class="text-center">' . round($pembagi[$i + 1], 5) . '</th>';
+						}
+						?>
 					</tr>
 				</tfood>
 			</table>
@@ -64,34 +65,36 @@
 					<tr>
 						<th scope="col">Nama Karyawan</th>
 						<?php
-							foreach ($kriteria as $k) { echo'<th scope="col" class="text-center">'.$k['nama_kriteria'].'</th>';}
+						foreach ($kriteria as $k) {
+							echo '<th scope="col" class="text-center">' . $k['nama_kriteria'] . '</th>';
+						}
 						?>
 					</tr>
 				</thead>
 				<tbody>
 					<?php
-                         $x = count(reset($ternormalisasi));
-                         $y = count($ternormalisasi);
-						
-                         for ($i=0; $i < $y; $i++) { 
-                             echo"<tr>";
-                             for ($j=0; $j < $x; $j++) { 
-                                if ($j==0) {
-									$kar = $this->Karyawan_model->getDataKaryawanByID($matrixYi[$i][$j]);
-                                    echo'<td>'.$kar['nama_karyawan'].'</td>';
-                                }else{
-                                     echo'<td class="text-center">'.round($ternormalisasi[$i][$j],5).'</td>';
-                                }
-                             }
-                             echo"</tr>";
-                         }
-                    ?>
+					$x = count(reset($ternormalisasi));
+					$y = count($ternormalisasi);
+
+					for ($i = 0; $i < $y; $i++) {
+						echo "<tr>";
+						for ($j = 0; $j < $x; $j++) {
+							if ($j == 0) {
+								$kar = $this->Karyawan_model->getDataKaryawanByID($matrixYi[$i][$j]);
+								echo '<td>' . $kar['nama_karyawan'] . '</td>';
+							} else {
+								echo '<td class="text-center">' . round($ternormalisasi[$i][$j], 5) . '</td>';
+							}
+						}
+						echo "</tr>";
+					}
+					?>
 				</tbody>
 			</table>
 		</div>
 	</div>
 
-    <div class="card shadow mb-5">
+	<div class="card shadow mb-5">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-info">Optimalisasi</h6>
 		</div>
@@ -101,33 +104,35 @@
 					<tr>
 						<th scope="col">Nama Karyawan</th>
 						<?php
-							foreach ($kriteria as $k) { echo'<th scope="col" class="text-center">'.$k['nama_kriteria'].'</th>';}
+						foreach ($kriteria as $k) {
+							echo '<th scope="col" class="text-center">' . $k['nama_kriteria'] . '</th>';
+						}
 						?>
 					</tr>
 				</thead>
 				<tbody>
 					<?php
-                         $x = count(reset($optimalisasi));
-                         $y = count($optimalisasi);
-                         for ($i=0; $i < $y; $i++) { 
-                             echo"<tr>";
-                             for ($j=0; $j < $x; $j++) { 
-                                if ($j==0) {
-									$kar = $this->Karyawan_model->getDataKaryawanByID($matrixYi[$i][$j]);
-                                    echo'<td>'.$kar['nama_karyawan'].'</td>';
-                                }else{
-                                     echo'<td class="text-center">'.round($optimalisasi[$i][$j],5).'</td>';
-                                }
-                             }
-                             echo"</tr>";
-                         }
-                    ?>
+					$x = count(reset($optimalisasi));
+					$y = count($optimalisasi);
+					for ($i = 0; $i < $y; $i++) {
+						echo "<tr>";
+						for ($j = 0; $j < $x; $j++) {
+							if ($j == 0) {
+								$kar = $this->Karyawan_model->getDataKaryawanByID($matrixYi[$i][$j]);
+								echo '<td>' . $kar['nama_karyawan'] . '</td>';
+							} else {
+								echo '<td class="text-center">' . round($optimalisasi[$i][$j], 5) . '</td>';
+							}
+						}
+						echo "</tr>";
+					}
+					?>
 				</tbody>
 			</table>
 		</div>
 	</div>
 
-    <div class="card shadow mb-5">
+	<div class="card shadow mb-5">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-info">Nilai Maksimum , Minumum dan Yi</h6>
 		</div>
@@ -143,57 +148,57 @@
 				</thead>
 				<tbody>
 					<?php
-                         $x = count(reset($matrixYi));
-                         $y = count($matrixYi);
-                         for ($i=0; $i < $y; $i++) { 
-                             echo"<tr>";
-                             for ($j=0; $j < $x; $j++) { 
-                                if ($j==0) {
-									$kar = $this->Karyawan_model->getDataKaryawanByID($matrixYi[$i][$j]);
-                                    echo'<td>'.$kar['nama_karyawan'].'</td>';
-                                }else{
-                                     echo'<td class="text-center">'.round($matrixYi[$i][$j],5).'</td>';
-                                }
-                             }
-                             echo"</tr>";
-                         }
-                    ?>
+					$x = count(reset($matrixYi));
+					$y = count($matrixYi);
+					for ($i = 0; $i < $y; $i++) {
+						echo "<tr>";
+						for ($j = 0; $j < $x; $j++) {
+							if ($j == 0) {
+								$kar = $this->Karyawan_model->getDataKaryawanByID($matrixYi[$i][$j]);
+								echo '<td>' . $kar['nama_karyawan'] . '</td>';
+							} else {
+								echo '<td class="text-center">' . round($matrixYi[$i][$j], 5) . '</td>';
+							}
+						}
+						echo "</tr>";
+					}
+					?>
 				</tbody>
 			</table>
 		</div>
 	</div>
 
-    <div class="card shadow mb-5">
+	<div class="card shadow mb-5">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-info">Peringkat Karyawan</h6>
 		</div>
 		<div class="card-body">
 			<form action="<?= base_url('kepala_bagian/simpan_peringkat'); ?>" method="post">
-			<table class="table table-bordered table-hover" style="width:100%">
-				<thead>
-					<tr class="bg-info text-white">
-						<th scope="col">Nama Karyawan</th>
-						<th scope="col">Yi</th>
-                        <th scope="col">Peringkat</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php
-                        //  Fungsi untuk melakukan sort
-                         array_multisort(array_column($matrixYi, 3), SORT_DESC, $matrixYi);
-                         $x = count(reset($matrixYi));
-                         $y = count($matrixYi);
-                         for ($i=0; $i < $y; $i++) { 
-							 $kar = $this->Karyawan_model->getDataKaryawanByID($matrixYi[$i][0]);
-                             echo"<tr>";
-                             echo'<td>'.$kar['nama_karyawan'].'</td>';
-                             echo'<td>'.round($matrixYi[$i][3],5).'</td>';
-                             echo'<td>'. $i+1 .'</td>';
-                             echo"</tr>";
-							 echo'
-							 	<input type="hidden" name="id_karyawan[]" value="'.$matrixYi[$i][0].'">
-							 	<input type="hidden" name="yi[]" value="'.round($matrixYi[$i][3],5).'">
-								<input type="hidden" name="peringkat[]" value="'. $i+1 .'">
+				<table class="table table-bordered table-hover" style="width:100%">
+					<thead>
+						<tr class="bg-info text-white">
+							<th scope="col">Nama Karyawan</th>
+							<th scope="col">Yi</th>
+							<th scope="col">Peringkat</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						//  Fungsi untuk melakukan sort
+						array_multisort(array_column($matrixYi, 3), SORT_DESC, $matrixYi);
+						$x = count(reset($matrixYi));
+						$y = count($matrixYi);
+						for ($i = 0; $i < $y; $i++) {
+							$kar = $this->Karyawan_model->getDataKaryawanByID($matrixYi[$i][0]);
+							echo "<tr>";
+							echo '<td>' . $kar['nama_karyawan'] . '</td>';
+							echo '<td>' . round($matrixYi[$i][3], 5) . '</td>';
+							echo '<td>' . $i + 1 . '</td>';
+							echo "</tr>";
+							echo '
+							 	<input type="hidden" name="id_karyawan[]" value="' . $matrixYi[$i][0] . '">
+							 	<input type="hidden" name="yi[]" value="' . round($matrixYi[$i][3], 5) . '">
+								<input type="hidden" name="peringkat[]" value="' . $i + 1 . '">
 							 ';
                          }
                     ?>
@@ -209,9 +214,9 @@
 					echo'<div class="alert alert-primary fw-bold fs-2 " role="alert">
 							Data Peringkat Telah Tersimpan !
 						</div>';
-				}
-			?>
-			</div>
+					}
+					?>
+				</div>
 			</form>
 		</div>
 	</div>

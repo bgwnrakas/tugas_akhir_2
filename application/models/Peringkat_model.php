@@ -17,4 +17,12 @@ class Peringkat_model extends CI_Model
         $result = $this->db->get();
         return $result->result_array();
     }
+
+    public function update($id_karyawan,$tahun,$nilai_yi)
+    {
+        $this->db->where('id_karyawan', $id_karyawan);
+        $this->db->where('tahun', $tahun);
+        $this->db->update('tb_ranking', array('nilai_yi' => $nilai_yi));
+        return true;
+    }
 }

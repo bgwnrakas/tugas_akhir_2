@@ -279,6 +279,8 @@ class Kepala_bagian extends CI_Controller
                     'tahun' => date("Y")
                    );
                 $simpan = $this->Peringkat_model->insert($data);
+            }else{
+                $update = $this->Peringkat_model->update($id_karyawan[$i],date("Y"),$yi[$i]);   
             }
         }
 

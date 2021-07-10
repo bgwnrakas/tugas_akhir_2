@@ -62,12 +62,17 @@ class Hrd_model extends CI_Model
 
     public function getDataKaryawanById($id_karyawan)
     {
-        return $this->db->get_where('tb_karyawan', ['id_karyawan' => $id_karyawan])->result_array();
+        return $this->db->get_where('tb_karyawan', ['id_karyawan' => $id_karyawan])->row_array();
     }
 
     public function getDataKriteriaById($id_kriteria)
     {
         return $this->db->get_where('tb_kriteria', ['id_kriteria' => $id_kriteria])->row_array();
+    }
+
+    public function getDataSubKriteriaById($id_sub_kriteria)
+    {
+        return $this->db->get_where('tb_sub_kriteria', ['id_sub_kriteria' => $id_sub_kriteria])->row_array();
     }
 
     public function editDataKriteria($id_kriteria)

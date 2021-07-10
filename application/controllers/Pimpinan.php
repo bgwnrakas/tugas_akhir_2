@@ -27,6 +27,7 @@ class Pimpinan extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['tb_bonus'] = $this->db->get('tb_bonus')->result_array();
+        $data['tb_ranking'] = $this->db->get('tb_ranking')->result_array();
         $data['title'] = 'Kelola Bonus';
         $data['peringkat'] = $this->Peringkat_model->getPeringkat();
         $this->load->view('templates/pimpinan_header', $data);

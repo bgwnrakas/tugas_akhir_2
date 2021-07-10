@@ -154,7 +154,7 @@ class Hrd extends CI_Controller
     public function ubah_sub_kriteria($id_sub_kriteria)
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['tb_sub_kriteria'] = $this->Hrd_model->getDataKriteriaById($id_sub_kriteria);
+        $data['tb_sub_kriteria'] = $this->Hrd_model->getDataSubKriteriaById($id_sub_kriteria);
         $data['title'] = 'Ubah Sub kriteria';
         $this->form_validation->set_rules('id_kriteria', 'id_kriteria', 'required');
         $this->form_validation->set_rules('nama_kriteria', 'nama_kriteria', 'required');
