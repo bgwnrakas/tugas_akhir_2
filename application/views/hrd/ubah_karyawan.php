@@ -1,6 +1,5 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
     <!-- Page Heading -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
