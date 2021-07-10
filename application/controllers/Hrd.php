@@ -9,6 +9,7 @@ class Hrd extends CI_Controller
         parent::__construct();
 
         $this->load->model('Hrd_model');
+        $this->load->model('Kriteria_model');
     }
     public function index()
     {
@@ -109,7 +110,7 @@ class Hrd extends CI_Controller
     public function kelola_sub_kriteria()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['tb_sub_kriteria'] = $this->db->get('tb_sub_kriteria')->result_array();
+        $data['tb_sub_kriteria'] = $this->Kriteria_model->getDataSubKriteria();
         $data['title'] = 'Kelola Sub Kriteria';
         $this->load->view('templates/hrd_header', $data);
         $this->load->view('templates/hrd_sidebar', $data);
@@ -124,7 +125,6 @@ class Hrd extends CI_Controller
         $data['tb_kriteria'] = $this->db->get('tb_kriteria')->result_array();
         $data['title'] = 'Tambah Sub Kriteria';
         $this->form_validation->set_rules('id_kriteria', 'id_kriteria', 'required');
-        $this->form_validation->set_rules('nama_kriteria', 'nama_kriteria', 'required');
         $this->form_validation->set_rules('nama_sub_kriteria', 'nama_sub_kriteria', 'required');
         $this->form_validation->set_rules('nilai_sub_kriteria', 'nilai_sub_kriteria', 'required');
 
@@ -136,13 +136,11 @@ class Hrd extends CI_Controller
             $this->load->view('templates/hrd_footer', $data);
         } else {
             $id_kriteria = $this->input->post('id_kriteria');
-            $nama_kriteria = $this->input->post('nama_kriteria');
             $nama_sub_kriteria = $this->input->post('nama_sub_kriteria');
             $nilai_sub_kriteria = $this->input->post('nilai_sub_kriteria');
 
             $data = array(
                 'id_kriteria' => $id_kriteria,
-                'nama_kriteria' => $nama_kriteria,
                 'nama_sub_kriteria' => $nama_sub_kriteria,
                 'nilai_sub_kriteria' => $nilai_sub_kriteria,
             );
@@ -155,9 +153,9 @@ class Hrd extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['tb_sub_kriteria'] = $this->Hrd_model->getDataSubKriteriaById($id_sub_kriteria);
+        $data['tb_kriteria'] = $this->db->get('tb_kriteria')->result_array();
         $data['title'] = 'Ubah Sub kriteria';
         $this->form_validation->set_rules('id_kriteria', 'id_kriteria', 'required');
-        $this->form_validation->set_rules('nama_kriteria', 'nama_kriteria', 'required');
         $this->form_validation->set_rules('nama_sub_kriteria', 'nama_sub_kriteria', 'required');
         $this->form_validation->set_rules('nilai_sub_kriteria', 'nilai_sub_kriteria', 'required');
 
@@ -170,7 +168,6 @@ class Hrd extends CI_Controller
         } else {
             $id_sub_kriteria = $this->input->post('id_sub_kriteria');
             $id_kriteria = $this->input->post('id_kriteria');
-            $nama_kriteria = $this->input->post('nama_kriteria');
             $nama_sub_kriteria = $this->input->post('nama_sub_kriteria');
             $nilai_sub_kriteria = $this->input->post('nilai_sub_kriteria');
 
@@ -178,7 +175,6 @@ class Hrd extends CI_Controller
             $data = array(
                 'id_sub_kriteria' => $id_sub_kriteria,
                 'id_kriteria' => $id_kriteria,
-                'nama_kriteria' => $nama_kriteria,
                 'nama_sub_kriteria' => $nama_sub_kriteria,
                 'nilai_sub_kriteria' => $nilai_sub_kriteria
 
