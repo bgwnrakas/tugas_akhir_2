@@ -268,15 +268,18 @@ class Kepala_bagian extends CI_Controller
 
     public function simpan_peringkat()
     {
+        $departemen = $this->Kabag_model->getDepartemenKabag($this->session->userdata('role_id'));
         foreach ($_POST as $key => $value) {$$key = $value;}   
         for ($i = 0; $i < count($id_karyawan); $i++) {
-            $data = array(
+            $cek = $this->Karyawan_model->CekKaryawanOnRank($id_karyawan[$i],$departemen);
+            if (empty($cek)) {
+                 $data = array(
                     'id_karyawan' => $id_karyawan[$i], 
-                    'ranking' => $peringkat[$i],
                     'nilai_yi' => $yi[$i],  
                     'tahun' => date("Y")
                    );
-            $simpan = $this->Peringkat_model->insert($data);
+                $simpan = $this->Peringkat_model->insert($data);
+            }
         }
 
         if ($simpan) {

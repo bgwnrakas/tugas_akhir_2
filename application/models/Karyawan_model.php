@@ -39,13 +39,27 @@ class Karyawan_model extends CI_Model
         return $this->db->count_all_results('tb_karyawan');
     }
 
-    public function CekRankingKaryawan($departemen)
+    public function CekRankingIfNull($departemen)
     {
         $this->db->select('*')
-               ->from('tb_ranking')
-               ->join('tb_karyawan', 'tb_ranking.id_karyawan = tb_karyawan.id_karyawan')
-               ->where('tb_karyawan.departemen',$departemen);
+               ->from('tb_karyawan')
+               ->join('tb_ranking', 'tb_karyawan.id_karyawan = tb_ranking.id_karyawan','left')
+               ->where('tb_karyawan.departemen',$departemen)
+               ->where('tahun', date("Y"))
+               ->where('tb_ranking.id_ranking IS NULL');
         $result = $this->db->get();
-        return $result->result_array();
+        return $result->result_array();  
+    }
+
+    public function CekKaryawanOnRank($id_karyawan,$departemen)
+    {
+        $this->db->select('*')
+               ->from('tb_karyawan')
+               ->join('tb_ranking', 'tb_karyawan.id_karyawan = tb_ranking.id_karyawan','left')
+               ->where('tb_karyawan.departemen',$departemen)
+               ->where('tahun', date("Y"))
+               ->where('tb_ranking.id_karyawan',$id_karyawan);
+        $result = $this->db->get();
+        return $result->row_array();  
     }
 }

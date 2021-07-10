@@ -67,7 +67,7 @@
                                 {
                                      echo'<td>'.$s['nama_sub_kriteria'].'</td>';
                                 }
-                                $rank = $this->Karyawan_model->CekRankingKaryawan($departemen);
+                                $rank = $this->Karyawan_model->CekKaryawanOnRank($d['id_karyawan'],$departemen);
                                 if (empty($rank)) {
                                       echo' 
                                     <td>

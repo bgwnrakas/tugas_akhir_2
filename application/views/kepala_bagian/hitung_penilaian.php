@@ -202,7 +202,7 @@
 			<br>
 			<div class="text-center">
 			<?php	
-				$data = $this->Karyawan_model->CekRankingKaryawan($departemen);
+				$data = $this->Karyawan_model->CekRankingIfNull($departemen);
 				if (empty($data)) {
 					echo'<button type="submit" class="btn btn-info  px-5 py-2">Simpan Peringkat</button>';
 				}else{
