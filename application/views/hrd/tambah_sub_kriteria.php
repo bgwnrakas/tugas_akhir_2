@@ -19,24 +19,28 @@
                 <div class="form-group row">
                     <label for="id_kriteria" class="col-sm-2 col-form-label">ID Kriteria</label>
 
-                    <?php foreach ($tb_kriteria as $p) : ?>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="id_kriteria" name="id_kriteria" value="">
+
+                    <div class="col-sm-10">
+                        <select class="form-control" id="id_kriteria" name="id_kriteria" value="">
+                            <?php foreach ($tb_kriteria as $p) : ?>
                                 <option><?= $p['id_kriteria']; ?></option>
-                            </select>
-                        </div>
-                    <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
                 </div>
                 <div class="form-group row">
                     <label for="nama_kriteria" class="col-sm-2 col-form-label">Nama Kriteria</label>
 
-                    <?php foreach ($tb_kriteria as $p) : ?>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="nama_kriteria" name="nama_kriteria" value="">
+
+                    <div class="col-sm-10">
+                        <select class="form-control" id="nama_kriteria" name="nama_kriteria" value="">
+                            <?php foreach ($tb_kriteria as $p) : ?>
                                 <option><?= $p['nama_kriteria']; ?></option>
-                            </select>
-                        </div>
-                    <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
                 </div>
                 <div class="form-group row">
                     <label for="nama_sub_kriteria" class="col-sm-2 col-form-label">Nama Sub Kriteria</label>
