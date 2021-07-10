@@ -93,7 +93,6 @@ class Hrd_model extends CI_Model
         $data = [
             "id_sub_kriteria" => $this->input->post('id_sub_kriteria'),
             "id_kriteria" => $this->input->post('id_kriteria'),
-            "nama_kriteria" => $this->input->post('nama_kriteria'),
             "nama_sub_kriteria" => $this->input->post('nama_sub_kriteria'),
             "nilai_sub_kriteria" => $this->input->post('nilai_sub_kriteria'),
         ];

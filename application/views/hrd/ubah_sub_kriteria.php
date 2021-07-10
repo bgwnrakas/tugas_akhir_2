@@ -23,15 +23,16 @@
                 </div>
                 <div class="form-group row">
                     <label for="id_kriteria" class="col-sm-2 col-form-label">ID Kriteria</label>
+
+
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="id_kriteria" name="id_kriteria" value="<?= $tb_sub_kriteria['id_kriteria']; ?>" rows="3">
+                        <select class="form-control" id="id_kriteria" name="id_kriteria" value="<?= $tb_sub_kriteria['id_kriteria']; ?>">
+                            <?php foreach ($tb_kriteria as $p) : ?>
+                                <option><?= $p['id_kriteria']; ?> - <?= $p['nama_kriteria']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="nama_kriteria" class="col-sm-2 col-form-label">Nama Kriteria</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nama_kriteria" name="nama_kriteria" value="<?= $tb_sub_kriteria['nama_kriteria']; ?>" rows="3">
-                    </div>
+
                 </div>
                 <div class="form-group row">
                     <label for="nama_sub_kriteria" class="col-sm-2 col-form-label">Nama Sub Kriteria</label>

@@ -23,20 +23,7 @@
                     <div class="col-sm-10">
                         <select class="form-control" id="id_kriteria" name="id_kriteria" value="">
                             <?php foreach ($tb_kriteria as $p) : ?>
-                                <option><?= $p['id_kriteria']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
-                </div>
-                <div class="form-group row">
-                    <label for="nama_kriteria" class="col-sm-2 col-form-label">Nama Kriteria</label>
-
-
-                    <div class="col-sm-10">
-                        <select class="form-control" id="nama_kriteria" name="nama_kriteria" value="">
-                            <?php foreach ($tb_kriteria as $p) : ?>
-                                <option><?= $p['nama_kriteria']; ?></option>
+                                <option><?= $p['id_kriteria']; ?> - <?= $p['nama_kriteria']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
