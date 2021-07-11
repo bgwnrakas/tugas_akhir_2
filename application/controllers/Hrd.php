@@ -385,6 +385,7 @@ class Hrd extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data2['user'] = $this->Hrd_model->getDataUserById($id);
+        $data2['user_role'] = $this->db->get('user_role')->result_array();
         $data['title'] = 'Edit Pengguna';
         $this->form_validation->set_rules('name', 'name', 'required');
         $this->form_validation->set_rules('email', 'email', 'required');
