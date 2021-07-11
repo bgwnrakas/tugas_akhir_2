@@ -112,7 +112,7 @@ class Hrd_model extends CI_Model
             "tempat_lahir" => $this->input->post('tempat_lahir'),
             "tgl_lahir" => $this->input->post('tgl_lahir'),
             "alamat" => $this->input->post('alamat'),
-            "jabatan" => $this->input->post('jabatan'),
+            "departemen" => $this->input->post('departemen'),
             "posisi" => $this->input->post('posisi'),
         ];
 
