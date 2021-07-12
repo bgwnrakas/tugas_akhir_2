@@ -267,7 +267,6 @@ class Hrd extends CI_Controller
         $this->form_validation->set_rules('tgl_lahir', 'tgl_lahir', 'required');
         $this->form_validation->set_rules('alamat', 'alamat', 'required');
         $this->form_validation->set_rules('departemen', 'departemen', 'required');
-        $this->form_validation->set_rules('posisi', 'posisi', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/hrd_header', $data);
@@ -278,6 +277,7 @@ class Hrd extends CI_Controller
         } else {
             $id_karyawan = $this->input->post('id_karyawan');
             $nik = $this->input->post('nik');
+            $no_ktp = $this->input->post('no_ktp');
             $nama_karyawan = $this->input->post('nama_karyawan');
             $jenis_kelamin = $this->input->post('jenis_kelamin');
             $tempat_lahir = $this->input->post('tempat_lahir');
@@ -290,6 +290,7 @@ class Hrd extends CI_Controller
             $data = array(
                 'id_karyawan' => $id_karyawan,
                 'nik' => $nik,
+                'no_ktp' => $no_ktp,
                 'nama_karyawan' => $nama_karyawan,
                 'jenis_kelamin' => $jenis_kelamin,
                 'tempat_lahir' => $tempat_lahir,
@@ -386,6 +387,7 @@ class Hrd extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data2['user'] = $this->Hrd_model->getDataUserById($id);
+        $data2['user_role'] = $this->db->get('user_role')->result_array();
         $data['title'] = 'Edit Pengguna';
         $this->form_validation->set_rules('name', 'name', 'required');
         $this->form_validation->set_rules('email', 'email', 'required');

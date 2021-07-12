@@ -27,6 +27,15 @@ class Karyawan_model extends CI_Model
         return $query->result_array();
     }
 
+    public function getDataKaryawanDepatemenAll($departemen)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_karyawan');
+        $this->db->where('departemen', $departemen);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     public function updateStatus($id)
     {
         $this->db->where('id_karyawan', $id);

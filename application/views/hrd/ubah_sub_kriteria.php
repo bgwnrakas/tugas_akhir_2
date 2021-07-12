@@ -27,15 +27,14 @@
 
                     <div class="col-sm-10">
                         <select class="form-control" id="id_kriteria" name="id_kriteria">
-                            <?php 
-                                foreach ($tb_kriteria as $p) 
-                                {
-                                    if ($p['id_kriteria'] == $tb_sub_kriteria['id_kriteria'] ) {
-                                        echo'<option value="'.$p['id_kriteria'].'" selected>'.$p['id_kriteria'].'-'.$p['nama_kriteria'].'</option>';
-                                    }else{
-                                        echo'<option value="'.$p['id_kriteria'].'">'.$p['id_kriteria'].'-'.$p['nama_kriteria'].'</option>';
-                                    }
-                                } ?>
+                            <?php
+                            foreach ($tb_kriteria as $p) {
+                                if ($p['id_kriteria'] == $tb_sub_kriteria['id_kriteria']) {
+                                    echo '<option value="' . $p['id_kriteria'] . '" selected>' . $p['id_kriteria'] . '-' . $p['nama_kriteria'] . '</option>';
+                                } else {
+                                    echo '<option value="' . $p['id_kriteria'] . '">' . $p['id_kriteria'] . '-' . $p['nama_kriteria'] . '</option>';
+                                }
+                            } ?>
                         </select>
                     </div>
 

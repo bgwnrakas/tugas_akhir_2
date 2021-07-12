@@ -43,8 +43,8 @@
                     <div class="col-sm-10">
                         <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" value="">
                             <option><?= $tb_karyawan['jenis_kelamin']; ?></option>
-                            <option>Laki - Laki</option>
-                            <option>Perempuan</option>
+                            <option>L</option>
+                            <option>P</option>
                         </select>
                     </div>
                 </div>
@@ -58,6 +58,12 @@
                     <label for="tgl_lahir" class="col-sm-2 col-form-label">Tanggal Lahir</label>
                     <div class="col-sm-10">
                         <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" value="<?= $tb_karyawan['tgl_lahir']; ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $tb_karyawan['alamat']; ?>">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -77,7 +83,7 @@
                 <div class="form-group row">
                     <label for="posisi" class="col-sm-2 col-form-label">Posisi</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="posisi" name="posisi" value="<?= $tb_karyawan['posisi']; ?>">
+                        <input type="text" class="form-control" id="posisi" name="posisi" value="<?= $tb_karyawan['posisi']; ?>" readonly>
                     </div>
                 </div>
                 <div class="form-group row">

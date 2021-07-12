@@ -64,7 +64,7 @@ class Kepala_bagian extends CI_Controller
         $data['departemen'] = $this->Kabag_model->getDepartemenKabag($this->session->userdata('role_id'));
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Tambah Penilaian';
-
+        $data['allkarywan'] = $this->Karyawan_model->getDataKaryawanDepatemenAll($data['departemen']);
         $data['karyawan'] = $this->Karyawan_model->getDataKaryawanDiNilai($data['departemen']);
         $data['totalKaryawan'] = $this->Karyawan_model->CountAllKaryawanByDepartmen($data['departemen']);
        
@@ -105,6 +105,12 @@ class Kepala_bagian extends CI_Controller
         $this->load->view('templates/kabag_topbar', $data);
         $this->load->view('kepala_bagian/ubah_penilaian', $data);
         $this->load->view('templates/kabag_footer', $data);
+    }
+
+    public function delete_penilaian($id_karyawan)
+    {
+        $this->Penilaian_model->deletePenilaian($id_karyawan);
+        redirect('Kepala_bagian/kelola_penilaian');
     }
 
     public function update_penilaian()

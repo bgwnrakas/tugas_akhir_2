@@ -39,15 +39,15 @@
                         <legend class="col-form-label col-sm-2 pt-0">Jenis Kelamin</legend>
                         <div class="col-sm-10">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Laki - Laki" checked>
+                                <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin" value="L" checked>
                                 <label class="form-check-label" for="jenis_kelamin">
-                                    Laki - Laki
+                                    L
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Perempuan">
+                                <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin" value="P">
                                 <label class="form-check-label" for="jenis_kelamin">
-                                    Perempuan
+                                    P
                                 </label>
                             </div>
 

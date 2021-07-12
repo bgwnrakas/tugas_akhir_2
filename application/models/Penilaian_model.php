@@ -23,4 +23,11 @@ class Penilaian_model extends CI_Model
       $result = $this->db->get();
       return $result->row_array();
     } 
+
+    public function deletePenilaian($id_karyawan)
+    { 
+        $this->db->delete('tb_penilaian', ['id_karyawan' => $id_karyawan, 'tahun' => date('Y')]);
+        $this->db->where('id_karyawan', $id_karyawan);
+        $this->db->update('tb_karyawan', array('status' => ''));
+    }
 }
