@@ -87,6 +87,9 @@
                                                 <a class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Disbled" href="#">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
+                                                <a class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Disbled" href="#">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
                                             </td>';
                                         }
                                 }else{
