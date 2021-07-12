@@ -94,7 +94,7 @@
                                         }
                                 }else{
                                     foreach($kriteria as $k){
-                                        echo'<td><small>Belum Di Nilai</small></td>';
+                                        echo'<td><small class="text-danger">Belum Di Nilai</small></td>';
                                     }
                                     echo'<td><small>-</small></td>';
                                     
