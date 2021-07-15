@@ -79,7 +79,7 @@ class Pimpinan extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['tb_bonus'] = $this->Pimpinan_model->getDataBonusById($id);
         $data['title'] = 'Ubah Bonus';
-        $this->form_validation->set_rules('jumlah_bonus', 'jumlah_bonus', 'required'); 
+        $this->form_validation->set_rules('jumlah_bonus', 'jumlah_bonus', 'required');
         $this->form_validation->set_rules('min_nilai_yi', 'min_nilai_yi', 'required');
         $this->form_validation->set_rules('max_nilai_yi', 'max_nilai_yi', 'required');
         $this->form_validation->set_rules('email', 'email', 'required');
@@ -104,7 +104,7 @@ class Pimpinan extends CI_Controller
                 'email' => $email
             );
 
-            $this->Pimpinan_model->editDataBonus($id,$data);
+            $this->Pimpinan_model->editDataBonus($id, $data);
             redirect('pimpinan/kelola_bonus');
         }
     }
@@ -171,9 +171,10 @@ class Pimpinan extends CI_Controller
         }
     }
 
-    public function print(){
+    public function print()
+    {
         // $data['record_print'] = $this->db->query($sql)->result();
-		$data['record_print'] = $this->Pimpinan_model->tampil_data("tb_karyawan")->result();
-		$this->load->view('pimpinan/print_laporan', $data);
-	}
+        $data['record_print'] = $this->Pimpinan_model->tampil_data("tb_karyawan")->result();
+        $this->load->view('pimpinan/print_laporan', $data);
+    }
 }

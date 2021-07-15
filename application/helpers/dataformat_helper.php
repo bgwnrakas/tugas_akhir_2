@@ -59,5 +59,3 @@ if (!function_exists('tanggal')) {
         return $tanggal;
     }
 }
-
-?>
