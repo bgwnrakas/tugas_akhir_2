@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2021 at 10:23 AM
+-- Generation Time: Jul 15, 2021 at 02:57 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -30,7 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `tb_bonus` (
   `id` int(11) NOT NULL,
   `jumlah_bonus` varchar(128) NOT NULL,
-  `batas_nilai_yi` double NOT NULL,
+  `min_nilai_yi` double NOT NULL,
+  `max_nilai_yi` double NOT NULL,
   `id_user` int(11) NOT NULL,
   `email` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -39,9 +40,14 @@ CREATE TABLE `tb_bonus` (
 -- Dumping data for table `tb_bonus`
 --
 
-INSERT INTO `tb_bonus` (`id`, `jumlah_bonus`, `batas_nilai_yi`, `id_user`, `email`) VALUES
-(1, '2,000,000', 1.050612, 19, 'pimpinan@gmail.com'),
-(2, '1,000,000', 1.2782, 19, 'pimpinan@gmail.com');
+INSERT INTO `tb_bonus` (`id`, `jumlah_bonus`, `min_nilai_yi`, `max_nilai_yi`, `id_user`, `email`) VALUES
+(4, '10000', 0, 0.27, 19, 'pimpinan@gmail.com'),
+(5, '20000', 0.3, 1.5, 19, 'pimpinan@gmail.com'),
+(6, '30000', 1.6, 2, 19, 'pimpinan@gmail.com'),
+(7, '40000', 2.1, 2.5, 19, 'pimpinan@gmail.com'),
+(8, '50000', 2.6, 3, 19, 'pimpinan@gmail.com'),
+(9, '60000', 3.1, 3.5, 19, 'pimpinan@gmail.com'),
+(10, '70000', 3.6, 4, 19, 'pimpinan@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -68,21 +74,20 @@ CREATE TABLE `tb_karyawan` (
 --
 
 INSERT INTO `tb_karyawan` (`id_karyawan`, `nik`, `no_ktp`, `nama_karyawan`, `jenis_kelamin`, `tempat_lahir`, `tgl_lahir`, `alamat`, `departemen`, `posisi`, `status`) VALUES
-(1, '00100400106', '3217062711770011', 'Ahmad Muhamad', 'L', 'Bandung', '1977-11-29', 'Kp. Bunisari RT04/RW11 Ds. Gadobangkong Kec. Ngamp', 'Spinning', 'Operator', ''),
-(4, '001.004.00108\r\n', '3217061610740005\r\n', 'Ateng Nyansi Dinata\r\n', 'L', 'Bandung', '1996-07-15', 'Graha Bukit Raya 3 Blok A9 No 1 RT01/RW25 Cilame Ngamprah Bandung Barat\r\n', 'Spinning', 'Operator', ''),
-(5, '001.004.00128', '3217081511660005', 'Cece Sunarli', 'L', 'Bandung', '1996-06-02', 'Kp. Cikurutug RT02/RW07 Ds. Tagogapu Kec. Padalarang Kab. Bandung Barat\r\n', 'Spinning', 'Operator', ''),
+(1, '00100400106', '3217062711770011', 'Ahmad Muhamad', 'L', 'Bandung', '1977-11-29', 'Kp. Bunisari RT04/RW11 Ds. Gadobangkong Kec. Ngamp', 'Spinning', 'Operator', '2021'),
+(4, '001.004.00108\r\n', '3217061610740005\r\n', 'Ateng Nyansi Dinata\r\n', 'L', 'Bandung', '1996-07-15', 'Graha Bukit Raya 3 Blok A9 No 1 RT01/RW25 Cilame Ngamprah Bandung Barat\r\n', 'Spinning', 'Operator', '2021'),
+(5, '001.004.00128', '3217081511660005', 'Cece Sunarli', 'L', 'Bandung', '1996-06-02', 'Kp. Cikurutug RT02/RW07 Ds. Tagogapu Kec. Padalarang Kab. Bandung Barat\r\n', 'Spinning', 'Operator', '2021'),
 (6, '001.004.00138', '3217090202790033', 'Toto Juharta', 'L', 'Majalengka', '1996-06-21', 'Puri Indah Lestari Blok C4 No.6 Ds. Batujajar RT/02/16 KBB\r\n', 'Weaving', 'Operator', ''),
 (8, '001.044.00169', '3277021504620002', 'Remigius Didi Sunardi', 'L', 'Kuningan', '1978-08-09', 'Pondok Ranca Belut Block A15 RT01/11 Kel. Padasuka Kec. Cimahi Tengah', 'Weaving', 'Operator', ''),
-(9, '001.004.00106', '3217062711770011', 'Ahmad Haryanto 2', 'L', 'Kuningan', '2021-07-08', 'Pondok Ranca Belut Block A15 RT01/11 Kel. Padasuka Kec. Cimahi Tengah', 'Weaving', 'Operator', ''),
-(11, '001.004.00167', '3217081005740042', 'Muhamad Imam Taofik', 'L', 'Magelang', '1974-05-10', 'Kp. Cipadangmanah RT02/16 Padalarang', 'Spinning', 'Operator', ''),
-(13, '001.004.00174', '3217041607780006', 'Hery Kuswanto', 'L', 'Bandung', '1978-07-16', 'Kp. Cikalong Kolot RT04/08 Ds. Cikalong Kec. Cikalong Wetan', 'Spinning', 'Operator', ''),
-(14, '001.004.00177', '3277020304800024', 'Kusnadi', 'L', 'Purworejo', '1980-04-03', 'Kp. Tangkil RT 06/07 Cigugur Tengah Cimahi Tengah', 'Spinning', 'Operator', ''),
-(15, '001.004.00180', '3273061111770007', 'Rully Santosa', 'L', 'Bandung', '1977-11-06', 'Jl. Gg Saleh No. 175/66 RT05/06 Kel. Arjuna Kec. Cicendo-Bandung', 'Spinning', 'Operator', ''),
-(16, '001.004.00197', '3171082409630001', 'Supat', 'L', 'Bandung', '1963-09-24', 'Jl Johar Baru utara No 11 RT 14/03 Ds Johar Baru Kec Johar Baru', 'Spinning', 'Operator', ''),
-(17, '001.004.00198', '3277022006600019', 'Poltak Simanjuntak', 'L', 'Medan', '1960-05-20', 'Jl. Sriwijaya Raya H-14 Cimahi RT06/01 Karang Mekar Cimahi Tengah', 'Spinning', 'Operator', ''),
-(18, '001.004.00327', '3217081310630006', 'Ahmad Haryanto', 'L', 'Bandung', '1963-10-13', 'PPI Jl Nakula Blok G3/4 RT 05/27 Padalarang', 'Spinning', 'Operator', ''),
-(19, '001.004.00329', '3217060702560007', 'Aso Acong', 'L', 'Bandung', '1956-02-07', 'Kp Cikalong kolot RT 02/08 Ds Cikalong Kec Cikalong wetan', 'Spinning', 'Operator', ''),
-(20, '001.004.00531', '3217060703760015', 'Darwita', 'L', 'Bandung', '1976-03-07', 'Cikalang RT 03/10 Ds Bojongkoneng Kec Ngamprah', 'Spinning', 'Operator', ''),
+(11, '001.004.00167', '3217081005740042', 'Muhamad Imam Taofik', 'L', 'Magelang', '1974-05-10', 'Kp. Cipadangmanah RT02/16 Padalarang', 'Spinning', 'Operator', '2021'),
+(13, '001.004.00174', '3217041607780006', 'Hery Kuswanto', 'L', 'Bandung', '1978-07-16', 'Kp. Cikalong Kolot RT04/08 Ds. Cikalong Kec. Cikalong Wetan', 'Spinning', 'Operator', '2021'),
+(14, '001.004.00177', '3277020304800024', 'Kusnadi', 'L', 'Purworejo', '1980-04-03', 'Kp. Tangkil RT 06/07 Cigugur Tengah Cimahi Tengah', 'Spinning', 'Operator', '2021'),
+(15, '001.004.00180', '3273061111770007', 'Rully Santosa', 'L', 'Bandung', '1977-11-06', 'Jl. Gg Saleh No. 175/66 RT05/06 Kel. Arjuna Kec. Cicendo-Bandung', 'Spinning', 'Operator', '2021'),
+(16, '001.004.00197', '3171082409630001', 'Supat', 'L', 'Bandung', '1963-09-24', 'Jl Johar Baru utara No 11 RT 14/03 Ds Johar Baru Kec Johar Baru', 'Spinning', 'Operator', '2021'),
+(17, '001.004.00198', '3277022006600019', 'Poltak Simanjuntak', 'L', 'Medan', '1960-05-20', 'Jl. Sriwijaya Raya H-14 Cimahi RT06/01 Karang Mekar Cimahi Tengah', 'Spinning', 'Operator', '2021'),
+(18, '001.004.00327', '3217081310630006', 'Ahmad Haryanto', 'L', 'Bandung', '1963-10-13', 'PPI Jl Nakula Blok G3/4 RT 05/27 Padalarang', 'Spinning', 'Operator', '2021'),
+(19, '001.004.00329', '3217060702560007', 'Aso Acong', 'L', 'Bandung', '1956-02-07', 'Kp Cikalong kolot RT 02/08 Ds Cikalong Kec Cikalong wetan', 'Spinning', 'Operator', '2021'),
+(20, '001.004.00531', '3217060703760015', 'Darwita', 'L', 'Bandung', '1976-03-07', 'Cikalang RT 03/10 Ds Bojongkoneng Kec Ngamprah', 'Spinning', 'Operator', '2021'),
 (241, '001.051.00386', '3277022509920014', 'Yudi Maulana', 'L', 'Cimahi', '1992-09-25', 'Jln Kebon Manggu RT 002/ RW 004 Kel Padasuka Kec Cimahi Tengah', 'Weaving', 'Operator', ''),
 (242, '001.051.00387', '3217061907890008', 'Adi Supriadi', 'L', 'Serang', '1989-07-19', 'Jl Baros Pasar RT 02/01 Ds Lewigajah kec Cimahi Selatan', 'Weaving', 'Operator', ''),
 (243, '001.051.00388', '3217062602920005', 'Rian Sopian', 'L', 'Bandung', '1992-02-26', 'Ngamprah kidul RT 04/02 Ds Ngamprah Kec Ngamprah', 'Weaving', 'Operator', ''),
@@ -170,6 +175,48 @@ CREATE TABLE `tb_penilaian` (
   `tahun` varchar(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tb_penilaian`
+--
+
+INSERT INTO `tb_penilaian` (`id_penilaian`, `id_karyawan`, `id_sub_kriteria`, `tahun`) VALUES
+(157, 1, 27, '2021'),
+(158, 1, 31, '2021'),
+(159, 1, 35, '2021'),
+(160, 5, 27, '2021'),
+(161, 5, 31, '2021'),
+(162, 5, 33, '2021'),
+(163, 4, 28, '2021'),
+(164, 4, 30, '2021'),
+(165, 4, 35, '2021'),
+(166, 13, 27, '2021'),
+(167, 13, 31, '2021'),
+(168, 13, 35, '2021'),
+(169, 11, 27, '2021'),
+(170, 11, 31, '2021'),
+(171, 11, 35, '2021'),
+(172, 15, 28, '2021'),
+(173, 15, 31, '2021'),
+(174, 15, 33, '2021'),
+(175, 14, 28, '2021'),
+(176, 14, 30, '2021'),
+(177, 14, 33, '2021'),
+(178, 17, 29, '2021'),
+(179, 17, 32, '2021'),
+(180, 17, 35, '2021'),
+(181, 18, 27, '2021'),
+(182, 18, 32, '2021'),
+(183, 18, 33, '2021'),
+(184, 19, 28, '2021'),
+(185, 19, 31, '2021'),
+(186, 19, 33, '2021'),
+(187, 20, 28, '2021'),
+(188, 20, 30, '2021'),
+(189, 20, 33, '2021'),
+(190, 16, 29, '2021'),
+(191, 16, 30, '2021'),
+(192, 16, 35, '2021');
+
 -- --------------------------------------------------------
 
 --
@@ -182,6 +229,24 @@ CREATE TABLE `tb_ranking` (
   `nilai_yi` double NOT NULL,
   `tahun` varchar(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_ranking`
+--
+
+INSERT INTO `tb_ranking` (`id_ranking`, `id_karyawan`, `nilai_yi`, `tahun`) VALUES
+(55, 1, 0.3682, '2021'),
+(56, 11, 0.3682, '2021'),
+(57, 13, 0.3682, '2021'),
+(58, 4, 0.35533, '2021'),
+(59, 16, 0.28307, '2021'),
+(60, 17, 0.16429, '2021'),
+(61, 5, 0.07115, '2021'),
+(62, 14, 0.05828, '2021'),
+(63, 20, 0.05828, '2021'),
+(64, 18, 0.01176, '2021'),
+(65, 15, -0.00111, '2021'),
+(66, 19, -0.00111, '2021');
 
 -- --------------------------------------------------------
 
@@ -329,7 +394,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `tb_bonus`
 --
 ALTER TABLE `tb_bonus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tb_karyawan`
@@ -347,13 +412,13 @@ ALTER TABLE `tb_kriteria`
 -- AUTO_INCREMENT for table `tb_penilaian`
 --
 ALTER TABLE `tb_penilaian`
-  MODIFY `id_penilaian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
+  MODIFY `id_penilaian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
 
 --
 -- AUTO_INCREMENT for table `tb_ranking`
 --
 ALTER TABLE `tb_ranking`
-  MODIFY `id_ranking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_ranking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `tb_sub_kriteria`
