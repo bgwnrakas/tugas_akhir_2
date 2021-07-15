@@ -18,6 +18,7 @@ class Peringkat_model extends CI_Model
         $this->db->select('*')
                ->from('tb_ranking')
                ->join('tb_karyawan', 'tb_ranking.id_karyawan = tb_karyawan.id_karyawan')
+               ->where('tb_ranking.tahun',date('Y'))
                ->order_by('nilai_yi','DESC');
         $result = $this->db->get();
         return $result->result_array();

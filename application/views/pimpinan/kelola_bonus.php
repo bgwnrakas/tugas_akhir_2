@@ -46,7 +46,7 @@
 
     <div class="card shadow mb-5">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-info">Peringkat Keleruhan</h6>
+            <h6 class="m-0 font-weight-bold text-info">Peringkat Penilaian Karyawan Tahun <?= date('Y');?></h6>
         </div>
         <div class="card-body">
             <table class="table table-striped table-hover" style="width:100%">
