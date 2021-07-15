@@ -66,7 +66,7 @@
                     foreach ($peringkat as $p) {
                         $bonus = $this->Bonus_model->getBonus($p['nilai_yi']);
                         if (!empty($bonus)) {
-                            $jumlah = $bonus['jumlah_bonus'];
+                            $jumlah = rupiah($bonus['jumlah_bonus']);
                         } else {
                             $jumlah = 'Bonus Tidak Tersedia';
                         }
