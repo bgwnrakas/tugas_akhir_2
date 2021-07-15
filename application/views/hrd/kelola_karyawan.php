@@ -24,11 +24,12 @@
                             <th scope="col">NIK</th>
                             <th scope="col">No KTP</th>
                             <th scope="col">Nama</th>
-                            <th scope="col">Departemen</th>
-                            <th scope="col">Posisi</th>
                             <th scope="col">Jenis Kelamin</th>
                             <th scope="col">Tempat Lahir</th>
                             <th scope="col">Tanggal Lahir</th>
+                            <th scope="col">Alamat</th>
+                            <th scope="col">Departemen</th>
+                            <th scope="col">Posisi</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
@@ -40,14 +41,21 @@
                                 <td><?= $p['nik']; ?></td>
                                 <td><?= $p['no_ktp']; ?></td>
                                 <td><?= $p['nama_karyawan']; ?></td>
-                                <td><?= $p['departemen']; ?></td>
-                                <td><?= $p['posisi']; ?></td>
                                 <td><?= $p['jenis_kelamin']; ?></td>
                                 <td><?= $p['tempat_lahir']; ?></td>
                                 <td><?= $p['tgl_lahir']; ?></td>
-                                <td> <a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="<?= base_url(); ?>hrd/ubah_kriteria/<?= $p['id_karyawan']; ?>"><i class="fa fa-edit"></i></a>
-
-                                    <a class="btn btn-danger btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Delete" href="<?= base_url(); ?>hrd/delete_karyawan/<?= $p['id_karyawan']; ?>"><i class="fa fa-trash"></i></a>
+                                <td><?= $p['alamat']; ?></td>
+                                <td><?= $p['departemen']; ?></td>
+                                <td><?= $p['posisi']; ?></td>
+                                <td> 
+                                <?php 
+                                if (empty($p['status'])) {
+                                    echo'
+                                     <a class="btn btn-success btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Edit" href="'.base_url().'hrd/ubah_karyawan/'.$p['id_karyawan'].'"><i class="fa fa-edit"></i></a>
+                                     <a class="btn btn-danger btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Delete" href="'.base_url().'hrd/delete_karyawan/'.$p['id_karyawan'].'"><i class="fa fa-trash"></i></a>';
+                                }else{
+                                   echo'<small> Disabled</small>';
+                                }?>
                                 </td>
                             </tr>
                             <?php $i++; ?>

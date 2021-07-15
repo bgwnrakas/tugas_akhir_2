@@ -62,7 +62,7 @@ class Hrd_model extends CI_Model
 
     public function getDataKaryawanById($id_karyawan)
     {
-        return $this->db->get_where('tb_karyawan', ['id_karyawan' => $id_karyawan])->result_array();
+        return $this->db->get_where('tb_karyawan', ['id_karyawan' => $id_karyawan])->row_array();
     }
 
     public function getDataKriteriaById($id_kriteria)
@@ -70,16 +70,14 @@ class Hrd_model extends CI_Model
         return $this->db->get_where('tb_kriteria', ['id_kriteria' => $id_kriteria])->row_array();
     }
 
-    public function editDataKriteria($id_kriteria)
+    public function getDataSubKriteriaById($id_sub_kriteria)
     {
-        $data = [
-            "id_kriteria" => $this->input->post('id_kriteria'),
-            "nama_kriteria" => $this->input->post('nama_kriteria'),
-            "bobot_kriteria" => $this->input->post('bobot_kriteria'),
-            "jenis_kriteria" => $this->input->post('jenis_kriteria'),
-        ];
+        return $this->db->get_where('tb_sub_kriteria', ['id_sub_kriteria' => $id_sub_kriteria])->row_array();
+    }
 
-        $this->db->where('id_kriteria', $this->input->post('id_kriteria'));
+    public function editDataKriteria($id_kriteria,$data)
+    {
+        $this->db->where('id_kriteria', $id_kriteria);
         $this->db->update('tb_kriteria', $data);
     }
 
@@ -88,7 +86,6 @@ class Hrd_model extends CI_Model
         $data = [
             "id_sub_kriteria" => $this->input->post('id_sub_kriteria'),
             "id_kriteria" => $this->input->post('id_kriteria'),
-            "nama_kriteria" => $this->input->post('nama_kriteria'),
             "nama_sub_kriteria" => $this->input->post('nama_sub_kriteria'),
             "nilai_sub_kriteria" => $this->input->post('nilai_sub_kriteria'),
         ];
@@ -108,11 +105,47 @@ class Hrd_model extends CI_Model
             "tempat_lahir" => $this->input->post('tempat_lahir'),
             "tgl_lahir" => $this->input->post('tgl_lahir'),
             "alamat" => $this->input->post('alamat'),
-            "jabatan" => $this->input->post('jabatan'),
+            "departemen" => $this->input->post('departemen'),
             "posisi" => $this->input->post('posisi'),
         ];
 
         $this->db->where('id_karyawan', $this->input->post('id_karyawan'));
         $this->db->update('tb_karyawan', $data);
+    }
+
+    public function hitungJumlahKaryawan()
+    {
+        $query = $this->db->get('tb_karyawan');
+        if($query->num_rows()>0)
+        {
+            return $query->num_rows();
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public function hitungkriteria()
+    {
+        $query = $this->db->get('tb_kriteria');
+        if($query->num_rows()>0)
+        {
+            return $query->num_rows();
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public function hitungUser()
+    {
+        $query = $this->db->get('user');
+        if($query->num_rows()>0)
+        {
+            return $query->num_rows();
+        }
+        else{
+            return 0;
+        }
     }
 }

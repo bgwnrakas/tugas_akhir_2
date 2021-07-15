@@ -36,7 +36,10 @@ class Kepala_bagian extends CI_Controller
 
     public function submit_penilaian()
     {
-        foreach ($_POST as $key => $value) {$$key = $value;}        
+        foreach ($_POST as $key => $value) {$$key = $value;}    
+        // echo'<pre>';
+        //     print_r($id_sub_kriteria);
+        // echo'</pre>';    
         
         for ($i = 0; $i < count($id_sub_kriteria); $i++) {
             $data = array(
@@ -61,7 +64,7 @@ class Kepala_bagian extends CI_Controller
         $data['departemen'] = $this->Kabag_model->getDepartemenKabag($this->session->userdata('role_id'));
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Tambah Penilaian';
-
+        $data['allkarywan'] = $this->Karyawan_model->getDataKaryawanDepatemenAll($data['departemen']);
         $data['karyawan'] = $this->Karyawan_model->getDataKaryawanDiNilai($data['departemen']);
         $data['totalKaryawan'] = $this->Karyawan_model->CountAllKaryawanByDepartmen($data['departemen']);
        
@@ -104,6 +107,12 @@ class Kepala_bagian extends CI_Controller
         $this->load->view('templates/kabag_footer', $data);
     }
 
+    public function delete_penilaian($id_karyawan)
+    {
+        $this->Penilaian_model->deletePenilaian($id_karyawan);
+        redirect('Kepala_bagian/kelola_penilaian');
+    }
+
     public function update_penilaian()
     {
         foreach ($_POST as $key => $value) {$$key = $value;}   
@@ -117,6 +126,7 @@ class Kepala_bagian extends CI_Controller
 
     public function profile()
     {
+        $data['departemen'] = $this->Kabag_model->getDepartemenKabag($this->session->userdata('role_id'));
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'My Profile';
         $this->load->view('templates/kabag_header', $data);
@@ -268,15 +278,20 @@ class Kepala_bagian extends CI_Controller
 
     public function simpan_peringkat()
     {
+        $departemen = $this->Kabag_model->getDepartemenKabag($this->session->userdata('role_id'));
         foreach ($_POST as $key => $value) {$$key = $value;}   
         for ($i = 0; $i < count($id_karyawan); $i++) {
-            $data = array(
+            $cek = $this->Karyawan_model->CekKaryawanOnRank($id_karyawan[$i],$departemen);
+            if (empty($cek)) {
+                 $data = array(
                     'id_karyawan' => $id_karyawan[$i], 
-                    'ranking' => $peringkat[$i],
                     'nilai_yi' => $yi[$i],  
                     'tahun' => date("Y")
                    );
-            $simpan = $this->Peringkat_model->insert($data);
+                $simpan = $this->Peringkat_model->insert($data);
+            }else{
+                $update = $this->Peringkat_model->update($id_karyawan[$i],date("Y"),$yi[$i]);   
+            }
         }
 
         if ($simpan) {

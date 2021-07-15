@@ -14,9 +14,12 @@
             <h6 class="m-0 font-weight-bold text-info">Sub Kriteria</h6>
         </div>
         <div class="card-body">
-
-            <a class="btn btn-primary btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Input" href="<?= base_url('hrd/tambah_sub_kriteria'); ?>"><i class="fa fa-edit"></i></a>
-
+            <?php 
+                if (!empty($tb_kriteria) && empty($cek)) {
+                    echo'<a class="btn btn-primary btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Input" href="'.base_url('hrd/tambah_sub_kriteria').'">
+                        <i class="fa fa-edit"></i></a>';    
+                }
+            ?>
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead class="thead-dark">
                     <tr>
@@ -37,9 +40,16 @@
                             <td><?= $p['nama_kriteria']; ?></td>
                             <td><?= $p['nama_sub_kriteria']; ?></td>
                             <td><?= $p['nilai_sub_kriteria']; ?></td>
-                            <td> <a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="<?= base_url(); ?>hrd/ubah_sub_kriteria/<?= $p['id_sub_kriteria']; ?>"><i class="fa fa-edit"></i></a>
-
-                                <a class="btn btn-danger btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Delete" href="<?= base_url(); ?>hrd/delete_sub_kriteria/<?= $p['id_sub_kriteria']; ?>"><i class="fa fa-trash"></i></a>
+                            <td> 
+                            <?php
+                                if (!empty($tb_kriteria) && empty($cek)) {
+                                    echo'
+                                        <a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="'.base_url().'hrd/ubah_sub_kriteria/'.$p['id_sub_kriteria'].'"><i class="fa fa-edit"></i></a>
+                                        <a class="btn btn-danger btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Delete" href="'.base_url().'hrd/delete_sub_kriteria/'.$p['id_sub_kriteria'].'"><i class="fa fa-trash"></i></a>'; 
+                                }else{
+                                    echo'<small> Telah Terpakai</small>';
+                                }
+                                ?>
                             </td>
                         </tr>
                         <?php $i++; ?>

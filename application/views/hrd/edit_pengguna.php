@@ -35,14 +35,21 @@
                 </div>
                 <div class="form-group row">
                     <label for="role_id" class="col-sm-2 col-form-label">Role ID</label>
+
+
                     <div class="col-sm-10">
-                        <select class="form-control" id="role_id" name="role_id" value="">
-                            <option><?= $user['role_id']; ?></option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
+                        <select class="form-control" id="role_id" name="role_id">
+                            <?php
+                            foreach ($user_role as $p) {
+                                if ($p['id'] == $user['role_id']) {
+                                    echo '<option value="' . $p['id'] . '" selected>' . $p['id'] . ' - ' . $p['role'] . '</option>';
+                                } else {
+                                    echo '<option value="' . $p['id'] . '">' . $p['id'] . ' - ' . $p['role'] . '</option>';
+                                }
+                            } ?>
                         </select>
                     </div>
+
                 </div>
                 <div class="form-group row">
                     <label for="role_id" class="col-sm-2 col-form-label">Active</label>

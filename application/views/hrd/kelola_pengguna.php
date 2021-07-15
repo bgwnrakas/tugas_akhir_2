@@ -14,19 +14,6 @@
             <h6 class="m-0 font-weight-bold text-info">Akun Terdaftar</h6>
         </div>
         <div class="card-body">
-
-            <div class="card" style="width: 18rem;">
-                <div class="card-header">
-                    Role ID
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">HRD Malakasari = 1</li>
-                    <li class="list-group-item">Pimpinan = 2</li>
-                    <li class="list-group-item">Kepala Bagian = 3</li>
-                </ul>
-            </div>
-            <!-- Divider -->
-            <hr class="sidebar-divider">
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead class="thead-dark">
                     <tr>

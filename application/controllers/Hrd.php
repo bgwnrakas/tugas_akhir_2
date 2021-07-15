@@ -9,11 +9,15 @@ class Hrd extends CI_Controller
         parent::__construct();
 
         $this->load->model('Hrd_model');
+        $this->load->model('Kriteria_model');
     }
     public function index()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Dashboard';
+        $data['total_karyawan'] = $this->Hrd_model->hitungJumlahKaryawan();
+        $data['total_kriteria'] = $this->Hrd_model->hitungkriteria();
+        $data['total_user'] = $this->Hrd_model->hitungUser();
         $this->load->view('templates/hrd_header', $data);
         $this->load->view('templates/hrd_sidebar', $data);
         $this->load->view('templates/hrd_topbar', $data);
@@ -25,6 +29,7 @@ class Hrd extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['tb_kriteria'] = $this->db->get('tb_kriteria')->result_array();
+        $data['cek'] = $this->Kriteria_model->cekIfUsed();
         $data['title'] = 'Kelola Kriteria';
         $this->load->view('templates/hrd_header', $data);
         $this->load->view('templates/hrd_sidebar', $data);
@@ -56,6 +61,7 @@ class Hrd extends CI_Controller
                 'nama_kriteria' => $nama_kriteria,
                 'bobot_kriteria' => $bobot_kriteria,
                 'jenis_kriteria' => $jenis_kriteria,
+                'tahun' => date("Y"),
             );
             $this->db->insert('tb_kriteria', $data);
             redirect('hrd/kelola_kriteria');
@@ -70,6 +76,7 @@ class Hrd extends CI_Controller
         $this->form_validation->set_rules('nama_kriteria', 'nama_kriteria', 'required');
         $this->form_validation->set_rules('bobot_kriteria', 'bobot_kriteria', 'required');
         $this->form_validation->set_rules('jenis_kriteria', 'jenis_kriteria', 'required');
+        $this->form_validation->set_rules('tahun', 'tahun', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/hrd_header', $data);
@@ -82,18 +89,14 @@ class Hrd extends CI_Controller
             $nama_kriteria = $this->input->post('nama_kriteria');
             $bobot_kriteria = $this->input->post('bobot_kriteria');
             $jenis_kriteria = $this->input->post('jenis_kriteria');
-
-
+            $tahun = $this->input->post('tahun');
             $data = array(
-                'id_kriteria' => $id_kriteria,
                 'nama_kriteria' => $nama_kriteria,
                 'bobot_kriteria' => $bobot_kriteria,
-                'jenis_kriteria' => $jenis_kriteria
-
+                'jenis_kriteria' => $jenis_kriteria,
+                'tahun' => $tahun,
             );
-
-            $this->Hrd_model->editDataKriteria($data);
-
+            $this->Hrd_model->editDataKriteria($id_kriteria,$data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" 
                     role="alert">Data Pendaftaran Berhasil di Ubag !');
             redirect('hrd/kelola_kriteria');
@@ -109,7 +112,9 @@ class Hrd extends CI_Controller
     public function kelola_sub_kriteria()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['tb_sub_kriteria'] = $this->db->get('tb_sub_kriteria')->result_array();
+        $data['tb_sub_kriteria'] = $this->Kriteria_model->getDataSubKriteria();
+        $data['cek'] = $this->Kriteria_model->cekIfUsed();
+        $data['tb_kriteria'] = $this->db->get('tb_kriteria')->result_array();
         $data['title'] = 'Kelola Sub Kriteria';
         $this->load->view('templates/hrd_header', $data);
         $this->load->view('templates/hrd_sidebar', $data);
@@ -124,7 +129,6 @@ class Hrd extends CI_Controller
         $data['tb_kriteria'] = $this->db->get('tb_kriteria')->result_array();
         $data['title'] = 'Tambah Sub Kriteria';
         $this->form_validation->set_rules('id_kriteria', 'id_kriteria', 'required');
-        $this->form_validation->set_rules('nama_kriteria', 'nama_kriteria', 'required');
         $this->form_validation->set_rules('nama_sub_kriteria', 'nama_sub_kriteria', 'required');
         $this->form_validation->set_rules('nilai_sub_kriteria', 'nilai_sub_kriteria', 'required');
 
@@ -136,13 +140,11 @@ class Hrd extends CI_Controller
             $this->load->view('templates/hrd_footer', $data);
         } else {
             $id_kriteria = $this->input->post('id_kriteria');
-            $nama_kriteria = $this->input->post('nama_kriteria');
             $nama_sub_kriteria = $this->input->post('nama_sub_kriteria');
             $nilai_sub_kriteria = $this->input->post('nilai_sub_kriteria');
 
             $data = array(
                 'id_kriteria' => $id_kriteria,
-                'nama_kriteria' => $nama_kriteria,
                 'nama_sub_kriteria' => $nama_sub_kriteria,
                 'nilai_sub_kriteria' => $nilai_sub_kriteria,
             );
@@ -154,10 +156,10 @@ class Hrd extends CI_Controller
     public function ubah_sub_kriteria($id_sub_kriteria)
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['tb_sub_kriteria'] = $this->Hrd_model->getDataKriteriaById($id_sub_kriteria);
+        $data['tb_sub_kriteria'] = $this->Hrd_model->getDataSubKriteriaById($id_sub_kriteria);
+        $data['tb_kriteria'] = $this->db->get('tb_kriteria')->result_array();
         $data['title'] = 'Ubah Sub kriteria';
         $this->form_validation->set_rules('id_kriteria', 'id_kriteria', 'required');
-        $this->form_validation->set_rules('nama_kriteria', 'nama_kriteria', 'required');
         $this->form_validation->set_rules('nama_sub_kriteria', 'nama_sub_kriteria', 'required');
         $this->form_validation->set_rules('nilai_sub_kriteria', 'nilai_sub_kriteria', 'required');
 
@@ -170,7 +172,6 @@ class Hrd extends CI_Controller
         } else {
             $id_sub_kriteria = $this->input->post('id_sub_kriteria');
             $id_kriteria = $this->input->post('id_kriteria');
-            $nama_kriteria = $this->input->post('nama_kriteria');
             $nama_sub_kriteria = $this->input->post('nama_sub_kriteria');
             $nilai_sub_kriteria = $this->input->post('nilai_sub_kriteria');
 
@@ -178,7 +179,6 @@ class Hrd extends CI_Controller
             $data = array(
                 'id_sub_kriteria' => $id_sub_kriteria,
                 'id_kriteria' => $id_kriteria,
-                'nama_kriteria' => $nama_kriteria,
                 'nama_sub_kriteria' => $nama_sub_kriteria,
                 'nilai_sub_kriteria' => $nilai_sub_kriteria
 
@@ -270,7 +270,6 @@ class Hrd extends CI_Controller
         $this->form_validation->set_rules('tgl_lahir', 'tgl_lahir', 'required');
         $this->form_validation->set_rules('alamat', 'alamat', 'required');
         $this->form_validation->set_rules('departemen', 'departemen', 'required');
-        $this->form_validation->set_rules('posisi', 'posisi', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/hrd_header', $data);
@@ -281,6 +280,7 @@ class Hrd extends CI_Controller
         } else {
             $id_karyawan = $this->input->post('id_karyawan');
             $nik = $this->input->post('nik');
+            $no_ktp = $this->input->post('no_ktp');
             $nama_karyawan = $this->input->post('nama_karyawan');
             $jenis_kelamin = $this->input->post('jenis_kelamin');
             $tempat_lahir = $this->input->post('tempat_lahir');
@@ -293,6 +293,7 @@ class Hrd extends CI_Controller
             $data = array(
                 'id_karyawan' => $id_karyawan,
                 'nik' => $nik,
+                'no_ktp' => $no_ktp,
                 'nama_karyawan' => $nama_karyawan,
                 'jenis_kelamin' => $jenis_kelamin,
                 'tempat_lahir' => $tempat_lahir,
@@ -389,6 +390,7 @@ class Hrd extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data2['user'] = $this->Hrd_model->getDataUserById($id);
+        $data2['user_role'] = $this->db->get('user_role')->result_array();
         $data['title'] = 'Edit Pengguna';
         $this->form_validation->set_rules('name', 'name', 'required');
         $this->form_validation->set_rules('email', 'email', 'required');

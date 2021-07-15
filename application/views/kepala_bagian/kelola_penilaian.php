@@ -5,11 +5,13 @@
     }
 </style>
 
-<?php if ($this->session->flashdata('berhasil')) : ?>
+<!-- <?php 
+// if ($this->session->flashdata('berhasil')) : ?>
     <script>
         swal("Success!", "Data Penilaian Berhasil Tersimpan!", "success");
     </script>
-<?php endif; ?>
+<?php 
+// endif; ?> -->
 
 <div class="container-fluid">
 
@@ -17,7 +19,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active" aria-current="page">Kelola Penilaian
-                <?php echo $this->session->flashdata('berhasil'); ?>
+                
             </li>
         </ol>
     </nav>
@@ -56,32 +58,46 @@
                 <tbody>
                     <?php 
                         $i = 1; 
-                        foreach ($karyawan as $d) 
+                        foreach ($allkarywan as $d) 
                         {
                             echo'
                                 <tr>
                                 <th scope="row">'.$i.'</th>
                                 <td>'.$d['nama_karyawan'].'</td>';
                                 $subkriteria = $this->Kriteria_model->getSubKriteriaByID($d['id_karyawan']);
-                                foreach($subkriteria as $s)
-                                {
-                                     echo'<td>'.$s['nama_sub_kriteria'].'</td>';
-                                }
-                                $rank = $this->Karyawan_model->CekRankingKaryawan($departemen);
-                                if (empty($rank)) {
-                                      echo' 
-                                    <td>
-                                        <a class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit" href="'.base_url('kepala_bagian/ubah_penilaian/'.$d['id_karyawan']).'">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    </td>';
+                                if (!empty($subkriteria)) {
+                                    foreach($subkriteria as $s)
+                                    {
+                                        echo'<td>'.$s['nama_sub_kriteria'].'</td>';
+                                    }
+                                    $rank = $this->Karyawan_model->CekKaryawanOnRank($d['id_karyawan'],$departemen);
+                                        if (empty($rank)) {
+                                            echo' 
+                                            <td>
+                                                <a class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit" href="'.base_url('kepala_bagian/ubah_penilaian/'.$d['id_karyawan']).'">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                 <a class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Edit" href="'.base_url('kepala_bagian/delete_penilaian/'.$d['id_karyawan']).'">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </td>';
+                                        }else{
+                                            echo'
+                                            <td>
+                                                <a class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Disbled" href="#">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <a class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Disbled" href="#">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </td>';
+                                        }
                                 }else{
-                                    echo'
-                                    <td>
-                                         <a class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Disbled" href="#">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    </td>';
+                                    foreach($kriteria as $k){
+                                        echo'<td><small class="text-danger">Belum Di Nilai</small></td>';
+                                    }
+                                    echo'<td><small>-</small></td>';
+                                    
                                 }
                                 echo'</tr>';
                             $i++;            
