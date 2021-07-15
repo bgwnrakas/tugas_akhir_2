@@ -17,6 +17,7 @@ class Pimpinan extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Dashboard';
+        $data['total_bonus'] = $this->Pimpinan_model->hitungTotalBonus();
         $this->load->view('templates/pimpinan_header', $data);
         $this->load->view('templates/pimpinan_sidebar', $data);
         $this->load->view('templates/pimpinan_topbar', $data);
@@ -169,4 +170,10 @@ class Pimpinan extends CI_Controller
             redirect('pimpinan/profile');
         }
     }
+
+    public function print(){
+        // $data['record_print'] = $this->db->query($sql)->result();
+		$data['record_print'] = $this->Pimpinan_model->tampil_data("tb_karyawan")->result();
+		$this->load->view('pimpinan/print_laporan', $data);
+	}
 }

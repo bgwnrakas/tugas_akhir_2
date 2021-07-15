@@ -112,4 +112,40 @@ class Hrd_model extends CI_Model
         $this->db->where('id_karyawan', $this->input->post('id_karyawan'));
         $this->db->update('tb_karyawan', $data);
     }
+
+    public function hitungJumlahKaryawan()
+    {
+        $query = $this->db->get('tb_karyawan');
+        if($query->num_rows()>0)
+        {
+            return $query->num_rows();
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public function hitungkriteria()
+    {
+        $query = $this->db->get('tb_kriteria');
+        if($query->num_rows()>0)
+        {
+            return $query->num_rows();
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public function hitungUser()
+    {
+        $query = $this->db->get('user');
+        if($query->num_rows()>0)
+        {
+            return $query->num_rows();
+        }
+        else{
+            return 0;
+        }
+    }
 }

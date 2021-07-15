@@ -18,6 +18,8 @@ class Kepala_bagian extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['departemen'] = $this->Kabag_model->getDepartemenKabag($this->session->userdata('role_id'));
         $data['title'] = 'Dashboard';
+        $data['karyawan'] = $this->Karyawan_model->getDataKaryawanDiNilai($data['departemen']);
+        $data['totalKaryawan'] = $this->Karyawan_model->CountAllKaryawanByDepartmen($data['departemen']);
         $this->load->view('templates/kabag_header', $data);
         $this->load->view('templates/kabag_sidebar', $data);
         $this->load->view('templates/kabag_topbar', $data);
@@ -63,7 +65,6 @@ class Kepala_bagian extends CI_Controller
         $data['allkarywan'] = $this->Karyawan_model->getDataKaryawanDepatemenAll($data['departemen']);
         $data['karyawan'] = $this->Karyawan_model->getDataKaryawanDiNilai($data['departemen']);
         $data['totalKaryawan'] = $this->Karyawan_model->CountAllKaryawanByDepartmen($data['departemen']);
-       
         $data['kriteria'] = $this->Kriteria_model->getKriteria();
         $this->load->view('templates/kabag_header', $data);
         $this->load->view('templates/kabag_sidebar', $data);

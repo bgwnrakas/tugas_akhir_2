@@ -15,6 +15,9 @@ class Hrd extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Dashboard';
+        $data['total_karyawan'] = $this->Hrd_model->hitungJumlahKaryawan();
+        $data['total_kriteria'] = $this->Hrd_model->hitungkriteria();
+        $data['total_user'] = $this->Hrd_model->hitungUser();
         $this->load->view('templates/hrd_header', $data);
         $this->load->view('templates/hrd_sidebar', $data);
         $this->load->view('templates/hrd_topbar', $data);

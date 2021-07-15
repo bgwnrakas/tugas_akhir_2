@@ -15,7 +15,7 @@
         <div class="card-body">
 
             <a class="btn btn-primary btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Input" href="<?= base_url('pimpinan/tambah_bonus'); ?>"><i class="fa fa-edit"></i></a>
-            <a class="btn btn-warning btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Laporan" href=""><i class="fas fa-print"></i></a>
+            <a class="btn btn-warning btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Laporan" href="<?= base_url('pimpinan/print'); ?>"><i class="fas fa-print"></i></a>
 
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead class="thead-dark">
