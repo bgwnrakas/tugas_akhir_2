@@ -67,7 +67,7 @@
                     {
                         $bonus = $this->Bonus_model->getBonus($p['nilai_yi']);
                         if (!empty($bonus)) { 
-                            $jumlah = $bonus['jumlah_bonus'];
+                            $jumlah = rupiah($bonus['jumlah_bonus']);
                         }else{
                             $jumlah = 'Bonus Tidak Tersedia';
                         }
@@ -78,7 +78,7 @@
                             <td>'.$p['departemen'].'</td>
                             <td>'.$p['nilai_yi'].'</td>
                             <td>'.$i.'</td>
-                            <td>'.rupiah($jumlah).'</td>
+                            <td>'.$jumlah.'</td>
                         </tr>';
                         $i++;
                     }

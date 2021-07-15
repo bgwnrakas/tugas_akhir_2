@@ -172,8 +172,7 @@ class Pimpinan extends CI_Controller
     }
 
     public function print(){
-        // $data['record_print'] = $this->db->query($sql)->result();
-		$data['record_print'] = $this->Pimpinan_model->tampil_data("tb_karyawan")->result();
+        $data['record_print'] = $this->Peringkat_model->getPeringkat();
 		$this->load->view('pimpinan/print_laporan', $data);
 	}
 }
