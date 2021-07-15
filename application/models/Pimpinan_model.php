@@ -15,16 +15,9 @@ class Pimpinan_model extends CI_Model
         return $this->db->get_where('tb_bonus', ['id' => $id])->row_array();
     }
 
-    public function editDataBonus($id)
+    public function editDataBonus($id,$data)
     {
-        $data = [
-            "id" => $this->input->post('id'),
-            "jumlah_bonus" => $this->input->post('jumlah_bonus'),
-            "batas_nilai_yi" => $this->input->post('batas_nilai_yi'),
-            "email" => $this->input->post('email'),
-        ];
-
-        $this->db->where('id', $this->input->post('id'));
+        $this->db->where('id', $id);
         $this->db->update('tb_bonus', $data);
     }
 
@@ -33,4 +26,30 @@ class Pimpinan_model extends CI_Model
         // $this->db->where('id', $id);
         $this->db->delete('tb_bonus', ['id' => $id]);
     }
+
+    public function hitungTotalBonus() {
+        $this->db->select_sum('jumlah_bonus');
+        $result = $this->db->get('tb_bonus')->row();  
+        return $result->jumlah_bonus;
+    }
+
+    public function tampil_data()
+	{
+        // // return $this->db->get('tb_karyawan');
+        // $this->db->from('tb_karyawan');
+        // $this->db->join('tb_ranking', 'tb_ranking.id_ranking' = 'tb_karyawan.id_karyawan');
+        // if($id ! = null){
+        //     $this->db->where('item_id', $id);
+        // }
+        // $query = $this->db->get();
+        // return $query;
+    }
+    
+    public function join_tabel(){
+		$this->db->select('*');
+		$this->db->from('tb_karyawan');
+		$this->db->innerjoin('tb_ranking','tb_ranking.id_karyawan=tb_ranking.id_karyawan');
+		$query=$this->db->get();
+		return $query;
+	}
 }

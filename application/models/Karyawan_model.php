@@ -54,8 +54,7 @@ class Karyawan_model extends CI_Model
                ->from('tb_karyawan')
                ->join('tb_ranking', 'tb_karyawan.id_karyawan = tb_ranking.id_karyawan','left')
                ->where('tb_karyawan.departemen',$departemen)
-               ->where('tahun', date("Y"))
-               ->where('tb_ranking.id_ranking IS NULL');
+               ->where('tb_ranking.tahun', date("Y"));
         $result = $this->db->get();
         return $result->result_array();  
     }

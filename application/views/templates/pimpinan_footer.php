@@ -37,6 +37,12 @@
           </div>
       </div>
   </div>
+<script>
+    $(document).ready(function(){
+        $( '.uang' ).mask('000.000.000', {reverse: true});
+        $( '.minmax' ).mask("0.##", {reverse: true});
+    });
+</script>
 
   <!-- Load file process.js -->
   <script>
@@ -45,6 +51,8 @@
           $(this).next('.custom-file-label').addClass('selected').html(fileName);
       });
   </script>
+  
+  
 
   <!-- Custom scripts for all pages-->
   <script src="<?= base_url('assets'); ?>/js/sb-admin-2.min.js"></script>
