@@ -36,11 +36,7 @@ class Kepala_bagian extends CI_Controller
 
     public function submit_penilaian()
     {
-        foreach ($_POST as $key => $value) {$$key = $value;}    
-        // echo'<pre>';
-        //     print_r($id_sub_kriteria);
-        // echo'</pre>';    
-        
+        foreach ($_POST as $key => $value) {$$key = $value;}            
         for ($i = 0; $i < count($id_sub_kriteria); $i++) {
             $data = array(
                     'id_karyawan' => $id_karyawan, 
@@ -120,7 +116,6 @@ class Kepala_bagian extends CI_Controller
             $update = $this->Penilaian_model->update($id_penilaian[$i], $id_sub_kriteria[$i]);
         }
 
-        $this->session->set_flashdata('berhasil', 'Data Terupdate!');
         redirect('Kepala_bagian/kelola_penilaian');
     }
 
@@ -299,6 +294,15 @@ class Kepala_bagian extends CI_Controller
         } else {
             redirect('Kepala_bagian/hitung');
         }
+    }
+
+    public function reset_peringkat()
+    {
+        foreach ($_POST as $key => $value) {$$key = $value;}   
+        for ($i = 0; $i < count($id_karyawan); $i++) {
+           $delete = $this->Peringkat_model->reset($id_karyawan[$i]);
+        }
+        redirect('Kepala_bagian/kelola_penilaian');
     }
 
     public function example()

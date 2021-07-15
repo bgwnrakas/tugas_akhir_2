@@ -8,6 +8,11 @@ class Peringkat_model extends CI_Model
         return true;
     }
 
+    public function reset($id_karyawan)
+    { 
+        $this->db->delete('tb_ranking', ['id_karyawan' => $id_karyawan, 'tahun' => date('Y')]);
+    }
+
     public function getPeringkat()
     {
         $this->db->select('*')

@@ -10,6 +10,7 @@ class Pimpinan extends CI_Controller
         $this->load->model('Karyawan_model');
         $this->load->model('Kriteria_model');
         $this->load->model('Peringkat_model');
+        $this->load->model('Bonus_model');
     }
 
     public function index()
@@ -42,7 +43,8 @@ class Pimpinan extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Tambah Bonus';
         $this->form_validation->set_rules('jumlah_bonus', 'jumlah_bonus', 'required');
-        $this->form_validation->set_rules('batas_nilai_yi', 'batas_nilai_yi', 'required');
+        $this->form_validation->set_rules('min_nilai_yi', 'min_nilai_yi', 'required');
+        $this->form_validation->set_rules('max_nilai_yi', 'max_nilai_yi', 'required');
         $this->form_validation->set_rules('email', 'email', 'required');
         $this->form_validation->set_rules('id_user', 'id_user', 'required');
 
@@ -54,13 +56,15 @@ class Pimpinan extends CI_Controller
             $this->load->view('templates/pimpinan_footer', $data);
         } else {
             $jumlah_bonus = $this->input->post('jumlah_bonus');
-            $batas_nilai_yi = $this->input->post('batas_nilai_yi');
+            $min_nilai_yi = $this->input->post('min_nilai_yi');
+            $max_nilai_yi = $this->input->post('max_nilai_yi');
             $email = $this->input->post('email');
             $id_user = $this->input->post('id_user');
 
             $data = array(
-                'jumlah_bonus' => $jumlah_bonus,
-                'batas_nilai_yi' => $batas_nilai_yi,
+                'jumlah_bonus' => str_replace(".", "", $jumlah_bonus),
+                'min_nilai_yi' => $min_nilai_yi,
+                'max_nilai_yi' => $max_nilai_yi,
                 'email' => $email,
                 'id_user' => $id_user,
             );
@@ -74,8 +78,9 @@ class Pimpinan extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['tb_bonus'] = $this->Pimpinan_model->getDataBonusById($id);
         $data['title'] = 'Ubah Bonus';
-        $this->form_validation->set_rules('jumlah_bonus', 'jumlah_bonus', 'required');
-        $this->form_validation->set_rules('batas_nilai_yi', 'batas_nilai_yi', 'required');
+        $this->form_validation->set_rules('jumlah_bonus', 'jumlah_bonus', 'required'); 
+        $this->form_validation->set_rules('min_nilai_yi', 'min_nilai_yi', 'required');
+        $this->form_validation->set_rules('max_nilai_yi', 'max_nilai_yi', 'required');
         $this->form_validation->set_rules('email', 'email', 'required');
 
         if ($this->form_validation->run() == false) {
@@ -87,19 +92,18 @@ class Pimpinan extends CI_Controller
         } else {
             $id = $this->input->post('id');
             $jumlah_bonus = $this->input->post('jumlah_bonus');
-            $batas_nilai_yi = $this->input->post('batas_nilai_yi');
+            $min_nilai_yi = $this->input->post('min_nilai_yi');
+            $max_nilai_yi = $this->input->post('max_nilai_yi');
             $email = $this->input->post('email');
 
-
             $data = array(
-                'id' => $id,
-                'jumlah_bonus' => $jumlah_bonus,
-                'batas_nilai_yi' => $batas_nilai_yi,
+                'jumlah_bonus' => str_replace(".", "", $jumlah_bonus),
+                'min_nilai_yi' => $min_nilai_yi,
+                'max_nilai_yi' => $max_nilai_yi,
                 'email' => $email
-
             );
 
-            $this->Pimpinan_model->editDataBonus($data);
+            $this->Pimpinan_model->editDataBonus($id,$data);
             redirect('pimpinan/kelola_bonus');
         }
     }

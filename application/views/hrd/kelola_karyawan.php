@@ -43,7 +43,7 @@
                                 <td><?= $p['nama_karyawan']; ?></td>
                                 <td><?= $p['jenis_kelamin']; ?></td>
                                 <td><?= $p['tempat_lahir']; ?></td>
-                                <td><?= $p['tgl_lahir']; ?></td>
+                                <td><?= tanggal($p['tgl_lahir']); ?></td>
                                 <td><?= $p['alamat']; ?></td>
                                 <td><?= $p['departemen']; ?></td>
                                 <td><?= $p['posisi']; ?></td>

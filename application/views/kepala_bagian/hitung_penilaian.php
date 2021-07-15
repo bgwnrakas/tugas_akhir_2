@@ -173,7 +173,14 @@
 			<h6 class="m-0 font-weight-bold text-info">Peringkat Karyawan</h6>
 		</div>
 		<div class="card-body">
-			<form action="<?= base_url('kepala_bagian/simpan_peringkat'); ?>" method="post">
+			<?php
+				$cekRank = $this->Karyawan_model->CekRankingIfNull($departemen);
+				if (empty($cekRank)) {
+					echo'<form action="'.base_url("kepala_bagian/simpan_peringkat").'" method="post">';
+				}else{
+					echo'<form action="'.base_url("kepala_bagian/reset_peringkat").'" method="post">';
+				}
+			?>
 				<table class="table table-bordered table-hover" style="width:100%">
 					<thead>
 						<tr class="bg-info text-white">
@@ -207,13 +214,10 @@
 			<br>
 			<div class="text-center">
 			<?php	
-				$data = $this->Karyawan_model->CekRankingIfNull($departemen);
-				if (empty($data)) {
+				if (empty($cekRank)) {
 					echo'<button type="submit" class="btn btn-info  px-5 py-2">Simpan Peringkat</button>';
 				}else{
-					echo'<div class="alert alert-primary fw-bold fs-2 " role="alert">
-							Data Peringkat Telah Tersimpan !
-						</div>';
+					echo'<button type="submit" class="btn btn-warning  px-5 py-2">Reset Peringkat</button>';
 					}
 					?>
 				</div>
