@@ -77,7 +77,7 @@
                             <td>' . $p['departemen'] . '</td>
                             <td>' . $p['nilai_yi'] . '</td>
                             <td>' . $i . '</td>
-                            <td>' . ($jumlah) . '</td>
+                            <td>' . $jumlah . '</td>
                         </tr>';
                         $i++;
                     }
