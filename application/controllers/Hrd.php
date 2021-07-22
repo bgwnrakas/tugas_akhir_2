@@ -105,6 +105,7 @@ class Hrd extends CI_Controller
 
     public function delete_kriteria($id_kriteria)
     {
+        $this->Hrd_model->deleteDataSubKriteriByIdKriteria($id_kriteria);
         $this->Hrd_model->deleteDataKriteria($id_kriteria);
         redirect('hrd/kelola_kriteria');
     }
