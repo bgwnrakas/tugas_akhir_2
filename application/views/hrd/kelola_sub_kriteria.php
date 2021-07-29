@@ -45,7 +45,7 @@
                                 if (!empty($tb_kriteria) && empty($cek)) {
                                     echo '
                                         <a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="' . base_url() . 'hrd/ubah_sub_kriteria/' . $p['id_sub_kriteria'] . '"><i class="fa fa-edit"></i></a>
-                                        <a class="btn btn-danger btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Delete" href="' . base_url() . 'hrd/delete_sub_kriteria/' . $p['id_sub_kriteria'] . '"><i class="fa fa-trash"></i></a>';
+                                        <a class="btn btn-danger btn-sm tombol-hapus-sub-kriteria" type="button" data-toggle="tooltip" data-placement="top" title="Delete" href="' . base_url() . 'hrd/delete_sub_kriteria/' . $p['id_sub_kriteria'] . '"><i class="fa fa-trash"></i></a>';
                                 } else {
                                     echo '<small> Telah Terpakai</small>';
                                 }

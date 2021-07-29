@@ -14,11 +14,11 @@
         </div>
         <div class="card-body">
             <?php
-                if (empty($cek)) {
-                    echo'<a class="btn btn-primary btn-sm rounded-0 mb-3" data-toggle="tooltip" data-placement="top" title="Input" href="'.base_url('hrd/tambah_kriteria').'">
+            if (empty($cek)) {
+                echo '<a class="btn btn-primary btn-sm rounded-0 mb-3" data-toggle="tooltip" data-placement="top" title="Input" href="' . base_url('hrd/tambah_kriteria') . '">
                             <i class="fa fa-edit"></i>
                         </a>';
-                }
+            }
             ?>
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead class="thead-dark">
@@ -42,20 +42,19 @@
                             <td><?= $p['bobot_kriteria']; ?></td>
                             <td><?= $p['jenis_kriteria']; ?></td>
                             <td><?= $p['tahun']; ?></td>
-                            <td> 
-                            <?php 
-                                if (empty($cek)) 
-                                { 
+                            <td>
+                                <?php
+                                if (empty($cek)) {
                                     if ($p['tahun'] == date("Y")) {
-                                        echo'<a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="'.base_url().'hrd/ubah_kriteria/'.$p['id_kriteria'].'"><i class="fa fa-edit"></i></a>';
-                                    }else{
-                                        echo'<a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="'.base_url().'hrd/ubah_kriteria/'.$p['id_kriteria'].'">Perbaharui</a>';
+                                        echo '<a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="' . base_url() . 'hrd/ubah_kriteria/' . $p['id_kriteria'] . '"><i class="fa fa-edit"></i></a>';
+                                    } else {
+                                        echo '<a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="' . base_url() . 'hrd/ubah_kriteria/' . $p['id_kriteria'] . '">Perbaharui</a>';
                                     }
-                                    echo'<a class="btn btn-danger btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Delete" href="'.base_url().'hrd/delete_kriteria/'.$p['id_kriteria'].'"><i class="fa fa-trash"></i></a>';
-                                }else{
-                                    echo'<small> Telah Terpakai</small>';
+                                    echo '<a class="btn btn-danger btn-sm tombol-hapus-kriteria" type="button" data-toggle="tooltip" data-placement="top" title="Delete" href="' . base_url() . 'hrd/delete_kriteria/' . $p['id_kriteria'] . '"><i class="fa fa-trash"></i></a>';
+                                } else {
+                                    echo '<small> Telah Terpakai</small>';
                                 }
-                            ?>
+                                ?>
                             </td>
                         </tr>
                         <?php $i++; ?>

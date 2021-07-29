@@ -16,7 +16,7 @@
 ?> -->
 
 <div class="container-fluid">
-
+    <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
     <!-- Page Heading -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -75,8 +75,8 @@
                                                 <a class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit" href="' . base_url('kepala_bagian/ubah_penilaian/' . $d['id_karyawan']) . '">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
-                                                 <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-placement="top" title="Delete" href="' . base_url('kepala_bagian/delete_penilaian/' . $d['id_karyawan']) . '">
-                                                    <i class="fa fa-trash"></i>
+                                                 <a class="btn btn-danger btn-sm tombol-hapus-penilaian" type="button" data-toggle="tooltip" data-placement="top" title="Delete" href="' . base_url('kepala_bagian/delete_penilaian/' . $d['id_karyawan']) . '">
+                                                    <i class="fa fa-trash"></i> 
                                                 </a>
                                             </td>';
                             } else {

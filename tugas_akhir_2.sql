@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2021 at 02:57 PM
+-- Generation Time: Jul 29, 2021 at 06:51 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -180,42 +180,42 @@ CREATE TABLE `tb_penilaian` (
 --
 
 INSERT INTO `tb_penilaian` (`id_penilaian`, `id_karyawan`, `id_sub_kriteria`, `tahun`) VALUES
-(157, 1, 27, '2021'),
-(158, 1, 31, '2021'),
-(159, 1, 35, '2021'),
-(160, 5, 27, '2021'),
-(161, 5, 31, '2021'),
-(162, 5, 33, '2021'),
-(163, 4, 28, '2021'),
-(164, 4, 30, '2021'),
-(165, 4, 35, '2021'),
-(166, 13, 27, '2021'),
-(167, 13, 31, '2021'),
-(168, 13, 35, '2021'),
-(169, 11, 27, '2021'),
-(170, 11, 31, '2021'),
-(171, 11, 35, '2021'),
-(172, 15, 28, '2021'),
-(173, 15, 31, '2021'),
-(174, 15, 33, '2021'),
-(175, 14, 28, '2021'),
-(176, 14, 30, '2021'),
-(177, 14, 33, '2021'),
-(178, 17, 29, '2021'),
-(179, 17, 32, '2021'),
-(180, 17, 35, '2021'),
-(181, 18, 27, '2021'),
-(182, 18, 32, '2021'),
-(183, 18, 33, '2021'),
-(184, 19, 28, '2021'),
-(185, 19, 31, '2021'),
-(186, 19, 33, '2021'),
-(187, 20, 28, '2021'),
-(188, 20, 30, '2021'),
-(189, 20, 33, '2021'),
-(190, 16, 29, '2021'),
-(191, 16, 30, '2021'),
-(192, 16, 35, '2021');
+(259, 1, 29, '2021'),
+(260, 1, 31, '2021'),
+(261, 1, 33, '2021'),
+(262, 5, 28, '2021'),
+(263, 5, 31, '2021'),
+(264, 5, 33, '2021'),
+(265, 11, 28, '2021'),
+(266, 11, 30, '2021'),
+(267, 11, 33, '2021'),
+(268, 4, 28, '2021'),
+(269, 4, 32, '2021'),
+(270, 4, 33, '2021'),
+(271, 13, 27, '2021'),
+(272, 13, 30, '2021'),
+(273, 13, 35, '2021'),
+(274, 15, 29, '2021'),
+(275, 15, 30, '2021'),
+(276, 15, 35, '2021'),
+(277, 14, 29, '2021'),
+(278, 14, 32, '2021'),
+(279, 14, 35, '2021'),
+(280, 17, 29, '2021'),
+(281, 17, 31, '2021'),
+(282, 17, 33, '2021'),
+(283, 18, 28, '2021'),
+(284, 18, 31, '2021'),
+(285, 18, 35, '2021'),
+(286, 19, 29, '2021'),
+(287, 19, 31, '2021'),
+(288, 19, 33, '2021'),
+(289, 16, 28, '2021'),
+(290, 16, 30, '2021'),
+(291, 16, 33, '2021'),
+(292, 20, 27, '2021'),
+(293, 20, 30, '2021'),
+(294, 20, 33, '2021');
 
 -- --------------------------------------------------------
 
@@ -235,18 +235,18 @@ CREATE TABLE `tb_ranking` (
 --
 
 INSERT INTO `tb_ranking` (`id_ranking`, `id_karyawan`, `nilai_yi`, `tahun`) VALUES
-(55, 1, 0.3682, '2021'),
-(56, 11, 0.3682, '2021'),
-(57, 13, 0.3682, '2021'),
-(58, 4, 0.35533, '2021'),
-(59, 16, 0.28307, '2021'),
-(60, 17, 0.16429, '2021'),
-(61, 5, 0.07115, '2021'),
-(62, 14, 0.05828, '2021'),
-(63, 20, 0.05828, '2021'),
-(64, 18, 0.01176, '2021'),
-(65, 15, -0.00111, '2021'),
-(66, 19, -0.00111, '2021');
+(79, 13, 0.48264, '2021'),
+(80, 18, 0.34022, '2021'),
+(81, 15, 0.31341, '2021'),
+(82, 20, 0.22152, '2021'),
+(83, 14, 0.1978, '2021'),
+(84, 11, 0.13691, '2021'),
+(85, 16, 0.13691, '2021'),
+(86, 5, 0.0791, '2021'),
+(87, 4, 0.0213, '2021'),
+(88, 1, -0.00551, '2021'),
+(89, 17, -0.00551, '2021'),
+(90, 19, -0.00551, '2021');
 
 -- --------------------------------------------------------
 
@@ -297,14 +297,14 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `date_created`) VALUES
-(18, 'HRD Malakasari', 'hrd@gmail.com', 'default.jpg', '$2y$10$D4XCgZPb/5YrfB.DZ9lHaO/UxFbM64O6/4FCPaFayHGMELoqlzwUy', 1, 1, 1625339231),
 (19, 'Pimpinan', 'pimpinan@gmail.com', 'default.jpg', '$2y$10$XKsiqTTiSHFHN/QIlPuLyuSHKcT444yXnWTYTndpu4G1XokhtJPUi', 2, 1, 1625342262),
 (21, 'Kepala Bagian Spinning', 'kabag@gmail.com', 'default.jpg', '$2y$10$k0OsVm2sJQ4ArmJ8R.8ZtOkq76qyl/Cr13HDh/fTILQLk9ibpNL3G', 3, 1, 1625346533),
 (23, 'Kepala Weaving', 'kabag2@gmail.com', 'default.jpg', '$2y$10$GgoE6rv3Dh0KsD1MZfNdeOG/.prg04we8k94fFQAQv0oREajenqPC', 4, 1, 1626163803),
 (24, 'Kepala Bagian Celup', 'kabag3@gmail.com', 'default.jpg', '$2y$10$DA2PF5RMJQuP2amB/rtCAue4md/iYCsw6KMyth8vIWp87VkOJkI1m', 5, 1, 1626163832),
 (25, 'Kepala Bagian Dyeing', 'kabag4@gmail.com', 'default.jpg', '$2y$10$g1njeYlxDCtYkJ3LoUkUmuNdjjL6a9eWneFhJj6JTCUgqQLUAy2qu', 6, 1, 1626163869),
 (26, 'Kepala Bagian Finnishing', 'kabag5@gmail.com', 'default.jpg', '$2y$10$1fbXD1hS/VnrJkU7stqWa.0qMyiMu/nyVP7doQTdvMOGPT0n1FMuK', 7, 1, 1626163900),
-(27, 'Kepala Bagian Utility', 'kabag6@gmail.com', 'default.jpg', '$2y$10$dIOW8F5JlKyMLVBX4YyxxeheLhyVUJ7iqdrFu5xwnTF.vWJ1olICm', 8, 1, 1626163931);
+(29, 'HRD Malakasari', 'hrd@gmail.com', 'default.jpg', '$2y$10$KnYpS5cPbn/X390SYjQvW.In2BSVuhIRDnHzINfF57hQBBoxlBI1e', 1, 1, 1626921977),
+(31, 'Kepala Bagian Utility', 'kabag6@gmail.com', 'default.jpg', '$2y$10$JaOVl6Uv56kYi3odbWxdx.oyyayXoISvyrKpahrJr5.6jzDf0h.JO', 8, 1, 1627576047);
 
 -- --------------------------------------------------------
 
@@ -412,13 +412,13 @@ ALTER TABLE `tb_kriteria`
 -- AUTO_INCREMENT for table `tb_penilaian`
 --
 ALTER TABLE `tb_penilaian`
-  MODIFY `id_penilaian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
+  MODIFY `id_penilaian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=295;
 
 --
 -- AUTO_INCREMENT for table `tb_ranking`
 --
 ALTER TABLE `tb_ranking`
-  MODIFY `id_ranking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id_ranking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `tb_sub_kriteria`
@@ -430,7 +430,7 @@ ALTER TABLE `tb_sub_kriteria`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `user_role`

@@ -19,6 +19,7 @@
 	<link href="<?= base_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
 	<link href="<?= base_url('assets/'); ?>css/custom.css" rel="stylesheet">
 	<link href="<?= base_url('assets/'); ?>css/select2.min.css" rel="stylesheet">
+	<script src="<?= base_url('assets'); ?>/js/sweetalert2.min.css"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 	<!-- Custom fonts for this template-->
@@ -59,6 +60,7 @@
 	<script src="<?= base_url('assets'); ?>/js/custom.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
 
 	<script>
 		$(document).ready(function() {

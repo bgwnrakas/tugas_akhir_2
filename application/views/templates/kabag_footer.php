@@ -38,7 +38,7 @@
       </div>
   </div>
 
-  <!-- Delete Modal -->
+  <!-- Delete Modal
   <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -56,7 +56,9 @@
               </div>
           </div>
       </div>
-  </div>
+  </div> -->
+
+
 
   <!-- Load file process.js -->
   <script>
@@ -64,10 +66,18 @@
           let fileName = $(this).val().split('\\').pop();
           $(this).next('.custom-file-label').addClass('selected').html(fileName);
       });
+
+      // JQuery solution!
+      $('table').on('click', 'input[type="button"]', function(e) {
+          $(this).closest('td').remove();
+      })
   </script>
+
 
   <!-- Custom scripts for all pages-->
   <script src="<?= base_url('assets'); ?>/js/sb-admin-2.min.js"></script>
+  <script src="<?= base_url('assets'); ?>/js/sweetalert2.all.min.js"></script>
+  <script src="<?= base_url('assets'); ?>/js/myscript.js"></script>
 
   </body>
 
