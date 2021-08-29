@@ -38,10 +38,8 @@
         <div class="card-body">
             <?php if (count($karyawan) == $totalKaryawan) { ?>
                 <a class="btn btn-secondary btn-sm rounded-0 mb-3 disabled" type="a" data-toggle="tooltip" data-placement="top" title="Input"><i class="fa fa-edit"></i></a>
-                <a class="btn btn-success btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Hitung Penilaian" href="<?= base_url('kepala_bagian/hitung'); ?>"><i class="fas fa-tools"></i></a>
             <?php } else { ?>
                 <a class="btn btn-primary btn-sm rounded-0 mb-3" type="a" data-toggle="tooltip" data-placement="top" title="Input" href="<?= base_url('kepala_bagian/tambah_penilaian'); ?>"><i class="fa fa-edit"></i></a>
-                <a class="btn btn-secondary btn-sm rounded-0 mb-3 disabled" type="a" data-toggle="tooltip" data-placement="top" title="Hitung Penilaian" href="#"><i class="fas fa-tools"></i></a>
             <?php } ?>
 
             <table id="example" class="table table-striped table-bordered" style="width:100%">

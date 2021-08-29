@@ -17,6 +17,16 @@ class Karyawan_model extends CI_Model
         return $query->result_array();
     }
 
+    public function getDataKaryawanDiNilaiAll()
+    {
+        $this->db->select('*');
+        $this->db->from('tb_karyawan');
+        $this->db->where('status', date("Y"));
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
     public function getDataKaryawanDiNilai($departemen)
     {
         $this->db->select('*');
@@ -54,6 +64,16 @@ class Karyawan_model extends CI_Model
             ->from('tb_karyawan')
             ->join('tb_ranking', 'tb_karyawan.id_karyawan = tb_ranking.id_karyawan', 'left')
             ->where('tb_karyawan.departemen', $departemen)
+            ->where('tb_ranking.tahun', date("Y"));
+        $result = $this->db->get();
+        return $result->result_array();
+    }
+
+     public function CekRankingIfNullAll()
+    {
+        $this->db->select('*')
+            ->from('tb_karyawan')
+            ->join('tb_ranking', 'tb_karyawan.id_karyawan = tb_ranking.id_karyawan', 'left')
             ->where('tb_ranking.tahun', date("Y"));
         $result = $this->db->get();
         return $result->result_array();

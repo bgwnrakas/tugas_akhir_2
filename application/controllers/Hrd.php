@@ -437,9 +437,11 @@ class Hrd extends CI_Controller
 
     public function kelola_penilaian_karyawan()
     {
-
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Kelola Penilaian Karyawan';
+        $data['kriteria'] = $this->Kriteria_model->getKriteria();
+        $data['ceknilai'] = $this->Karyawan_model->getDataKaryawanDiNilaiAll();
+        $data['allkarywan'] = $this->db->get('tb_karyawan')->result_array(); 
         $this->load->view('templates/hrd_header', $data);
         $this->load->view('templates/hrd_sidebar', $data);
         $this->load->view('templates/hrd_topbar', $data);
@@ -447,15 +449,138 @@ class Hrd extends CI_Controller
         $this->load->view('templates/hrd_footer', $data);
     }
 
-    public function hitung_penilaian()
+  public function hitung_penilaian()
     {
-
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['title'] = 'Kelola Penilaian Karyawan';
+        $data['title'] = 'Hasil Perhitungan Penilaian';
+        $data['kriteria'] = $this->Kriteria_model->getKriteria();
+        // Get Data Karyawan
+        $karyawan = $this->Karyawan_model->getDataKaryawanDiNilaiAll();
+        $bobot    = $this->Kriteria_model->getKriteriaBobot();
+        $jenis    = $this->Kriteria_model->getKriteriaJenis();
+
+        // --- Bilangan Fuzzy ---
+        $fuzzy = array();
+        foreach ($karyawan as $datakaryawan => $r) {
+            $subkriteria = $this->Kriteria_model->getSubKriteriaByID($r['id_karyawan']);
+            $fuzzy[$datakaryawan][0] = $r['id_karyawan'];
+            foreach ($subkriteria as $sub => $s) {
+                $fuzzy[$datakaryawan][$sub + 1] = $s['nilai_sub_kriteria'];
+               
+            }
+        }
+
+        // // --- Mencari Pembagi ---
+        $x = count(reset($fuzzy)); // Mendapatkan Dimensi X dari Matrix
+        $y = count($fuzzy); // Mendapatkan Dimensi Y dari Matrix
+
+        $pembagi = array();
+        for ($i = 1; $i < $x; $i++) {
+            $pangkat = 0;
+            for ($j = 0; $j < $y; $j++) {
+                $pangkat += pow($fuzzy[$j][$i], 2);
+            }
+            $pembagi[$i] = sqrt($pangkat);
+        }
+
+        // Menghitung Matrix Ternormalisasi
+        $ternormalisasi = array();
+        for ($i = 0; $i < $y; $i++) {
+            $ternormalisasi[$i][0] = $fuzzy[$i][0];
+            for ($j = 1; $j < $x; $j++) {
+                $ternormalisasi[$i][$j] = $fuzzy[$i][$j] / $pembagi[$j];
+            }
+        }
+
+        // Menghitung Matrix Optimalisasi
+        $optimalisasi = array();
+
+        for ($i = 1; $i < $x; $i++) {
+            for ($j = 0; $j < $y; $j++) {
+                $optimalisasi[$j][0] = $ternormalisasi[$j][0];
+                $optimalisasi[$j][$i] = $ternormalisasi[$j][$i] / $bobot[$i - 1];
+                // echo  $optimalisasi[$j][$i] .' | ';
+            }
+            // echo"<br>";
+        }
+
+        // Menghitung Nilai Maximum,Minimum dan Yi
+        $maksimum = array();
+        $minimum = array();
+        $Yi = array();
+        for ($i = 0; $i < $y; $i++) {
+            $minimum[$i] = 0;
+            $maksimum[$i] = 0;
+            for ($j = 1; $j < $x; $j++) {
+                if ($jenis[$j - 1] == "Benefit") {
+                    $maksimum[$i] += $optimalisasi[$i][$j];
+                } else {
+                    $minimum[$i] += $optimalisasi[$i][$j];
+                }
+            }
+            $Yi[$i] = $maksimum[$i] - $minimum[$i];
+        }
+
+        //  Membuat Matrix Akhir Untuk Menampung Semua hasil
+        $matrixYi = array();
+        for ($i = 0; $i < $y; $i++) {
+            $matrixYi[$i][0] = $fuzzy[$i][0];
+            $matrixYi[$i][1] = $maksimum[$i];
+            $matrixYi[$i][2] = $minimum[$i];
+            $matrixYi[$i][3] = $Yi[$i];
+        }
+
+        // // // Mengirim Data Array Ke View
+        $data['pembagi']        = $pembagi;
+        $data['fuzzy']          = $fuzzy;
+        $data['ternormalisasi'] = $ternormalisasi;
+        $data['optimalisasi']   = $optimalisasi;
+        $data['bobot']          = $bobot;
+        $data['matrixYi']       = $matrixYi;
+
         $this->load->view('templates/hrd_header', $data);
         $this->load->view('templates/hrd_sidebar', $data);
         $this->load->view('templates/hrd_topbar', $data);
-        $this->load->view('hrd/hitung_penilaian', $data);
+        $this->load->view('hrd/hasil_perhitungan', $data);
         $this->load->view('templates/hrd_footer', $data);
     }
+
+    public function simpan_peringkat()
+    {
+        foreach ($_POST as $key => $value) {
+            $$key = $value;
+        }
+        for ($i = 0; $i < count($id_karyawan); $i++) {
+            $cek = $this->Karyawan_model->CekKaryawanOnRank($id_karyawan[$i], $departemen[$i]);
+            if (empty($cek)) {
+                $data = array(
+                    'id_karyawan' => $id_karyawan[$i],
+                    'nilai_yi' => $yi[$i],
+                    'tahun' => date("Y")
+                );
+                $simpan = $this->Peringkat_model->insert($data);
+            } else {
+                $update = $this->Peringkat_model->update($id_karyawan[$i], date("Y"), $yi[$i]);
+            }
+        }
+
+        if ($simpan) {
+            redirect('hrd/kelola_penilaian_karyawan');
+        } else {
+            redirect('hrd/hitung_penilaian');
+        }
+    }
+
+     public function reset_peringkat()
+    {
+        foreach ($_POST as $key => $value) {
+            $$key = $value;
+        }
+        for ($i = 0; $i < count($id_karyawan); $i++) {
+            $delete = $this->Peringkat_model->reset($id_karyawan[$i]);
+        }
+        redirect('hrd/kelola_penilaian_karyawan');
+    }
+
+ 
 }
