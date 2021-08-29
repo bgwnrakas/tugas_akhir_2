@@ -33,6 +33,12 @@ class Hrd_model extends CI_Model
         $this->db->delete('tb_sub_kriteria', ['id_sub_kriteria' => $id_sub_kriteria]);
     }
 
+    public function deleteDataSubKriteriByIdKriteria($id_kriteria)
+    {
+        // $this->db->where('id', $id);
+        $this->db->delete('tb_sub_kriteria', ['id_kriteria' => $id_kriteria]);
+    }
+
 
     public function getDataUserById($id)
     {
