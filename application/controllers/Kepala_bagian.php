@@ -38,16 +38,18 @@ class Kepala_bagian extends CI_Controller
 
     public function submit_penilaian()
     {
-        foreach ($_POST as $key => $value) {$$key = $value;}            
+        foreach ($_POST as $key => $value) {
+            $$key = $value;
+        }
         for ($i = 0; $i < count($id_sub_kriteria); $i++) {
             $data = array(
-                    'id_karyawan' => $id_karyawan, 
-                    'id_sub_kriteria' => $id_sub_kriteria[$i], 
-                    'tahun' => date("Y")
-                   );
+                'id_karyawan' => $id_karyawan,
+                'id_sub_kriteria' => $id_sub_kriteria[$i],
+                'tahun' => date("Y")
+            );
             $simpan = $this->Penilaian_model->insert($data);
         }
-            $update = $this->Karyawan_model->updateStatus($id_karyawan);
+        $update = $this->Karyawan_model->updateStatus($id_karyawan);
         if ($simpan) {
             $this->session->set_flashdata('berhasil', 'Data Tersimpan!');
             redirect('Kepala_bagian/kelola_penilaian');
@@ -112,7 +114,9 @@ class Kepala_bagian extends CI_Controller
 
     public function update_penilaian()
     {
-        foreach ($_POST as $key => $value) {$$key = $value;}   
+        foreach ($_POST as $key => $value) {
+            $$key = $value;
+        }
         for ($i = 0; $i < count($id_penilaian); $i++) {
             $update = $this->Penilaian_model->update($id_penilaian[$i], $id_sub_kriteria[$i]);
         }
@@ -135,6 +139,7 @@ class Kepala_bagian extends CI_Controller
     public function edit_profile()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['departemen'] = $this->Kabag_model->getDepartemenKabag($this->session->userdata('role_id'));
         $data['title'] = 'Edit Profile';
         $this->form_validation->set_rules('name', 'name', 'required|trim');
         if ($this->form_validation->run() == false) {
@@ -239,7 +244,7 @@ class Kepala_bagian extends CI_Controller
             $minimum[$i] = 0;
             $maksimum[$i] = 0;
             for ($j = 1; $j < $x; $j++) {
-                if ($jenis[$j-1] == "Benefit") {
+                if ($jenis[$j - 1] == "Benefit") {
                     $maksimum[$i] += $optimalisasi[$i][$j];
                 } else {
                     $minimum[$i] += $optimalisasi[$i][$j];
@@ -275,18 +280,20 @@ class Kepala_bagian extends CI_Controller
     public function simpan_peringkat()
     {
         $departemen = $this->Kabag_model->getDepartemenKabag($this->session->userdata('role_id'));
-        foreach ($_POST as $key => $value) {$$key = $value;}   
+        foreach ($_POST as $key => $value) {
+            $$key = $value;
+        }
         for ($i = 0; $i < count($id_karyawan); $i++) {
-            $cek = $this->Karyawan_model->CekKaryawanOnRank($id_karyawan[$i],$departemen);
+            $cek = $this->Karyawan_model->CekKaryawanOnRank($id_karyawan[$i], $departemen);
             if (empty($cek)) {
-                 $data = array(
-                    'id_karyawan' => $id_karyawan[$i], 
-                    'nilai_yi' => $yi[$i],  
+                $data = array(
+                    'id_karyawan' => $id_karyawan[$i],
+                    'nilai_yi' => $yi[$i],
                     'tahun' => date("Y")
-                   );
+                );
                 $simpan = $this->Peringkat_model->insert($data);
-            }else{
-                $update = $this->Peringkat_model->update($id_karyawan[$i],date("Y"),$yi[$i]);   
+            } else {
+                $update = $this->Peringkat_model->update($id_karyawan[$i], date("Y"), $yi[$i]);
             }
         }
 
@@ -299,9 +306,11 @@ class Kepala_bagian extends CI_Controller
 
     public function reset_peringkat()
     {
-        foreach ($_POST as $key => $value) {$$key = $value;}   
+        foreach ($_POST as $key => $value) {
+            $$key = $value;
+        }
         for ($i = 0; $i < count($id_karyawan); $i++) {
-           $delete = $this->Peringkat_model->reset($id_karyawan[$i]);
+            $delete = $this->Peringkat_model->reset($id_karyawan[$i]);
         }
         redirect('Kepala_bagian/kelola_penilaian');
     }

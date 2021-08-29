@@ -10,6 +10,11 @@ class Hrd extends CI_Controller
 
         $this->load->model('Hrd_model');
         $this->load->model('Kriteria_model');
+        $this->load->model('Kriteria_model');
+        $this->load->model('Kabag_model');
+        $this->load->model('Karyawan_model');
+        $this->load->model('Penilaian_model');
+        $this->load->model('Peringkat_model');
     }
     public function index()
     {
@@ -96,7 +101,7 @@ class Hrd extends CI_Controller
                 'jenis_kriteria' => $jenis_kriteria,
                 'tahun' => $tahun,
             );
-            $this->Hrd_model->editDataKriteria($id_kriteria,$data);
+            $this->Hrd_model->editDataKriteria($id_kriteria, $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" 
                     role="alert">Data Pendaftaran Berhasil di Ubag !');
             redirect('hrd/kelola_kriteria');
@@ -428,5 +433,29 @@ class Hrd extends CI_Controller
     {
         $this->Hrd_model->deleteDataPengguna($id);
         redirect('hrd/kelola_pengguna');
+    }
+
+    public function kelola_penilaian_karyawan()
+    {
+
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Kelola Penilaian Karyawan';
+        $this->load->view('templates/hrd_header', $data);
+        $this->load->view('templates/hrd_sidebar', $data);
+        $this->load->view('templates/hrd_topbar', $data);
+        $this->load->view('hrd/kelola_penilaian_karyawan', $data);
+        $this->load->view('templates/hrd_footer', $data);
+    }
+
+    public function hitung_penilaian()
+    {
+
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Kelola Penilaian Karyawan';
+        $this->load->view('templates/hrd_header', $data);
+        $this->load->view('templates/hrd_sidebar', $data);
+        $this->load->view('templates/hrd_topbar', $data);
+        $this->load->view('hrd/hitung_penilaian', $data);
+        $this->load->view('templates/hrd_footer', $data);
     }
 }

@@ -6,7 +6,7 @@ class Karyawan_model extends CI_Model
     {
         return $this->db->get_where('tb_karyawan', ['id_karyawan' => $id_karyawan])->row_array();
     }
-    
+
     public function getDataKaryawanBelum($departemen)
     {
         $this->db->select('*');
@@ -51,23 +51,23 @@ class Karyawan_model extends CI_Model
     public function CekRankingIfNull($departemen)
     {
         $this->db->select('*')
-               ->from('tb_karyawan')
-               ->join('tb_ranking', 'tb_karyawan.id_karyawan = tb_ranking.id_karyawan','left')
-               ->where('tb_karyawan.departemen',$departemen)
-               ->where('tb_ranking.tahun', date("Y"));
+            ->from('tb_karyawan')
+            ->join('tb_ranking', 'tb_karyawan.id_karyawan = tb_ranking.id_karyawan', 'left')
+            ->where('tb_karyawan.departemen', $departemen)
+            ->where('tb_ranking.tahun', date("Y"));
         $result = $this->db->get();
-        return $result->result_array();  
+        return $result->result_array();
     }
 
-    public function CekKaryawanOnRank($id_karyawan,$departemen)
+    public function CekKaryawanOnRank($id_karyawan, $departemen)
     {
         $this->db->select('*')
-               ->from('tb_karyawan')
-               ->join('tb_ranking', 'tb_karyawan.id_karyawan = tb_ranking.id_karyawan','left')
-               ->where('tb_karyawan.departemen',$departemen)
-               ->where('tahun', date("Y"))
-               ->where('tb_ranking.id_karyawan',$id_karyawan);
+            ->from('tb_karyawan')
+            ->join('tb_ranking', 'tb_karyawan.id_karyawan = tb_ranking.id_karyawan', 'left')
+            ->where('tb_karyawan.departemen', $departemen)
+            ->where('tahun', date("Y"))
+            ->where('tb_ranking.id_karyawan', $id_karyawan);
         $result = $this->db->get();
-        return $result->row_array();  
+        return $result->row_array();
     }
 }

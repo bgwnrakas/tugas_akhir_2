@@ -33,8 +33,8 @@
                             <th scope="row"><?= $i; ?></th>
                             <td><?= rupiah($p['jumlah_bonus']); ?></td>
                             <td><?= $p['min_nilai_yi']; ?> - <?= $p['max_nilai_yi']; ?></td>
-                            <td> <a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="<?= base_url('pimpinan/ubah_bonus/'.$p['id']); ?>"><i class="fa fa-edit"></i></a>
-                                <a class="btn btn-danger btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Delete" href="<?= base_url('pimpinan/delete_bonus/'.$p['id']); ?>"><i class="fa fa-trash"></i></a>
+                            <td> <a class="btn btn-success btn-sm " type="a" data-toggle="tooltip" data-placement="top" title="Edit" href="<?= base_url('pimpinan/ubah_bonus/' . $p['id']); ?>"><i class="fa fa-edit"></i></a>
+                                <a class="btn btn-danger btn-sm tombol-hapus-bonus" type="button" data-toggle="tooltip" data-placement="top" title="Delete" href="<?= base_url('pimpinan/delete_bonus/' . $p['id']); ?>"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                         <?php $i++; ?>
@@ -46,7 +46,7 @@
 
     <div class="card shadow mb-5">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-info">Peringkat Penilaian Karyawan Tahun <?= date('Y');?></h6>
+            <h6 class="m-0 font-weight-bold text-info">Peringkat Penilaian Karyawan Tahun <?= date('Y'); ?></h6>
         </div>
         <div class="card-body">
             <table class="table table-striped table-hover" style="width:100%">
@@ -61,24 +61,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php 
+                    <?php
                     $i = 1;
-                    foreach ($peringkat as $p) 
-                    {
+                    foreach ($peringkat as $p) {
                         $bonus = $this->Bonus_model->getBonus($p['nilai_yi']);
-                        if (!empty($bonus)) { 
+                        if (!empty($bonus)) {
                             $jumlah = rupiah($bonus['jumlah_bonus']);
-                        }else{
+                        } else {
                             $jumlah = 'Bonus Tidak Tersedia';
                         }
-                        echo'
+                        echo '
                         <tr>
-                            <td>'.$p['nik'].'</td>
-                            <td>'.$p['nama_karyawan'].'</td>
-                            <td>'.$p['departemen'].'</td>
-                            <td>'.$p['nilai_yi'].'</td>
-                            <td>'.$i.'</td>
-                            <td>'.$jumlah.'</td>
+                            <td>' . $p['nik'] . '</td>
+                            <td>' . $p['nama_karyawan'] . '</td>
+                            <td>' . $p['departemen'] . '</td>
+                            <td>' . $p['nilai_yi'] . '</td>
+                            <td>' . $i . '</td>
+                            <td>' . $jumlah . '</td>
                         </tr>';
                         $i++;
                     }

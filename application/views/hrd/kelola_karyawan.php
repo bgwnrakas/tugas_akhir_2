@@ -47,15 +47,15 @@
                                 <td><?= $p['alamat']; ?></td>
                                 <td><?= $p['departemen']; ?></td>
                                 <td><?= $p['posisi']; ?></td>
-                                <td> 
-                                <?php 
-                                if (empty($p['status'])) {
-                                    echo'
-                                     <a class="btn btn-success btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Edit" href="'.base_url().'hrd/ubah_karyawan/'.$p['id_karyawan'].'"><i class="fa fa-edit"></i></a>
-                                     <a class="btn btn-danger btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Delete" href="'.base_url().'hrd/delete_karyawan/'.$p['id_karyawan'].'"><i class="fa fa-trash"></i></a>';
-                                }else{
-                                   echo'<small> Disabled</small>';
-                                }?>
+                                <td>
+                                    <?php
+                                    if (empty($p['status'])) {
+                                        echo '
+                                     <a class="btn btn-success btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Edit" href="' . base_url() . 'hrd/ubah_karyawan/' . $p['id_karyawan'] . '"><i class="fa fa-edit"></i></a>
+                                     <a class="btn btn-danger btn-sm tombol-hapus-karyawan" type="button" data-toggle="tooltip" data-placement="top" title="Delete" href="' . base_url() . 'hrd/delete_karyawan/' . $p['id_karyawan'] . '"><i class="fa fa-trash"></i></a>';
+                                    } else {
+                                        echo '<small> Disabled</small>';
+                                    } ?>
                                 </td>
                             </tr>
                             <?php $i++; ?>

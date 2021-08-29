@@ -28,6 +28,9 @@
               <a class="nav-link" href="<?= base_url('hrd/kelola_sub_kriteria'); ?>">
                   <i class="fas fa-passport"></i>
                   <span>Kelola Sub Kriteria</span></a>
+              <a class="nav-link" href="<?= base_url('hrd/kelola_penilaian_karyawan'); ?>">
+                  <i class="fas fa-passport"></i>
+                  <span>Kelola Penilaian Karyawan</span></a>
               <a class="nav-link" href="<?= base_url('hrd/kelola_karyawan'); ?>">
                   <i class="fas fa-users-cog"></i>
                   <span>Kelola Karyawan</span></a>
@@ -53,7 +56,7 @@
 
           <!-- Nav Item - Charts -->
           <li class="nav-item">
-              <a class="nav-link" href="<?= base_url('auth/logout'); ?>">
+              <a class="nav-link" data-toggle="modal" data-target="#logoutModal" href="<?= base_url('auth/logout'); ?>">
                   <i class="fas fa-fw fa-sign-out-alt"></i>
                   <span>Logout</span></a>
           </li>
