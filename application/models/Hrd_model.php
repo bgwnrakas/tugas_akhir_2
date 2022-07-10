@@ -75,16 +75,9 @@ class Hrd_model extends CI_Model
         return $this->db->get_where('tb_sub_kriteria', ['id_sub_kriteria' => $id_sub_kriteria])->row_array();
     }
 
-    public function editDataKriteria($id_kriteria)
+    public function editDataKriteria($id_kriteria,$data)
     {
-        $data = [
-            "id_kriteria" => $this->input->post('id_kriteria'),
-            "nama_kriteria" => $this->input->post('nama_kriteria'),
-            "bobot_kriteria" => $this->input->post('bobot_kriteria'),
-            "jenis_kriteria" => $this->input->post('jenis_kriteria'),
-        ];
-
-        $this->db->where('id_kriteria', $this->input->post('id_kriteria'));
+        $this->db->where('id_kriteria', $id_kriteria);
         $this->db->update('tb_kriteria', $data);
     }
 

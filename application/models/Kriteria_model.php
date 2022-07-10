@@ -6,11 +6,13 @@ class Kriteria_model extends CI_Model
   {
     $this->db->select('*')
       ->from('tb_kriteria')
+      ->where('tahun',date('Y'))
       ->order_by('jenis_kriteria', 'ASC')
       ->order_by('id_kriteria', 'ASC');
     $query = $this->db->get();
     return $query->result_array();
   }
+  
 
   public function getKriteriaBobot()
   {
@@ -47,7 +49,8 @@ class Kriteria_model extends CI_Model
       ->from('tb_sub_kriteria')
       ->join('tb_penilaian', 'tb_sub_kriteria.id_sub_kriteria = tb_penilaian.id_sub_kriteria')
       ->join('tb_karyawan', 'tb_penilaian.id_karyawan = tb_karyawan.id_karyawan')
-      ->where('tb_karyawan.id_karyawan', $id_karyawan);
+      ->where('tb_karyawan.id_karyawan', $id_karyawan)
+      ->where('tb_penilaian.tahun', date("Y"));
     $result = $this->db->get();
     return $result->result_array();
   }
@@ -71,5 +74,15 @@ class Kriteria_model extends CI_Model
       ->join('tb_kriteria', 'tb_sub_kriteria.id_kriteria = tb_kriteria.id_kriteria');
     $result = $this->db->get();
     return $result->result_array();
+  }
+
+  public function cekIfUsed()
+  {
+    $this->db->select('*')
+      ->from('tb_kriteria')
+      ->join('tb_karyawan', 'tb_kriteria.tahun = tb_karyawan.status')
+      ->where('tb_kriteria.tahun',date("Y"));
+    $query = $this->db->get();
+    return $query->result_array();
   }
 }

@@ -26,6 +26,7 @@ class Hrd extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['tb_kriteria'] = $this->db->get('tb_kriteria')->result_array();
+        $data['cek'] = $this->Kriteria_model->cekIfUsed();
         $data['title'] = 'Kelola Kriteria';
         $this->load->view('templates/hrd_header', $data);
         $this->load->view('templates/hrd_sidebar', $data);
@@ -57,6 +58,7 @@ class Hrd extends CI_Controller
                 'nama_kriteria' => $nama_kriteria,
                 'bobot_kriteria' => $bobot_kriteria,
                 'jenis_kriteria' => $jenis_kriteria,
+                'tahun' => date("Y"),
             );
             $this->db->insert('tb_kriteria', $data);
             redirect('hrd/kelola_kriteria');
@@ -71,6 +73,7 @@ class Hrd extends CI_Controller
         $this->form_validation->set_rules('nama_kriteria', 'nama_kriteria', 'required');
         $this->form_validation->set_rules('bobot_kriteria', 'bobot_kriteria', 'required');
         $this->form_validation->set_rules('jenis_kriteria', 'jenis_kriteria', 'required');
+        $this->form_validation->set_rules('tahun', 'tahun', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/hrd_header', $data);
@@ -83,18 +86,14 @@ class Hrd extends CI_Controller
             $nama_kriteria = $this->input->post('nama_kriteria');
             $bobot_kriteria = $this->input->post('bobot_kriteria');
             $jenis_kriteria = $this->input->post('jenis_kriteria');
-
-
+            $tahun = $this->input->post('tahun');
             $data = array(
-                'id_kriteria' => $id_kriteria,
                 'nama_kriteria' => $nama_kriteria,
                 'bobot_kriteria' => $bobot_kriteria,
-                'jenis_kriteria' => $jenis_kriteria
-
+                'jenis_kriteria' => $jenis_kriteria,
+                'tahun' => $tahun,
             );
-
-            $this->Hrd_model->editDataKriteria($data);
-
+            $this->Hrd_model->editDataKriteria($id_kriteria,$data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" 
                     role="alert">Data Pendaftaran Berhasil di Ubag !');
             redirect('hrd/kelola_kriteria');
@@ -111,6 +110,8 @@ class Hrd extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['tb_sub_kriteria'] = $this->Kriteria_model->getDataSubKriteria();
+        $data['cek'] = $this->Kriteria_model->cekIfUsed();
+        $data['tb_kriteria'] = $this->db->get('tb_kriteria')->result_array();
         $data['title'] = 'Kelola Sub Kriteria';
         $this->load->view('templates/hrd_header', $data);
         $this->load->view('templates/hrd_sidebar', $data);

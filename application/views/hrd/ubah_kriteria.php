@@ -18,6 +18,7 @@
             <form action="" method="post">
                 <div class="form-group row">
                     <div class="col-sm-6">
+                        <input type="hidden" name="tahun" value="<?=date("Y")?>">
                         <input type="text" class="form-control" id="id_kriteria" name="id_kriteria" value="<?= $tb_kriteria['id_kriteria']; ?>" hidden>
                     </div>
                 </div>

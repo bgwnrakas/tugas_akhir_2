@@ -36,7 +36,10 @@ class Kepala_bagian extends CI_Controller
 
     public function submit_penilaian()
     {
-        foreach ($_POST as $key => $value) {$$key = $value;}        
+        foreach ($_POST as $key => $value) {$$key = $value;}    
+        // echo'<pre>';
+        //     print_r($id_sub_kriteria);
+        // echo'</pre>';    
         
         for ($i = 0; $i < count($id_sub_kriteria); $i++) {
             $data = array(

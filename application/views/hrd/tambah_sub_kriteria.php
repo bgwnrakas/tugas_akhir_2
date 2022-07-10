@@ -18,8 +18,6 @@
             <form action="<?= base_url('hrd/tambah_sub_kriteria'); ?>" method="post">
                 <div class="form-group row">
                     <label for="id_kriteria" class="col-sm-2 col-form-label">ID Kriteria</label>
-
-
                     <div class="col-sm-10">
                         <select class="form-control" id="id_kriteria" name="id_kriteria" value="">
                             <?php foreach ($tb_kriteria as $p) : ?>
@@ -27,7 +25,6 @@
                             <?php endforeach; ?>
                         </select>
                     </div>
-
                 </div>
                 <div class="form-group row">
                     <label for="nama_sub_kriteria" class="col-sm-2 col-form-label">Nama Sub Kriteria</label>
